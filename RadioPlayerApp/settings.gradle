@@ -1,0 +1,2 @@
+rootProject.name = "RadioPlayerApp"
+include ':app'
