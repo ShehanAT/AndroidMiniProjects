@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RadioPlayerApp</string>
+    <string name="toggle_play_pause">Play</string>
 </resources>

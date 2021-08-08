@@ -1,4 +1,4 @@
-package com.coding.informer.radioplayerapp.activities;
+package com.coding.informer.radioplayerapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

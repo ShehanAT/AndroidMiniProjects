@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.coding.informer.radioplayerapp.activities.RadioPlayerActivity;
+import com.coding.informer.radioplayerapp.activity.RadioPlayerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
