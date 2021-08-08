@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlayButtonClick(View view){
-        // Need to figure out how to play sample audio file on button click on frequency_info layout
+        
         MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.sample_audio_1);
         mp.start();
     }
