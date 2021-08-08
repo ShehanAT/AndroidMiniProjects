@@ -10,13 +10,15 @@
     >
 
     <ImageButton
-        android:id="@+id/ctl_toggle"
+        android:id="@+id/play_button"
         android:layout_width="@dimen/ctl_size_toggle"
         android:layout_height="@dimen/ctl_size_toggle"
         android:contentDescription="@string/toggle_play_pause"
-        android:onClick="onButtonClick"
+        android:onClick="onPlayButtonClick"
         android:src="@drawable/ic_play"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
