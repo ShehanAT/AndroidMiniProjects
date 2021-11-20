@@ -26,8 +26,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private BarChart chart;
-    private SeekBar seekBarX, seekBarY;
-    private TextView tvX, tvY;
+//    private SeekBar seekBarX, seekBarY;
+//    private TextView tvX, tvY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("BarChartActivity");
 
-//        tvX = findViewById(R.id.tvXMax);
-//        tvY = findViewById(R.id.tvYMax);
-//
-//        seekBarX = findViewById(R.id.seekBar1);
-//        seekBarY = findViewById(R.id.seekBar2);
-
-//        seekBarY.setOnSeekBarChangeListener(this);
-//        seekBarX.setOnSeekBarChangeListener(this);
 //
         chart = findViewById(R.id.chart1);
 //        chart.setOnChartValueSelectedListener(this);
@@ -63,35 +55,6 @@ public class MainActivity extends AppCompatActivity {
         chart.setPinchZoom(false);
 
         chart.setDrawGridBackground(false);
-        // chart.setDrawYLabels(false);
-
-//        IAxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart);
-//
-//        XAxis xAxis = chart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        xAxis.setTypeface(tfLight);
-//        xAxis.setDrawGridLines(false);
-//        xAxis.setGranularity(1f); // only intervals of 1 day
-//        xAxis.setLabelCount(7);
-//        xAxis.setValueFormatter(xAxisFormatter);
-
-//        IAxisValueFormatter custom = new MyAxisValueFormatter();
-//
-//        YAxis leftAxis = chart.getAxisLeft();
-//        leftAxis.setTypeface(tfLight);
-//        leftAxis.setLabelCount(8, false);
-//        leftAxis.setValueFormatter(custom);
-//        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-//        leftAxis.setSpaceTop(15f);
-//        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
-//
-//        YAxis rightAxis = chart.getAxisRight();
-//        rightAxis.setDrawGridLines(false);
-//        rightAxis.setTypeface(tfLight);
-//        rightAxis.setLabelCount(8, false);
-//        rightAxis.setValueFormatter(custom);
-//        rightAxis.setSpaceTop(15f);
-//        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -105,15 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         setData(5, 100);
-//        XYMarkerView mv = new XYMarkerView(this, xAxisFormatter);
-//        mv.setChartView(chart); // For bounds control
-//        chart.setMarker(mv); // Set the marker to the chart
-
-        // setting data
-//        seekBarY.setProgress(50);
-//        seekBarX.setProgress(12);
-
-        // chart.setDrawLegend(false);
     }
 
     private void setData(int count, float range) {
@@ -142,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             chart.notifyDataSetChanged();
 
         } else {
-            set1 = new BarDataSet(values, "The year 2017");
+            set1 = new BarDataSet(values, "The year 2021");
 
             set1.setDrawIcons(false);
 
