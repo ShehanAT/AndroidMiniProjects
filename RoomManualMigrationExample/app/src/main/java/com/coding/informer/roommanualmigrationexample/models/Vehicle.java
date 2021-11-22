@@ -5,8 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName="fruit")
-public class Fruit {
+@Entity(tableName="vehicle")
+public class Vehicle {
 
     @PrimaryKey(autoGenerate=true)
     @ColumnInfo(name="id")
@@ -17,6 +17,18 @@ public class Fruit {
     @ColumnInfo(name="name")
     @NonNull
     private String name;
+
+//    @ColumnInfo(name="model")
+//    @NonNull
+//    private String model;
+
+//    public String getModel() {
+//        return model;
+//    }
+//
+//    public void setModel(String model) {
+//        this.model = model;
+//    }
 
     public int getId() {
         return id;
@@ -36,7 +48,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
+        return "Vehicle{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
