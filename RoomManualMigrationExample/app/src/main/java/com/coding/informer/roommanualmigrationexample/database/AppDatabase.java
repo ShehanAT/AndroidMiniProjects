@@ -9,7 +9,7 @@ import androidx.room.migration.AutoMigrationSpec;
 import com.coding.informer.roommanualmigrationexample.dao.VehicleDAO;
 import com.coding.informer.roommanualmigrationexample.models.Vehicle;
 
-@Database(version=4, entities={Vehicle.class})
+@Database(version=1, entities={Vehicle.class})
 public abstract class AppDatabase extends RoomDatabase{
     public abstract VehicleDAO getVehicleDAO();
 
