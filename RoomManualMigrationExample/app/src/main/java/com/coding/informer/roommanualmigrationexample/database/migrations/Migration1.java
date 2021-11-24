@@ -5,9 +5,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 public class Migration1 {
 
-    public static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+    public static Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
-        public void migrate(SupportSQLiteDatabase database) {
+        public void migrate(SupportSQLiteDatabase database){
             database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, "
                     + "`name` TEXT, PRIMARY KEY(`id`))");
         }
@@ -24,23 +24,16 @@ public class Migration1 {
     public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE `Vehicle` ADD COLUMN `model` INTEGER NOT NULL DEFAULT 0");
+        }
+    };
+
+    public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
             database.execSQL("DROP TABLE `Vehicle`");
             database.execSQL("CREATE TABLE `Vehicle` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))");
         }
     };
-//    public static final Migration MIGRATION_4_5 = new Migration(4, 5) {
-//        @Override
-//        public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("ALTER TABLE `Vehicle` ADD COLUMN `model` INTEGER NOT NULL DEFAULT 0");
-//        }
-//    };
-
-//    public static final Migration MIGRATION_5_6 = new Migration(5, 6) {
-//        @Override
-//        public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("DROP TABLE `Vehicle`");
-//            database.execSQL("CREATE TABLE `Vehicle` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`id`))");
-//        }
-//    };
 
 }

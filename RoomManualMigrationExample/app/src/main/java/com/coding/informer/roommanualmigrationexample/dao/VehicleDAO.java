@@ -10,7 +10,8 @@ import com.coding.informer.roommanualmigrationexample.models.Vehicle;
 import java.util.List;
 
 @Dao
-public interface VehicleDAO {
+public interface VehicleDAO{
+
     @Query("SELECT * FROM vehicle")
     List<Vehicle> getAll();
 
@@ -18,13 +19,8 @@ public interface VehicleDAO {
     Vehicle findById(int findVehicleId);
 
     @Insert
-    void insertAll(Vehicle... assetEntries);
-
-    @Insert
-    void insertAsset(Vehicle asset);
+    void insertAll(Vehicle... vehicles);
 
     @Delete
-    void delete(Vehicle asset);
-
-
+    void delete(Vehicle vehicle);
 }

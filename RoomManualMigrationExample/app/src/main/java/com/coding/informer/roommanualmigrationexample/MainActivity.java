@@ -17,6 +17,7 @@ import java.util.List;
 import static com.coding.informer.roommanualmigrationexample.database.migrations.Migration1.MIGRATION_1_2;
 import static com.coding.informer.roommanualmigrationexample.database.migrations.Migration1.MIGRATION_2_3;
 import static com.coding.informer.roommanualmigrationexample.database.migrations.Migration1.MIGRATION_3_4;
+import static com.coding.informer.roommanualmigrationexample.database.migrations.Migration1.MIGRATION_4_5;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,16 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         AsyncTask.execute(() -> {
             AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "example_db")
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4).build();
-
-//            Vehicle vehicle = new Vehicle();
-//            vehicle.setName("Civic");
-//
-//            VehicleDAO vehicleDAO = db.getVehicleDAO();
-//            vehicleDAO.insertAll(vehicle);
-//            List<Vehicle> savedVehicles = vehicleDAO.getAll();
-//            Log.d("savedVehicles size: ", "" + savedVehicles.size());
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5).build();
         });
-        Toast.makeText(getApplicationContext(), "Database working?", Toast.LENGTH_LONG);
     }
 }
