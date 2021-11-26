@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RoomManualMigrationExample</string>
+    <string name="database_name">example_db</string>
 </resources>

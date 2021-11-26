@@ -17,19 +17,19 @@ public class Vehicle {
     @NonNull
     private String name;
 
-    @ColumnInfo(name="model")
-    @NonNull
-    private String model;
+//    @ColumnInfo(name="model")
+//    @NonNull
+//    private String model;
 
 
-    @NonNull
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(@NonNull String model) {
-        this.model = model;
-    }
+//    @NonNull
+//    public String getModel() {
+//        return model;
+//    }
+//
+//    public void setModel(@NonNull String model) {
+//        this.model = model;
+//    }
 
     public int getId() {
         return id;

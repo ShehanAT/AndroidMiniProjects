@@ -62,4 +62,7 @@ dependencies {
 
     // optional - Paging 3 Integration
     implementation "androidx.room:room-paging:2.4.0-beta01"
+
+    // AssetSQLiteOpenHelper
+    implementation 'com.github.daolq3012:AssetSQLiteOpenHelper:V1.0.1'
 }
