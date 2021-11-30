@@ -1,8 +1,12 @@
 package com.coding.informer.androidloginregistrationexample.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -18,12 +23,15 @@ import com.coding.informer.androidloginregistrationexample.MainActivity;
 import com.coding.informer.androidloginregistrationexample.R;
 import com.coding.informer.androidloginregistrationexample.database.AppDatabase;
 import com.coding.informer.androidloginregistrationexample.helpers.DatabaseHelper;
+import com.coding.informer.androidloginregistrationexample.helpers.Functions;
 import com.coding.informer.androidloginregistrationexample.helpers.SessionManager;
+import com.coding.informer.androidloginregistrationexample.models.UserFieldType;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Objects;
 import java.util.Timer;
+import java.util.TimerTask;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -55,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         initialize(inputUsernameField, inputPasswordField);
     }
 
@@ -66,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = inputUsernameField.getText().toString().trim();
                 String password = inputPasswordField.getText().toString().trim();
                 if(username != null && password != null){
-                    Log.d(TAG, "asdf");
+                    loginProcess(username, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please enter the credentials!",
@@ -86,49 +93,46 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginProcess(String username, String password) {
         String tag_string_req = "req_login";
-//        DialogFragment dialogFragment = showDialog("Logging in...");
+        DialogFragment dialogFragment = showDialog("Logging in...");
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
-//        val storedUserPassword = databaseHelper.getUserFieldSQLQuery(
-//                applicationContext,
-//                UserFieldType.PASSWORD,
-//                username
-//        )
-//        val storedPasswordSalt = databaseHelper.getUserFieldSQLQuery(
-//                applicationContext,
-//                UserFieldType.PASSWORD_SALT,
-//                username
-//        )
-//        Timer().schedule(object : TimerTask() {
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            override fun run() {
-//                hideDialog(dialogFragment)
-//                var message: String? = null
-//                message = if (storedUserPassword != null) {
-//                    val hashedInputPassword = BCrypt.hashpw(password, storedPasswordSalt)
-//                    if (hashedInputPassword == storedUserPassword) {
-//                        "Login successful!"
-//                    } else {
-//                        "Login failed! Please try again..."
-//                    }
-//                } else {
-//                    "Login failed! Please try again..."
-//                }
-//                Functions.showToastMessage(this@LoginActivity, applicationContext, message)
-//            }
-//        }, 1000)
+        String storedUserPassword = databaseHelper.getUserFieldSQLQuery(
+                getApplicationContext(),
+                UserFieldType.PASSWORD,
+                username
+        );
+        String storedPasswordSalt = databaseHelper.getUserFieldSQLQuery(
+                getApplicationContext(),
+                UserFieldType.PASSWORD_SALT,
+                username
+        );
+
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                String message = null;
+                if (storedUserPassword != null) {
+                    String hashedInputPassword = BCrypt.hashpw(password, storedPasswordSalt);
+                    if (hashedInputPassword.equals(storedUserPassword)) {
+                        message = "Login successful!";
+                    } else {
+                        message = "Login failed! Please try again...";
+                    }
+                } else {
+                    message = "Login failed! Please try again...";
+                }
+                String finalMessage = message;
+                LoginActivity.this.runOnUiThread(() -> {
+                    Toast.makeText(getApplicationContext(), finalMessage, Toast.LENGTH_LONG).show();
+                });
+            }
+        }, 500);
     }
 
-//    @WorkerThread
-//    private fun showToastMessage(message: String) {
-//        runOnUiThread { Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show() }
-//    }
 
-//    private DialogFragment showDialog(String title){
-//        return Functions.showProgressDialog(LoginActivity.this, title);
-//    }
+    private DialogFragment showDialog(String title){
+        return Functions.showProgressDialog(LoginActivity.this, title);
+    }
 
-//    private fun hideDialog(dialogFragment: DialogFragment) {
-//        dialogFragment.dismiss()
-//    }
 
 }

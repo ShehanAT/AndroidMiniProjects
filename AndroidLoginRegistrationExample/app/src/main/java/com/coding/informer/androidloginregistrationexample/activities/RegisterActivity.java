@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
             newUser.setLastName(lastName);
         }
 
-        if (password == confirmPassword) {
+        if (password.equals(confirmPassword)) {
             String passwordSalt = BCrypt.gensalt();
             String hashedPassword = BCrypt.hashpw(password, passwordSalt);
             newUser.setPassword(hashedPassword);

@@ -17,10 +17,10 @@ public interface UserDAO {
     List<User> all();
 
     @Query("SELECT * FROM user WHERE user_id in (:findUserId)")
-    void findById(int findUserId);
+    User findById(int findUserId);
 
     @Query("SELECT * FROM user WHERE username in (:username)")
-    void findByUsername(String username);
+    User findByUsername(String username);
 
     @Insert
     void insertALL(User... users);
