@@ -30,6 +30,4 @@ public interface UserDAO {
 
     @Delete
     void deleleUser(User user);
-
-
 }

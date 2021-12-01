@@ -133,6 +133,4 @@ public class LoginActivity extends AppCompatActivity {
     private DialogFragment showDialog(String title){
         return Functions.showProgressDialog(LoginActivity.this, title);
     }
-
-
 }

@@ -41,11 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context){
         super(context, DATABASE_NAME, null, Integer.parseInt(DATABASE_VERSION));
-
-    }
-
-    public AppDatabase getDatabaseInstance(Context context){
-        return getDatabase(context);
     }
 
     public static AppDatabase getDatabase(Context context){
@@ -59,8 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         AsyncTask.execute(() -> {
             AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "example_db")
                     .addMigrations(MIGRATION_1_2).build();
-
-//            return db;
         });
 
 
