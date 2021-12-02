@@ -48,42 +48,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             INSTANCE = createDatabase(context);
         }
         return INSTANCE;
+
     }
 
     public static AppDatabase createDatabase(Context context){
-        AsyncTask.execute(() -> {
-            AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "example_db")
-                    .addMigrations(MIGRATION_1_2).build();
-        });
-
-
         RoomDatabase.Builder<AppDatabase> builder =
                 Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,
                         context.getString(R.string.database_name));
 
         return (builder.openHelperFactory(new AssetSQLiteOpenHelperFactory())
-                .allowMainThreadQueries()
-                .addMigrations(MIGRATION_1_2).build());
+            .allowMainThreadQueries()
+            .addMigrations(MIGRATION_1_2).build());
 
     }
 
     public static String getUserFieldSQLQuery(Context context, UserFieldType userFieldType, String inputUsername) {
         AppDatabase appDatabase = getDatabase(context);
+
         User foundUser = appDatabase.getUserDAO().findByUsername(inputUsername);
-        if(foundUser != null) {
-            switch (userFieldType) {
+
+        if(foundUser != null){
+            switch(userFieldType){
                 case PASSWORD:
-                    Toast.makeText(context, foundUser.toString(), Toast.LENGTH_LONG);
                     return foundUser.getPassword();
                 case PASSWORD_SALT:
-                    Toast.makeText(context, foundUser.toString(), Toast.LENGTH_LONG);
                     return foundUser.getPasswordSalt();
             }
         }
-        Toast.makeText(
-                context,
-                "An user with that username was not found in the database!",
-                Toast.LENGTH_LONG);
+
+        Toast.makeText(context, "An user with that username was not found in the database", Toast.LENGTH_LONG).show();
         return null;
     }
 

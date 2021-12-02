@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName="user")
 public class User {
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="user_id")
     @NonNull
