@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         // create SQLite database
         db = new DatabaseHelper(this);
         session = new SessionManager(this);
-        if (session.isLoggedIn()) {
+        if(session.isLoggedIn()){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
@@ -72,13 +72,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = inputUsernameField.getText().toString().trim();
                 String password = inputPasswordField.getText().toString().trim();
+
                 if(username != null && password != null){
                     loginProcess(username, password);
-                } else {
+                }else{
                     Toast.makeText(getApplicationContext(),
-                            "Please enter the credentials!",
+                            "Please enter the required credentials!",
                             Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
@@ -92,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginProcess(String username, String password) {
-        String tag_string_req = "req_login";
         DialogFragment dialogFragment = showDialog("Logging in...");
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
         String storedUserPassword = databaseHelper.getUserFieldSQLQuery(
@@ -106,22 +107,20 @@ public class LoginActivity extends AppCompatActivity {
                 username
         );
 
-
-        new Timer().schedule(new TimerTask() {
+        new Timer().schedule(new TimerTask(){
             @Override
             public void run() {
                 String message = null;
-                if (storedUserPassword != null) {
+                if(storedUserPassword != null){
                     String hashedInputPassword = BCrypt.hashpw(password, storedPasswordSalt);
-                    if (hashedInputPassword.equals(storedUserPassword)) {
-                        message = "Login successful!";
-                    } else {
+                    if(hashedInputPassword.equals(storedUserPassword)){
+                        message = "Login Successful!";
+                    }else{
                         message = "Login failed! Please try again...";
                     }
-                } else {
+                }else{
                     message = "Login failed! Please try again...";
-                }
-                String finalMessage = message;
+                }    String finalMessage = message;
                 LoginActivity.this.runOnUiThread(() -> {
                     Toast.makeText(getApplicationContext(), finalMessage, Toast.LENGTH_LONG).show();
                 });

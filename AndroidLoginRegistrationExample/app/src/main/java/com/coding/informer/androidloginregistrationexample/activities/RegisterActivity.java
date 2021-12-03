@@ -59,19 +59,18 @@ public class RegisterActivity extends AppCompatActivity {
                 String fConfirmPassword = regConfirmPassword.getText().toString().trim();
                 String fFirstName = regFirstName.getText().toString().trim();
                 String fLastName = regLastName.getText().toString().trim();
-                if (fUsername.isEmpty() || fPassword.isEmpty() || fConfirmPassword.isEmpty() || fFirstName.isEmpty() || fLastName.isEmpty()) {
+                if(fUsername.isEmpty() || fPassword.isEmpty() || fConfirmPassword.isEmpty() || fFirstName.isEmpty() || fLastName.isEmpty()){
                     Toast.makeText(
                             RegisterActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
-                } else {
+                }else{
                     insertData(
                             fUsername,
                             fEmail,
                             fPassword,
                             fConfirmPassword,
                             fFirstName,
-                            fLastName);
-                    Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT)
-                    .show();
+                            fLastName
+                    );
                 }
             }
         });
@@ -104,20 +103,20 @@ public class RegisterActivity extends AppCompatActivity {
             newUser.setLastName(lastName);
         }
 
-        if (password.equals(confirmPassword)) {
+        if(password.equals(confirmPassword)){
             String passwordSalt = BCrypt.gensalt();
             String hashedPassword = BCrypt.hashpw(password, passwordSalt);
             newUser.setPassword(hashedPassword);
             newUser.setPasswordSalt(passwordSalt);
             DatabaseHelper databaseHelper = new DatabaseHelper(this);
             AppDatabase db = databaseHelper.getDatabase(getApplicationContext());
-            if (db != null) {
+            if(db != null){
                 db.getUserDAO().insertUser(newUser);
             }
-        } else {
+        }else{
             Toast.makeText(
                     getApplicationContext(),
-                    "Password does not match Confirm Password",
+                    "Password does not match Confirm Password! Please try again...",
                     Toast.LENGTH_LONG
             ).show();
         }
