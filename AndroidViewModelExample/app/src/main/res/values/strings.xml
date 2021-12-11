@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidViewModelExample</string>
+    <string name="title_activity_login">Login Page</string>
+    <string name="test_email">shehanatuk@gmail.com</string>
+    <string name="test_password">testing123</string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_email">Email</string>
+</resources>
