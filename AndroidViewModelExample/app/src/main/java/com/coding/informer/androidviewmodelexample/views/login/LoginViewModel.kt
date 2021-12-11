@@ -1,5 +1,25 @@
 package com.coding.informer.androidviewmodelexample.views.login
 
+
+import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.coding.informer.androidviewmodelexample.data.DataRepository
+import com.coding.informer.androidviewmodelexample.data.Resource
+import com.coding.informer.androidviewmodelexample.data.error.INVALID_USERNAME_AND_PASSWORD
+import com.coding.informer.androidviewmodelexample.data.error.PASSWORD_ERROR
+import com.coding.informer.androidviewmodelexample.data.error.USERNAME_ERROR
+import com.coding.informer.androidviewmodelexample.data.login.LoginRequest
+import com.coding.informer.androidviewmodelexample.data.login.LoginResponse
+import com.coding.informer.androidviewmodelexample.utils.RegexUtils.isValidEmail
+import com.coding.informer.androidviewmodelexample.utils.SingleEvent
+import com.coding.informer.androidviewmodelexample.views.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val dataRepository: DataRepository) : BaseViewModel() {
 
@@ -22,11 +42,11 @@ class LoginViewModel @Inject constructor(private val dataRepository: DataReposit
         val isUsernameValid = isValidEmail(userName)
         val isPassWordValid = passWord.trim().length > 4
         if (isUsernameValid && !isPassWordValid) {
-            loginLiveDataPrivate.value = Resource.DataError(PASS_WORD_ERROR)
+            loginLiveDataPrivate.value = Resource.DataError(PASSWORD_ERROR)
         } else if (!isUsernameValid && isPassWordValid) {
-            loginLiveDataPrivate.value = Resource.DataError(USER_NAME_ERROR)
+            loginLiveDataPrivate.value = Resource.DataError(USERNAME_ERROR)
         } else if (!isUsernameValid && !isPassWordValid) {
-            loginLiveDataPrivate.value = Resource.DataError(CHECK_YOUR_FIELDS)
+            loginLiveDataPrivate.value = Resource.DataError(INVALID_USERNAME_AND_PASSWORD)
         } else {
             viewModelScope.launch {
                 loginLiveDataPrivate.value = Resource.Loading()

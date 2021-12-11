@@ -7,4 +7,10 @@
     <string name="action_sign_in">Sign In</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_email">Email</string>
+    <string name="no_internet">Please check your Internet connection</string>
+    <string name="network_error">Network error, unable to fetch data. Please try again...</string>
+    <string name="invalid_password">Password must be greater than 4 characters</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_username_and_password">Please check your username and password</string>
+    <string name="search_error">There is no such expense in our database...</string>
 </resources>

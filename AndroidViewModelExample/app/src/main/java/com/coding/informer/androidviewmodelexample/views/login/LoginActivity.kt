@@ -75,4 +75,3 @@ class LoginActivity : BaseActivity() {
         binding.root.showToast(this, event, Snackbar.LENGTH_LONG)
     }
 }
-© 2021 GitHub, Inc.

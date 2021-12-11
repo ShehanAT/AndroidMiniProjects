@@ -4,9 +4,8 @@ buildscript {
     ext.hilt_version ='2.31.2-alpha'
     repositories {
         google()
+        jcenter()
         mavenCentral()
-
-
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.3"
@@ -22,12 +21,13 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'https://jitpack.io' }
-        maven(url = "https://oss.sonatype.org/content/repositories/snapshots"){
-            content {
-                includeModule("com.google.dagger", "hilt-android-gradle-plugin")
-            }
-        }
+        google()
+//        maven { url 'https://jitpack.io' }
+//        maven(url = "https://oss.sonatype.org/content/repositories/snapshots"){
+//            content {
+//                includeModule("com.google.dagger", "hilt-android-gradle-plugin")
+//            }
+//        }
     }
 }
 
