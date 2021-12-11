@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
+
+    defaultConfig {
+        applicationId "com.coding.informer.roommanualmigrationexample"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - RxJava3 support for Room
+    implementation "androidx.room:room-rxjava3:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    // optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:2.4.0-beta01"
+
+    // AssetSQLiteOpenHelper
+    implementation 'com.github.daolq3012:AssetSQLiteOpenHelper:V1.0.1'
+}
