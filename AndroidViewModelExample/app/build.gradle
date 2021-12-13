@@ -40,7 +40,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     configurations.all {
@@ -57,6 +57,7 @@ android {
         unitTests.returnDefaultValues = true
     }
     android {
+        compileSdk 31
         sourceSets {
             String sharedTestDir = 'src/sharedTest/resources'
             test {
@@ -72,8 +73,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // hilt library
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+    implementation "com.google.dagger:hilt-android-gradle-plugin:2.38"
 
-//    kotlin
+    //    kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.annotation:annotation:$annotationVersion"
@@ -81,6 +85,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_ktx"
     androidTestImplementation "androidx.test.ext:junit-ktx:$androidXJunitVersion"
 
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoIntentsVersion"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
@@ -88,10 +93,12 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     //android support
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
+
     // retrofit
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.moshi:moshi:$moshiVersion"
