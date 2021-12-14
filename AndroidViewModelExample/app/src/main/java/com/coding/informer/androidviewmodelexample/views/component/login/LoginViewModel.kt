@@ -39,9 +39,9 @@ class LoginViewModel @Inject constructor(private val dataRepository: DataReposit
     val showToast: LiveData<SingleEvent<Any>> get() = showToastPrivate
 
 
-    fun doLogin(userName: String, passWord: String) {
+    fun doLogin(userName: String, password: String) {
         val isUsernameValid = isValidEmail(userName)
-        val isPassWordValid = passWord.trim().length > 4
+        val isPassWordValid = password.trim().length > 4
         if (isUsernameValid && !isPassWordValid) {
             loginLiveDataPrivate.value = Resource.DataError(PASSWORD_ERROR)
         } else if (!isUsernameValid && isPassWordValid) {
@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor(private val dataRepository: DataReposit
             viewModelScope.launch {
                 loginLiveDataPrivate.value = Resource.Loading()
                 wrapEspressoIdlingResource {
-                    dataRepository.doLogin(loginRequest = LoginRequest(userName, passWord)).collect {
+                    dataRepository.doLogin(loginRequest = LoginRequest(userName, password)).collect {
                         loginLiveDataPrivate.value = it
                     }
                 }
