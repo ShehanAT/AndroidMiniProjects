@@ -110,6 +110,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
 
     // Room Persistence
     implementation "androidx.room:room-runtime:2.3.0"
@@ -123,4 +124,7 @@ dependencies {
 
 kapt {
     correctErrorTypes true
+    javacOptions {
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
 }

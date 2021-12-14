@@ -17,7 +17,7 @@ abstract class ErrorModule {
     @Singleton
     abstract fun provideErrorFactoryImpl(errorManager: ErrorManager): ErrorUseCase
 
-    @Binds
-//    @Singleton
-    abstract fun provideErrorMapper(errorManager: ErrorManager): ErrorMapperSource
+//    @Binds
+////    @Singleton
+//    abstract fun provideErrorMapper(errorManager: ErrorManager): ErrorMapperSource
 }

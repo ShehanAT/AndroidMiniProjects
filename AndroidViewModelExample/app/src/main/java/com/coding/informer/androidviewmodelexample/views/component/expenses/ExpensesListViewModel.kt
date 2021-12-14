@@ -16,7 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-import com.coding.informer.androidviewmodelexample.utils.wrapExpressoIdlingResource
+import com.coding.informer.androidviewmodelexample.utils.wrapEspressoIdlingResource
 import kotlinx.coroutines.InternalCoroutinesApi
 
 
@@ -65,7 +65,7 @@ class ExpensesListViewModel @Inject constructor(private val dataRepository: Data
     fun getRecipes() {
         viewModelScope.launch {
             expensesLiveDataPrivate.value = Resource.Loading()
-//            wrapExpressoIdlingResource {
+//            wrapEspressoIdlingResource {
 //                dataRepository.requestExpenses().collect {
 //                    expensesLiveDataPrivate.value = it
 //                }
