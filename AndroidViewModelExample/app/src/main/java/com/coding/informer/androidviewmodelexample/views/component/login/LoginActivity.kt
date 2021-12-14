@@ -10,8 +10,6 @@ import com.coding.informer.androidviewmodelexample.databinding.LoginActivityBind
 import com.coding.informer.androidviewmodelexample.utils.SingleEvent
 import com.google.android.material.snackbar.Snackbar
 import com.coding.informer.androidviewmodelexample.views.base.BaseActivity
-
-//import com.coding.informer.androidviewmodelexample.
 import com.coding.informer.androidviewmodelexample.utils.*
 import com.coding.informer.androidviewmodelexample.views.component.expenses.ExpensesListActivity
 import dagger.hilt.android.AndroidEntryPoint
