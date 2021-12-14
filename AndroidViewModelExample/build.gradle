@@ -5,16 +5,14 @@ buildscript {
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
+        classpath "com.android.tools.build:gradle:4.1.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'com.google.gms:google-services:4.3.4'
-        classpath "com.google.dagger:hilt-android-gradle-plugin:HEAD-SNAPSHOT"
     }
 }
 
@@ -22,12 +20,6 @@ allprojects {
     repositories {
         jcenter()
         google()
-//        maven { url 'https://jitpack.io' }
-//        maven(url = "https://oss.sonatype.org/content/repositories/snapshots"){
-//            content {
-//                includeModule("com.google.dagger", "hilt-android-gradle-plugin")
-//            }
-//        }
     }
 }
 

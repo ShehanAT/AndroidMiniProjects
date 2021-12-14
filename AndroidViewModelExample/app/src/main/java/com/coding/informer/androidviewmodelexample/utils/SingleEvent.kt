@@ -13,7 +13,7 @@ open class SingleEvent<out T>(private val content: T) {
     /**
      * Returns the content and prevents its use again
      */
-    fun getContentIfNotHandler(): T? {
+    fun getContentIfNotHandled(): T? {
         return if(hasBeenHandled){
             null
         }else{

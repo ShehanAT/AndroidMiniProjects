@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.test.espresso:espresso-intents:3.3.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9521191c4a5b6b493f108c8706526730/transformed/espresso-intents-3.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9521191c4a5b6b493f108c8706526730/transformed/espresso-intents-3.3.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9521191c4a5b6b493f108c8706526730/transformed/espresso-intents-3.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/a1af855246d4de7cef033551f8507755/transformed/espresso-intents-3.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a1af855246d4de7cef033551f8507755/transformed/espresso-intents-3.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a1af855246d4de7cef033551f8507755/transformed/espresso-intents-3.3.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-intents/3.3.0/d255e4bba0f0e4b0be6b4f21cc6e54d640346e1f/espresso-intents-3.3.0-javadoc.jar!/" />

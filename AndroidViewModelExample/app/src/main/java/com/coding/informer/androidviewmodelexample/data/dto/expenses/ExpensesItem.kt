@@ -17,6 +17,8 @@ data class ExpensesItem(
     val expenseId: Int = 0,
     @Json(name="title")
     val title: String = "",
+    @Json(name="description")
+    val description: String = "",
     @Json(name="amount")
     val amount: Double = 0.toDouble(),
     @Json(name="date")

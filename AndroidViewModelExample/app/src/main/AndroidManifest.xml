@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidViewModelExample">
         <activity
-            android:name=".MainActivity"
+            android:name=".views.component.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.login.LoginActivity"
+            android:name="com.coding.informer.androidviewmodelexample.views.component.login.LoginActivity"
             android:label="@string/title_activity_login" />
     </application>
 

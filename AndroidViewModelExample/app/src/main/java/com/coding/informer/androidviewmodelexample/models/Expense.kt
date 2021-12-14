@@ -20,6 +20,7 @@ class Expense(
         if(title.isEmpty()){
             throw IllegalArgumentException("Title is empty")
         }
+
     }
 
     fun isRevenue() = amount < 0
