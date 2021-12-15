@@ -10,14 +10,14 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 // With @Module we are telling Dagger that this is a Dagger module
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class ErrorModule {
-    @Binds
-    @Singleton
-    abstract fun provideErrorFactoryImpl(errorManager: ErrorManager): ErrorUseCase
+//@Module
+//@InstallIn(SingletonComponent::class)
+//abstract class ErrorModule {
+//    @Binds
+//    @Singleton
+//    abstract fun provideErrorFactoryImpl(errorManager: ErrorManager): ErrorUseCase
 
 //    @Binds
-////    @Singleton
+//    @Singleton
 //    abstract fun provideErrorMapper(errorManager: ErrorManager): ErrorMapperSource
-}
+//}
