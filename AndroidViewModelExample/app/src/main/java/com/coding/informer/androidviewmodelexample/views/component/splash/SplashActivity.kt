@@ -6,7 +6,7 @@ import android.os.Handler
 import com.coding.informer.androidviewmodelexample.SPLASH_DELAY
 import com.coding.informer.androidviewmodelexample.databinding.SplashActivityBinding
 import com.coding.informer.androidviewmodelexample.views.base.BaseActivity
-import com.coding.informer.androidviewmodelexample.views.component.login.LoginActivity
+import com.coding.informer.androidviewmodelexample.views.component.details.DetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,7 +31,7 @@ class SplashActivity: BaseActivity() {
 
     private fun navigateToMainScreen(){
         Handler().postDelayed({
-            val nextScreenIntent = Intent(this, LoginActivity::class.java)
+            val nextScreenIntent = Intent(this, DetailsActivity::class.java)
             startActivity(nextScreenIntent)
             finish()
         }, SPLASH_DELAY.toLong())

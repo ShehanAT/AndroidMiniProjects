@@ -14,4 +14,5 @@
     <string name="invalid_username_and_password">Please check your username and password</string>
     <string name="search_error">There is no such expense in our database...</string>
     <string name="title_activity_splash">Welcome to Splash Activity</string>
+    <string name="title_activity_details">Details Activity</string>
 </resources>

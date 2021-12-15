@@ -5,7 +5,6 @@ import com.coding.informer.androidviewmodelexample.data.local.LocalData
 import com.coding.informer.androidviewmodelexample.data.login.LoginRequest
 import com.coding.informer.androidviewmodelexample.data.login.LoginResponse
 import com.coding.informer.androidviewmodelexample.data.remote.RemoteData
-import com.coding.informer.androidviewmodelexample.models.Expense
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -29,7 +28,7 @@ class DataRepository @Inject constructor(private val remoteRepository: RemoteDat
         }.flowOn(ioDispatcher)
     }
 
-    override suspend fun addToFavourite(id: String): Flow<Resource<Boolean>> {
+     override suspend fun addToFavourite(id: String): Flow<Resource<Boolean>> {
         return flow {
             localRepository.getCachedFavourites().let {
                 it.data?.toMutableSet()?.let { set ->

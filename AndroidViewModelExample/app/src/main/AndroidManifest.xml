@@ -11,12 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidViewModelExample">
         <activity
-            android:name=".views.component.main.MainActivity"
-            android:exported="true">
-        </activity>
-        <activity
             android:name="com.coding.informer.androidviewmodelexample.views.component.login.LoginActivity"
             android:label="@string/title_activity_login"
+            android:exported="true"/>
+        <activity
+            android:name="com.coding.informer.androidviewmodelexample.views.component.details.DetailsActivity"
+            android:label="@string/title_activity_details"
             android:exported="true"/>
         <activity
             android:name="com.coding.informer.androidviewmodelexample.views.component.splash.SplashActivity"

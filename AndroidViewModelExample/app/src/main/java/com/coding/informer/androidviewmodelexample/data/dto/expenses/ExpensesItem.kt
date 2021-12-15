@@ -25,4 +25,5 @@ data class ExpensesItem(
     val date: Date
 ): Parcelable {
 
+
 }
