@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:calorie_tracker_app/src/model/user_id_model.dart';
+
 
 class AddFoodScreen extends StatefulWidget {
+  final String foodItemId;
+  final UserId userId;
+
+  AddFoodScreen({
+    required this.foodItemId,
+    required this.userId
+  })
+
   @override
   State<StatefulWidget> createState() {
     return _AddFoodScreenState();
