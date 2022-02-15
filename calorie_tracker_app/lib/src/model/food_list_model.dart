@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:calorie_tracker_app/src/scopedmodel/'
+// import 'package:calorie_tracker_app/src/scopedmodel/'
 
-class FoodListModel extends Model {
+class FoodListModel {
+  // extends Model
   // var _db = DBProvider.db;
 
   // List<
