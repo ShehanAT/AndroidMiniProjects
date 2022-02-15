@@ -8,13 +8,10 @@ class Food {
   String id;
   String name;
   String color;
-  @JsonKey(name: 'code_point')
-  int codePoint;
 
   Food(
     this.name, {
     required this.color,
-    required this.codePoint,
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
 }

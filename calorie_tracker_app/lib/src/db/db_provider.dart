@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -14,10 +14,45 @@ class DBProvider {
   static final DBProvider db = DBProvider._();
 
   var foodList = [
-    Food("Oatmeal", color: "white", codePoint: 01),
-    Food("Sandwich", color: "white", codePoint: 02),
-    Food("Blueberry", color: "blue", codePoint: 03),
-    Food("Apple", color: "red", codePoint: 04),
-    Food("Pasta", color: "yellow", codePoint: 05)
+    Food("Oatmeal", color: "white"),
+    Food("Sandwich", color: "white"),
+    Food("Blueberry", color: "blue"),
+    Food("Apple", color: "red"),
+    Food("Pasta", color: "yellow")
   ];
+
+  get _dbPath async {
+    String documentsDirectory = await _localPath;
+    return p.join(documentsDirectory, "FoodList.db");
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<bool> dbExists() async {
+    return File(await _dbPath).exists();
+  }
+
+  Future<Database> get database async {
+    return _database ?? await initDB();
+  }
+
+  initDB() async {
+    String path = await _dbPath;
+    return await openDatabase(path, version: 1, onOpen: (db) {},
+        onCreate: (Database db, int version) async {
+      print("DBProvider:: onCreate()");
+      await db.execute("CREATE TABLE Food("
+          "id TEXT PRIMARY KEY,"
+          "name TEXT,"
+          "color TEXT,"
+          ")");
+      await db.execute("CREATE TABLE FoodTrackTask("
+          "id TEXT PRIMARY KEY,"
+          "foodId INTEGER,"
+          "FOREIGN KEY(foodId) REFERENCES Food(id)");
+    });
+  }
 }
