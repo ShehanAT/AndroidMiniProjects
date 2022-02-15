@@ -39,6 +39,20 @@ class DBProvider {
     return _database ?? await initDB();
   }
 
+  Future<List<FoodTrackTask>> getFoodList() async {
+    final db = await database;
+    var result = await db.query("Foodlist");
+    return result.map((it) => FoodTrackTask.fromJson(it)).toList();
+  }
+
+  insertBulkFoodTrackTask(List<Food> foods) async {
+    final db = await database;
+    foods.forEach((it) async {
+      var res = await db.insert("Food", it.toJson());
+      print("Food item: ${it.id} = $res");
+    });
+  }
+
   initDB() async {
     String path = await _dbPath;
     return await openDatabase(path, version: 1, onOpen: (db) {},

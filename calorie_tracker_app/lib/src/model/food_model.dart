@@ -14,4 +14,8 @@ class Food {
     required this.color,
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
+
+  factory Food.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TaskToJson(this);
 }

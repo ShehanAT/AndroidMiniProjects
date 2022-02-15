@@ -25,4 +25,14 @@ class FoodListModel extends Model {
     _isLoading = true;
     notifyListeners();
   }
+
+  void loadFoodList() async {
+    var isNew = !await DBProvider.db.dbExists();
+    if (isNew) {
+      await _db.insertBulkFoodTrackTask(_db.foodList);
+    }
+    _foodTrackTasks = await _db.getFoodList();
+
+    await Future.delayed(Duration(milliseconds: 300));
+  }
 }
