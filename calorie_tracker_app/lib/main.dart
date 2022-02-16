@@ -48,19 +48,55 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Homepage')
+      appBar: AppBar(title: const Text('Homepage')),
+      body: Center(),
+      // child: ElevatedButton(
+      //   child: const Text('Open route'),
+      //   onPressed: (){
+      //     // Navigate to EnterFood page when tapped
+      //   },
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned(
+            left: 30,
+            bottom: 20,
+            child: FloatingActionButton(
+              heroTag: 'back',
+              onPressed: () {/* Do something */},
+              child: const Icon(
+                Icons.arrow_left,
+                size: 40,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 30,
+            child: FloatingActionButton(
+              heroTag: 'next',
+              onPressed: () {/* Do something */},
+              child: const Icon(
+                Icons.arrow_right,
+                size: 40,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          // Add more floating buttons if you want
+          // There is no limit
+        ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Open route'),
-          onPressed: (){
-            // Navigate to EnterFood page when tapped
-          },
-        )
-      )
+      // )
     );
   }
 }
@@ -69,7 +105,7 @@ class EnterFoodPage extends StatefulWidget {
   const EnterFoodPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second Route'),
@@ -90,7 +126,6 @@ class EnterFoodPage extends StatefulWidget {
     // TODO: implement createState
     throw UnimplementedError();
   }
-
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -151,11 +186,49 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned(
+            left: 30,
+            bottom: 20,
+            child: FloatingActionButton(
+              heroTag: 'back',
+              onPressed: () {/* Do something */},
+              child: const Icon(
+                Icons.arrow_left,
+                size: 40,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 30,
+            child: FloatingActionButton(
+              heroTag: 'next',
+              onPressed: () {/* Do something */},
+              child: const Icon(
+                Icons.arrow_right,
+                size: 40,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          // Add more floating buttons if you want
+          // There is no limit
+        ],
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
