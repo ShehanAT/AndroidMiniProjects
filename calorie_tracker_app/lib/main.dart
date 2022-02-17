@@ -147,7 +147,7 @@ class EnterFoodPage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   int _counter = 0;
-  TabController _tabController;
+  late TabController _tabController;
   bool showFab = true;
 
   void _incrementCounter() {
