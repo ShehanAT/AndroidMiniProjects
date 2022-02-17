@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
+import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
 // import 'package:calorie_tracker_app/src/c'
 
 
@@ -124,8 +125,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     }
                   },
                 );
+              }
             )
-        }
-    }
+        );
+      }
+    };
   }
 }
