@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:calorie_tracker_app/src/model/user_id_model.dart';
+import 'package:flutter/material.dart';
+// import 'package:calorie_tracker_app/src/model/scoped/'
 
+import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
+import 'package:calorie_tracker_app/src/model/food_track_task.dart';
+import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
+import 'package:calorie_tracker_app/component/iconpicker/icon_picker_builder.dart';
+import 'package:calorie_tracker_app/src/model/food_model.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:calorie_tracker_app/src/utils/color_utils.dart';
+import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 
 class AddFoodScreen extends StatefulWidget {
   final String foodItemId;
@@ -26,15 +36,15 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   @override
   void initState() {
     super.initState();
-    newTask = '';
+    newFood = '';
     taskColor = ColorUtils.defaultColors[0];
     taskIcon = Icons.work;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<TodoListModel>(
-      builder: (BuildContext context, Widget child, TodoListModel model) {
+    return ScopedModelDescendant<FoodListModel>(
+      builder: (BuildContext context, Widget child, FoodListModel model) {
         return Scaffold(
           key: _scaffoldKey,
           backgroundColor: Colors.white,
@@ -67,7 +77,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 ),
                 TextField(
                   onChanged: (text) {
-                    setState(() => newTask = text);
+                    setState(() => newFood = text);
                   },
                   cursorColor: taskColor,
                   autofocus: true,
@@ -114,17 +124,17 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 backgroundColor: taskColor,
                 label: Text('Create New Card'),
                 onPressed: () {
-                  if (newTask.isEmpty) {
+                  if (newFood.isEmpty) {
                     final snackBar = SnackBar(
                       content: Text(
-                          'Ummm... It seems that you are trying to add an invisible task which is not allowed in this realm.'),
+                          'Food Track Task not found!'),
                       backgroundColor: taskColor,
                     );
                     Scaffold.of(context).showSnackBar(snackBar);
                     // _scaffoldKey.currentState.showSnackBar(snackBar);
                   } else {
-                    model.addTask(Task(newTask,
-                        codePoint: taskIcon.codePoint, color: taskColor.value));
+                    model.addFoodTrackTask(FoodTrackTask(newFood,
+                        food: Food("Oatmeal")));
                     Navigator.pop(context);
                   }
                 },

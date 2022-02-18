@@ -35,4 +35,9 @@ class FoodListModel extends Model {
 
     await Future.delayed(Duration(milliseconds: 300));
   }
+
+  void addFoodTrackTask(FoodTrackTask task) async {
+    _foodTrackTasks.add(task);
+    notifyListeners();
+  }
 }
