@@ -1,9 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'src/app.dart';
 import 'src/page/add_food_screen.dart';
+import 'src/services/service_locator.dart';
+import 'src/model/test_model.dart';
+import 'package:calorie_tracker_app/src/utils/enums/view_states.dart';
 
 void main() {
+  setupLocator();
   runApp(const MyApp());
+}
+
+class TestView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ScopedModel<TestModel>(
+        model: locator<TestModel>,
+        child: ScopedModelDescendant<TestModel>(
+            builder: (context, child, model) => Scaffold(
+                    body: Center(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                      _getBodyUi(model.state),
+                      Text(model.title),
+                    ])))));
+  }
+
+  Widget _getBodyUi(ViewState state) {
+    switch (state) {
+      case ViewState.Busy:
+        return CircularProgressIndicator();
+      case ViewState.Retrieved:
+      default:
+        return Text('Done');
+    }
+  }
 }
 
 class MyApp extends StatelessWidget {
