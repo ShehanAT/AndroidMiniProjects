@@ -101,10 +101,42 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 : Container()
           ],
         ),
-        body: Container(
-          child: body(),
-          color: Colors.white,
+        body: new Column(
+          children: <Widget>[
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "Food Name",
+                  ),
+                )),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "Carb amount(g):",
+                  ),
+                )),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "Fat amount(g):",
+                  ),
+                )),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "Protein amount(g):",
+                  ),
+                )),
+          ],
         ));
+    // body: Container(
+    //   child: body(),
+    //   color: Colors.white,
+    // ));
     // return ScopedModelDescendant<FoodListModel>(
     //     builder: (BuildContext context, Widget child, FoodListModel model) {
     //   return Scaffold(
