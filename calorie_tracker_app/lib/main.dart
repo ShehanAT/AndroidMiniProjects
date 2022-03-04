@@ -14,17 +14,23 @@ void main() {
 class TestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<TestModel>(
-        model: locator<TestModel>,
-        child: ScopedModelDescendant<TestModel>(
-            builder: (context, child, model) => Scaffold(
-                    body: Center(
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                      _getBodyUi(model.state),
-                      Text(model.title),
-                    ])))));
+    var app = MaterialApp(
+      title: 'Todo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w400),
+          titleMedium: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w500),
+          bodyMedium: TextStyle(
+            fontSize: 14.0,
+            fontFamily: 'Hind',
+          ),
+        ),
+      ),
+      home: MyHomePage(title: ''),
+    );
+    return ScopedModel<TestModel>(model: TestModel(), child: app);
   }
 
   Widget _getBodyUi(ViewState state) {
@@ -79,74 +85,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   // _tabController = TabController(vsync: this, initialIndex: 1, length: 4);
-  //   // _tabController.addListener)(() => {
-  //   //   if(_tabController.index == 1){
-  //   //     showFab = true;
-  //   //   }else{
-  //   //     showFab = false;
-  //   //   }
-  //   // });
-  // }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(title: const Text('Homepage')),
-  //     body: TabBarView(
-  //         controller: _tabController, children: <Widget>[AddFoodScreen()]),
-  //     // child: ElevatedButton(
-  //     //   child: const Text('Open route'),
-  //     //   onPressed: (){
-  //     //     // Navigate to EnterFood page when tapped
-  //     //   },
-  //     // ),
-  //     floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-  //     floatingActionButton: Stack(
-  //       fit: StackFit.expand,
-  //       children: [
-  //         Positioned(
-  //           left: 30,
-  //           bottom: 20,
-  //           child: FloatingActionButton(
-  //             heroTag: 'back',
-  //             onPressed: () {/* Do something */},
-  //             child: const Icon(
-  //               Icons.arrow_left,
-  //               size: 40,
-  //             ),
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(10),
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           bottom: 20,
-  //           right: 30,
-  //           child: FloatingActionButton(
-  //             heroTag: 'next',
-  //             onPressed: () {/* Do something */},
-  //             child: const Icon(
-  //               Icons.arrow_right,
-  //               size: 40,
-  //             ),
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(10),
-  //             ),
-  //           ),
-  //         ),
-  //         // Add more floating buttons if you want
-  //         // There is no limit
-  //       ],
-  //     ),
-  //     // )
-  //   );
-  // }
 }
 
 class EnterFoodPage extends StatefulWidget {
@@ -198,14 +136,6 @@ class _MyHomePageState extends State<MyHomePage>
     super.initState();
 
     _tabController = TabController(vsync: this, initialIndex: 1, length: 4);
-    // _tabController.addListener(() => {
-    //   if(_tabController.index == 1){
-    //     showFab = true;
-    //   }else{
-    //     showFab = false;
-    //   }
-    //   setState(() {});
-    // });
   }
 
   @override
@@ -292,15 +222,8 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             ),
           ),
-          // Add more floating buttons if you want
-          // There is no limit
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
