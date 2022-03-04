@@ -16,16 +16,67 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool _isBack = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void onClickBackButton() {
+    print("Back Button");
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<FoodListModel>(
-        model: new FoodListModel(),
-        child: new Column(
-          children: [
-            new ScopedModelDescendant<FoodListModel>(
-                builder: (context, child, model) =>
-                    new Text('${model.toString()}')),
-            new Text("Random Text Widget")
+    return Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.blue.shade200, Colors.pink.shade300])),
+          ),
+          title: Text(
+            "Calorie Tracker App",
+            style: TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          leading: _isBack
+              ? IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    onClickBackButton();
+                  },
+                )
+              : Container(),
+        ),
+        body: new Column(
+          children: <Widget>[
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text(
+                    "Oatmeal, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text(
+                    "Burrito, calories: 400cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text(
+                    "Pasta, calories: 350cal, Carbs: 40g, Fat: 10g, Protein: 5g")),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text(
+                    "Hummus, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text(
+                    "Mashed Potates, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
           ],
         ));
   }
