@@ -65,7 +65,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: EnterFoodPage(),
+      // const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -94,9 +95,9 @@ class EnterFoodPage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Second Route'),
+      // ),
       body: Center(
         child: FlatButton(
           onPressed: () {
@@ -111,7 +112,84 @@ class EnterFoodPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    throw UnimplementedError();
+    return _EnterFoodPage();
+  }
+}
+
+class _EnterFoodPage extends State<EnterFoodPage>
+    with SingleTickerProviderStateMixin {
+  void onClickAddFoodButton(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => AddFoodScreen()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle buttonStyle =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+
+    return Scaffold(
+        // appBar: AppBar(
+        //   flexibleSpace: Container(
+        //     decoration: BoxDecoration(
+        //         gradient: LinearGradient(
+        //             colors: [Colors.blue.shade200, Colors.pink.shade300])),
+        //   ),
+        //   title: Text(
+        //     "Homepage",
+        //     style: TextStyle(
+        //         color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        //   ),
+        // ),
+        body: new Column(
+      children: <Widget>[
+        new ListTile(
+            leading: const Icon(Icons.food_bank),
+            title: new Text("Welcome to Calorie Tracker App!",
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontWeight: FontWeight.bold))),
+        new ElevatedButton(
+          // style: buttonStyle,
+          onPressed: () {
+            onClickAddFoodButton(context);
+          },
+          child: Text("Add Food"),
+        )
+        // new ListTile(
+        //     leading: const Icon(Icons.food_bank),
+        //     title: new TextField(
+        //       decoration: new InputDecoration(
+        //         hintText: "Calories",
+        //       ),
+        //     )),
+        // new ListTile(
+        //     leading: const Icon(Icons.food_bank),
+        //     title: new TextField(
+        //       decoration: new InputDecoration(
+        //         hintText: "Carb amount(g):",
+        //       ),
+        //     )),
+        // new ListTile(
+        //     leading: const Icon(Icons.food_bank),
+        //     title: new TextField(
+        //       decoration: new InputDecoration(
+        //         hintText: "Fat amount(g):",
+        //       ),
+        //     )),
+        // new ListTile(
+        //     leading: const Icon(Icons.food_bank),
+        //     title: new TextField(
+        //       decoration: new InputDecoration(
+        //         hintText: "Protein amount(g):",
+        //       ),
+        //     )),
+        // ElevatedButton(
+        //   // style: buttonStyle,
+        //   onPressed: () {},
+        //   child: Text("Add Food"),
+        // )
+      ],
+    ));
   }
 }
 
@@ -153,12 +231,13 @@ class _MyHomePageState extends State<MyHomePage>
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: TabBarView(controller: _tabController, children: [
-        AddFoodScreen(),
-        AddFoodScreen(),
-        AddFoodScreen(),
-        HistoryScreen(),
-      ]),
+      body: EnterFoodPage(),
+      // TabBarView(controller: _tabController, children: [
+      //   AddFoodScreen(),
+      //   EnterFoodPage(),
+      //   AddFoodScreen(),
+      //   HistoryScreen(),
+      // ]),
       // Center(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.

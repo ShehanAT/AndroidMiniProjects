@@ -33,8 +33,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
   void onClickBackButton(BuildContext context) {
     print("Back Button");
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => EnterFoodPage()));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => MyHomePage(title: "Calorie Tracker App")));
   }
 
   @override
@@ -66,27 +66,28 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.blue.shade200, Colors.pink.shade300])),
-          ),
-          title: Text(
-            "Calorie Tracker App",
-            style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          leading: _isBack
-              ? IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    onClickBackButton(context);
-                  },
-                )
-              : Container(),
+          // flexibleSpace: Container(
+          //   decoration: BoxDecoration(
+          //       gradient: LinearGradient(
+          //           colors: [Colors.blue.shade200, Colors.pink.shade300])),
+          // ),
+          // title: Text(
+          //   "Calorie Tracker App",
+          //   style: TextStyle(
+          //       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          // ),
+          // leading: _isBack
+          //     ? IconButton(
+          //         icon: Icon(
+          //           Icons.arrow_back_ios,
+          //           color: Colors.black,
+          //         ),
+          //         onPressed: () {
+          //           onClickBackButton(context);
+          //         },
+          //       )
+          //     : Container(),
+          title: Text("Add Food Page"),
         ),
         body: new Column(
           children: <Widget>[
