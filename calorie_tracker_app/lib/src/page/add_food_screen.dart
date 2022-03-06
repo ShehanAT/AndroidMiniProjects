@@ -3,6 +3,7 @@ import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
 import 'package:calorie_tracker_app/component/iconpicker/icon_picker_builder.dart';
+import 'package:calorie_tracker_app/main.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class AddFoodScreen extends StatefulWidget {
@@ -30,14 +31,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
     foodIcon = Icons.food_bank;
   }
 
-  void onClickBackButton() {
+  void onClickBackButton(BuildContext context) {
     print("Back Button");
-    Navigator.of(context).pop();
-  }
-
-  void onClickCart() {
-    print("Cart Button");
-    // Navigator.of(context).push(MaterialPageRoute(builder: (context) =>))
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => EnterFoodPage()));
   }
 
   @override
@@ -86,23 +83,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    onClickBackButton();
+                    onClickBackButton(context);
                   },
                 )
               : Container(),
-          // actions: [
-          //   _isCart
-          //       ? IconButton(
-          //           icon: Icon(
-          //             Icons.shopping_cart,
-          //             color: Colors.black,
-          //           ),
-          //           onPressed: () {
-          //             onClickCart();
-          //           },
-          //         )
-          //       : Container()
-          // ],
         ),
         body: new Column(
           children: <Widget>[
@@ -142,7 +126,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                   ),
                 )),
             ElevatedButton(
-              style: buttonStyle,
+              // style: buttonStyle,
               onPressed: () {},
               child: Text("Add Food"),
             )

@@ -98,7 +98,7 @@ class EnterFoodPage extends StatefulWidget {
         title: const Text('Second Route'),
       ),
       body: Center(
-        child: ElevatedButton(
+        child: FlatButton(
           onPressed: () {
             // Navigate back to homepage
           },
