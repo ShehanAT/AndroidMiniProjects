@@ -37,6 +37,10 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
         builder: (context) => MyHomePage(title: "Calorie Tracker App")));
   }
 
+  void addFood() {
+    print("Adding tracked food...");
+  }
+
   @override
   Widget body() {
     return Center(
@@ -66,27 +70,6 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          // flexibleSpace: Container(
-          //   decoration: BoxDecoration(
-          //       gradient: LinearGradient(
-          //           colors: [Colors.blue.shade200, Colors.pink.shade300])),
-          // ),
-          // title: Text(
-          //   "Calorie Tracker App",
-          //   style: TextStyle(
-          //       color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-          // ),
-          // leading: _isBack
-          //     ? IconButton(
-          //         icon: Icon(
-          //           Icons.arrow_back_ios,
-          //           color: Colors.black,
-          //         ),
-          //         onPressed: () {
-          //           onClickBackButton(context);
-          //         },
-          //       )
-          //     : Container(),
           title: Text("Add Food Page"),
         ),
         body: new Column(
@@ -128,7 +111,9 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
                 )),
             ElevatedButton(
               // style: buttonStyle,
-              onPressed: () {},
+              onPressed: () {
+                addFood();
+              },
               child: Text("Add Food"),
             )
           ],

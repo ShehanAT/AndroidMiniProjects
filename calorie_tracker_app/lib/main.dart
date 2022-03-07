@@ -129,67 +129,28 @@ class _EnterFoodPage extends State<EnterFoodPage>
         ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
 
     return Scaffold(
-        // appBar: AppBar(
-        //   flexibleSpace: Container(
-        //     decoration: BoxDecoration(
-        //         gradient: LinearGradient(
-        //             colors: [Colors.blue.shade200, Colors.pink.shade300])),
-        //   ),
-        //   title: Text(
-        //     "Homepage",
-        //     style: TextStyle(
-        //         color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        //   ),
-        // ),
+        appBar: AppBar(
+          title: Text(
+            "Homepage",
+            style: TextStyle(
+                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
         body: new Column(
-      children: <Widget>[
-        new ListTile(
-            leading: const Icon(Icons.food_bank),
-            title: new Text("Welcome to Calorie Tracker App!",
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.bold))),
-        new ElevatedButton(
-          // style: buttonStyle,
-          onPressed: () {
-            onClickAddFoodButton(context);
-          },
-          child: Text("Add Food"),
-        )
-        // new ListTile(
-        //     leading: const Icon(Icons.food_bank),
-        //     title: new TextField(
-        //       decoration: new InputDecoration(
-        //         hintText: "Calories",
-        //       ),
-        //     )),
-        // new ListTile(
-        //     leading: const Icon(Icons.food_bank),
-        //     title: new TextField(
-        //       decoration: new InputDecoration(
-        //         hintText: "Carb amount(g):",
-        //       ),
-        //     )),
-        // new ListTile(
-        //     leading: const Icon(Icons.food_bank),
-        //     title: new TextField(
-        //       decoration: new InputDecoration(
-        //         hintText: "Fat amount(g):",
-        //       ),
-        //     )),
-        // new ListTile(
-        //     leading: const Icon(Icons.food_bank),
-        //     title: new TextField(
-        //       decoration: new InputDecoration(
-        //         hintText: "Protein amount(g):",
-        //       ),
-        //     )),
-        // ElevatedButton(
-        //   // style: buttonStyle,
-        //   onPressed: () {},
-        //   child: Text("Add Food"),
-        // )
-      ],
-    ));
+          children: <Widget>[
+            new ListTile(
+                leading: const Icon(Icons.food_bank),
+                title: new Text("Welcome to Calorie Tracker App!",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold))),
+            new ElevatedButton(
+              onPressed: () {
+                onClickAddFoodButton(context);
+              },
+              child: Text("Add Food"),
+            )
+          ],
+        ));
   }
 }
 
@@ -232,42 +193,6 @@ class _MyHomePageState extends State<MyHomePage>
         title: Text(widget.title),
       ),
       body: EnterFoodPage(),
-      // TabBarView(controller: _tabController, children: [
-      //   AddFoodScreen(),
-      //   EnterFoodPage(),
-      //   AddFoodScreen(),
-      //   HistoryScreen(),
-      // ]),
-      // Center(
-      // Center is a layout widget. It takes a single child and positions it
-      // in the middle of the parent.
-      //   child: Column(
-      //     // Column is also a layout widget. It takes a list of children and
-      //     // arranges them vertically. By default, it sizes itself to fit its
-      //     // children horizontally, and tries to be as tall as its parent.
-      //     //
-      //     // Invoke "debug painting" (press "p" in the console, choose the
-      //     // "Toggle Debug Paint" action from the Flutter Inspector in Android
-      //     // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-      //     // to see the wireframe for each widget.
-      //     //
-      //     // Column has various properties to control how it sizes itself and
-      //     // how it positions its children. Here we use mainAxisAlignment to
-      //     // center the children vertically; the main axis here is the vertical
-      //     // axis because Columns are vertical (the cross axis would be
-      //     // horizontal).
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       const Text(
-      //         'You have pushed the button this many times:',
-      //       ),
-      //       Text(
-      //         '$_counter',
-      //         style: Theme.of(context).textTheme.headline4,
-      //       ),
-      //     ],
-      //   ),
-      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Stack(
         fit: StackFit.expand,

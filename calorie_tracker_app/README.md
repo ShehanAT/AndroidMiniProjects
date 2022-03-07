@@ -13,7 +13,8 @@ Calorie Tracker Application built using Flutter
 # Getting Started 
 
 ### Running Locally 
-
+To run this project follow these steps:
+1. Clone the project
 
 ### Prerequisites 
 
