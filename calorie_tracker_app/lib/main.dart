@@ -1,3 +1,4 @@
+import 'package:calorie_tracker_app/src/page/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'src/app.dart';
@@ -123,6 +124,16 @@ class _EnterFoodPage extends State<EnterFoodPage>
         .push(MaterialPageRoute(builder: (context) => AddFoodScreen()));
   }
 
+  void onClickHistoryScreenButton(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => HistoryScreen()));
+  }
+
+  void onClickSettingsScreenButton(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SettingsScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
@@ -148,7 +159,17 @@ class _EnterFoodPage extends State<EnterFoodPage>
                 onClickAddFoodButton(context);
               },
               child: Text("Add Food"),
-            )
+            ),
+            new ElevatedButton(
+                onPressed: () {
+                  onClickHistoryScreenButton(context);
+                },
+                child: Text("History Screen")),
+            new ElevatedButton(
+                onPressed: () {
+                  onClickSettingsScreenButton(context);
+                },
+                child: Text("Settings Screen"))
           ],
         ));
   }
