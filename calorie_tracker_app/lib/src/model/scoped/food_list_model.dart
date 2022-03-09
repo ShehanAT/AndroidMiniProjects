@@ -26,15 +26,15 @@ class FoodListModel extends Model {
     notifyListeners();
   }
 
-  void loadFoodList() async {
-    var isNew = !await DBProvider.db.dbExists();
-    if (isNew) {
-      await _db.insertBulkFoodTrackTask(_db.foodList);
-    }
-    _foodTrackTasks = await _db.getFoodList();
+  // void loadFoodList() async {
+  //   var isNew = !await DBProvider.db.dbExists();
+  //   if (isNew) {
+  //     await _db.insertBulkFoodTrackTask(_db.foodList);
+  //   }
+  //   _foodTrackTasks = await _db.getFoodList();
 
-    await Future.delayed(Duration(milliseconds: 300));
-  }
+  //   await Future.delayed(Duration(milliseconds: 300));
+  // }
 
   void addFoodTrackTask(FoodTrackTask task) async {
     _foodTrackTasks.add(task);
