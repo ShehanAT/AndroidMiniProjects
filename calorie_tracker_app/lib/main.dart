@@ -227,7 +227,8 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                       query: foodTrackQuery,
                       itemBuilder: (_, DataSnapshot snap,
                           Animation<double> animation, int index) {
-                        return FoodTrackCard(foodTrackTask: foodTrackList[0]);
+                        return FoodTrackCard(
+                            foodTrackTask: foodTrackList[index]);
                       }),
                 )),
             new ListTile(
