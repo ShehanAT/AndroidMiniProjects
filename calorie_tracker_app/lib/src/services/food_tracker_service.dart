@@ -20,8 +20,8 @@ class FoodTrackerService {
     // _databaseReference = database.reference().child(nodeName);
     // _databaseReference.push().set(foodtrackTask.toMap());
 
-    final food = Food(getRandomString(5));
-    foodDao.saveFood(food);
+    // final food = Food(foodtrackTask.food.name,
+    foodDao.saveFood(foodtrackTask);
   }
 
   void deleteFoodTrack(FoodTrackTask foodtrackTask) {

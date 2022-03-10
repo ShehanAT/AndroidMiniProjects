@@ -6,22 +6,42 @@ import 'package:firebase_database/firebase_database.dart';
 @JsonSerializable()
 class FoodTrackTask {
   String id;
-  String name;
-  Food food;
+  late Food food;
+  String mealTime;
 
   FoodTrackTask({
-    required this.name,
     required this.food,
+    required this.mealTime,
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
 
   factory FoodTrackTask.fromSnapshot(DataSnapshot snap) => FoodTrackTask(
-      name: snap.child('name').value as String,
-      food: snap.child('food').value as Food);
+      food: snap.child('food').value as Food,
+      mealTime: snap.child('mealTime').value as String);
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'name': name, 'food': food.toString()};
+    return <String, dynamic>{'mealTime': mealTime, 'food': food.toString()};
   }
+
+  FoodTrackTask.fromJson(Map<dynamic, dynamic> json)
+      : id = json['id'],
+        mealTime = json['mealTime'],
+        food = json['food'];
+  // food.name = json['name'],
+  // food.calories = json['calories'],
+  // food.carbs = json['carbs'],
+  // food.fat = json['fat'],
+  // food.protein = json['protein'];
+
+  Map<dynamic, dynamic> toJson() => <dynamic, dynamic>{
+        'id': id,
+        'mealTime': mealTime,
+        'name': food.name,
+        'calories': food.calories,
+        'carbs': food.carbs,
+        'fat': food.fat,
+        'protein': food.protein
+      };
 
   // factory FoodTrackTask.fromJson(Map<String, dynamic> json) =>
   //     _$TaskFromJson(json);
