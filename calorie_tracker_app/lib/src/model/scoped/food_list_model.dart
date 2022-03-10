@@ -6,7 +6,7 @@ import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/db/db_provider.dart';
 
 class FoodListModel extends Model {
-  var _db = DBProvider.db;
+  // var _db = DBProvider.db;
 
   List<FoodTrackTask> get foodTrackTasks => _foodTrackTasks.toList();
 

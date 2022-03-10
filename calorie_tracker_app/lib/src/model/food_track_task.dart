@@ -20,7 +20,7 @@ class FoodTrackTask {
       food: snap.child('food').value as Food);
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'name': name, 'food': food};
+    return <String, dynamic>{'name': name, 'food': food.toString()};
   }
 
   // factory FoodTrackTask.fromJson(Map<String, dynamic> json) =>

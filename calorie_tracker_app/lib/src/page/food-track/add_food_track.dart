@@ -40,6 +40,7 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
   }
 
   void addFood() {
+    print("addFood()");
     final FoodTrackTask foodTrackTask = FoodTrackTask(
       name: "Breakfast",
       food: Food("oatmeal"),

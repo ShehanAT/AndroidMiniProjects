@@ -1,7 +1,7 @@
 # calorie_tracker_app
 
 ### Overview 
-Calorie Tracker Application built using Flutter 
+Calorie Tracker Application built using Flutter and Firebase
 
 ## Screenshots 
 

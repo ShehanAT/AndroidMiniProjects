@@ -16,7 +16,11 @@ class Food {
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
 
-  factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
+  // factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FoodToJson(this);
+  Food.fromJson(Map<dynamic, dynamic> json)
+      : id = json['id'],
+        name = json['name'];
+
+  Map<dynamic, dynamic> toJson() => <dynamic, dynamic>{'id': id, 'name': name};
 }
