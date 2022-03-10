@@ -41,8 +41,8 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
   void onClickBackButton(BuildContext context) {
     print("Back Button");
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => MyHomePage(title: "Calorie Tracker App")));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => Homepage()));
   }
 
   void addFood() {

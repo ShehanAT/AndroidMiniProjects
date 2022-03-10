@@ -42,4 +42,19 @@ class Food {
         'fat': fat,
         'protein': protein
       };
+
+  @override
+  String toString() {
+    return "name: " +
+        name +
+        ', ' +
+        "calories: " +
+        calories +
+        ", carbs: " +
+        carbs +
+        ", fat: " +
+        fat +
+        ", protein: " +
+        protein;
+  }
 }
