@@ -30,7 +30,8 @@ class FoodTrackTask {
       : id = json['id'],
         mealTime = json['mealTime'],
         createdOn = json['createdOn'],
-        food = json['food'];
+        food = Food(json['name'], json['calories'], json['carbs'], json['fat'],
+            json['protein']);
 
   Map<dynamic, dynamic> toJson() => <dynamic, dynamic>{
         'id': id,

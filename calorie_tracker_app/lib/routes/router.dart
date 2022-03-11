@@ -1,4 +1,6 @@
+import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/page/food-track/add_food_track.dart';
+import 'package:calorie_tracker_app/src/page/food-track/view_food_track.dart';
 import 'package:flutter/cupertino.dart';
 import 'route_constants.dart';
 import 'package:calorie_tracker_app/main.dart';
@@ -17,6 +19,13 @@ class RoutePage {
         return PageRouteBuilder<dynamic>(
             settings: settings,
             pageBuilder: (_, __, ___) => AddFoodScreen(),
+            transitionsBuilder: (_, Animation<double> a, __, Widget c) =>
+                FadeTransition(opacity: a, child: c));
+      case RouteConstant.VIEW_FOODTRACK:
+        final FoodTrackTask foodTrackTask = settings.arguments as FoodTrackTask;
+        return PageRouteBuilder<dynamic>(
+            settings: settings,
+            pageBuilder: (_, __, ___) => ViewFoodTrack(foodTrackTask),
             transitionsBuilder: (_, Animation<double> a, __, Widget c) =>
                 FadeTransition(opacity: a, child: c));
       default:

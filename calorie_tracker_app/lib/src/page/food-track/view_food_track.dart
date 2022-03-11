@@ -19,7 +19,7 @@ class _ViewFoodTrackState extends State<ViewFoodTrack> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.foodTrack.id,
+          "Food Track Entry",
         ),
         leading: IconButton(
           icon: const Icon(
@@ -44,17 +44,22 @@ class _ViewFoodTrackState extends State<ViewFoodTrack> {
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      widget.foodTrack.mealTime +
-                          ", Calories: " +
+                      "Name: " +
+                          widget.foodTrack.food.name +
+                          "\n" +
+                          "Mealtime: " +
+                          widget.foodTrack.mealTime +
+                          "\n" +
+                          "Calories: " +
                           widget.foodTrack.food.calories +
                           "\n" +
-                          ", Carbs: " +
+                          "Carbs: " +
                           widget.foodTrack.food.carbs +
                           "\n" +
-                          ", Fat: " +
+                          "Fat: " +
                           widget.foodTrack.food.fat +
                           "\n" +
-                          ", Protein: " +
+                          "Protein: " +
                           widget.foodTrack.food.protein,
                       style: const TextStyle(fontSize: 16.0),
                     ),
