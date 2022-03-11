@@ -220,17 +220,6 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
         ),
         body: new Column(
           children: <Widget>[
-            Visibility(
-                visible: foodTrackList.isNotEmpty,
-                child: Flexible(
-                  child: FirebaseAnimatedList(
-                      query: foodTrackQuery,
-                      itemBuilder: (_, DataSnapshot snap,
-                          Animation<double> animation, int index) {
-                        return FoodTrackCard(
-                            foodTrackTask: foodTrackList[index]);
-                      }),
-                )),
             new ListTile(
                 leading: const Icon(Icons.food_bank),
                 title: new Text("Welcome to Calorie Tracker App!",
@@ -251,7 +240,18 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                 onPressed: () {
                   onClickSettingsScreenButton(context);
                 },
-                child: Text("Settings Screen"))
+                child: Text("Settings Screen")),
+            Visibility(
+                visible: foodTrackList.isNotEmpty,
+                child: Flexible(
+                  child: FirebaseAnimatedList(
+                      query: foodTrackQuery,
+                      itemBuilder: (_, DataSnapshot snap,
+                          Animation<double> animation, int index) {
+                        return FoodTrackCard(
+                            foodTrackTask: foodTrackList[index]);
+                      }),
+                )),
           ],
         ));
   }

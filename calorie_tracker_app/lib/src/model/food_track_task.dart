@@ -8,16 +8,19 @@ class FoodTrackTask {
   String id;
   late Food food;
   String mealTime;
+  DateTime createdOn;
 
   FoodTrackTask({
     required this.food,
     required this.mealTime,
+    required this.createdOn,
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
 
   factory FoodTrackTask.fromSnapshot(DataSnapshot snap) => FoodTrackTask(
       food: snap.child('food').value as Food,
-      mealTime: snap.child('mealTime').value as String);
+      mealTime: snap.child('mealTime').value as String,
+      createdOn: snap.child('createdOn').value as DateTime);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'mealTime': mealTime, 'food': food.toString()};
@@ -26,25 +29,17 @@ class FoodTrackTask {
   FoodTrackTask.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         mealTime = json['mealTime'],
+        createdOn = json['createdOn'],
         food = json['food'];
-  // food.name = json['name'],
-  // food.calories = json['calories'],
-  // food.carbs = json['carbs'],
-  // food.fat = json['fat'],
-  // food.protein = json['protein'];
 
   Map<dynamic, dynamic> toJson() => <dynamic, dynamic>{
         'id': id,
         'mealTime': mealTime,
+        'createdOn': createdOn,
         'name': food.name,
         'calories': food.calories,
         'carbs': food.carbs,
         'fat': food.fat,
         'protein': food.protein
       };
-
-  // factory FoodTrackTask.fromJson(Map<String, dynamic> json) =>
-  //     _$TaskFromJson(json);
-
-  // Map<String, dynamic> toJson() => _$TaskToJson(this);
 }
