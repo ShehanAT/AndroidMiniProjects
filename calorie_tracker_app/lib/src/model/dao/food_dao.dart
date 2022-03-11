@@ -17,4 +17,12 @@ class FoodDao {
   Query getFoodQuery() {
     return _foodRef;
   }
+
+  Query getFoodTrackQuery() {
+    return _foodTrackRef;
+  }
+
+  Future<DataSnapshot> getAllFoodTrackTasks() {
+    return _foodTrackRef.get();
+  }
 }

@@ -19,6 +19,7 @@ import 'package:calorie_tracker_app/helpers/colors.dart';
 import 'package:calorie_tracker_app/routes/router.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:calorie_tracker_app/src/model/dao/food_dao.dart';
 
 Future<void> main() async {
   setupLocator();
@@ -34,39 +35,6 @@ Future<void> main() async {
       //   child: CalorieTrackerApp(),)
       );
 }
-
-// class TestView extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     var app = MaterialApp(
-//       title: 'Todo',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         primarySwatch: Colors.deepPurple,
-//         textTheme: TextTheme(
-//           headline1: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w400),
-//           titleMedium: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w500),
-//           bodyMedium: TextStyle(
-//             fontSize: 14.0,
-//             fontFamily: 'Hind',
-//           ),
-//         ),
-//       ),
-//       home: MyHomePage(title: ''),
-//     );
-//     return ScopedModel<TestModel>(model: TestModel(), child: app);
-//   }
-
-//   Widget _getBodyUi(ViewState state) {
-//     switch (state) {
-//       case ViewState.Busy:
-//         return CircularProgressIndicator();
-//       case ViewState.Retrieved:
-//       default:
-//         return Text('Done');
-//     }
-//   }
-// }
 
 class CalorieTrackerApp extends StatefulWidget {
   @override
@@ -84,10 +52,6 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
     super.initState();
     checkFirstSeen();
   }
-
-  // void getCurrentAppTheme(){
-  //   // theme
-  // }
 
   void checkFirstSeen() {
     final bool _firstLaunch = true;
@@ -172,21 +136,63 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _database.ref().child(nodeName).onChildAdded.listen(_childAdded);
+    // _database.ref().child(nodeName).onChildAdded.listen(_childAdded);
+    // _database.ref().child(nodeName).onChildRemoved.listen(_childRemoves);
+    // _database.ref().child(nodeName).onChildChanged.listen(_childChanged);
     foodTrackQuery = _database.ref().child('foodTrack');
   }
 
   void _childAdded(dynamic event) {
+    DateTime now = DateTime.now();
+    FoodDao().getAllFoodTrackTasks();
     setState(() {
-      foodTrackList.add(FoodTrackTask(
-          mealTime: "Lunch", food: Food("apple", "200", "20", "20", "20")));
-      foodTrackList.add(FoodTrackTask(
-          mealTime: "Lunch", food: Food("banana", "300", "20", "20", "20")));
-      foodTrackList.add(FoodTrackTask(
-          mealTime: "Lunch",
-          food: Food("grapefruit", "100", "20", "20", "20")));
-      foodTrackList.add(FoodTrackTask(
-          mealTime: "Lunch", food: Food("grapes", "150", "20", "20", "20")));
+      // foodTrackList.add(FoodTrackTask.fromSnapshot(event.snapshot));
+      // foodTrackList.add(FoodDao().getAllFoodTrackTasks());
+      // foodTrackList.add(FoodTrackTask(
+      //     mealTime: "Lunch",
+      //     createdOn:
+      //         new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      //     food: Food("apple", "200", "20", "20", "20")));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("banana", "300", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("grapefruit", "100", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("grapes", "150", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
+    });
+  }
+
+  void _childRemoves(dynamic event) {
+    final FoodTrackTask deletedFoodTrackTask =
+        foodTrackList.singleWhere((FoodTrackTask foodtrackTask) {
+      return foodtrackTask == event.snapshot.key;
+    });
+
+    setState(() {
+      foodTrackList.removeAt(foodTrackList.indexOf(deletedFoodTrackTask));
+    });
+  }
+
+  void _childChanged(dynamic event) {
+    final FoodTrackTask changedFoodTrackTask =
+        foodTrackList.singleWhere((FoodTrackTask foodTrackTask) {
+      return foodTrackTask.id == event.snapshot.key;
+    });
+    setState(() {
+      foodTrackList[foodTrackList.indexOf(changedFoodTrackTask)] =
+          FoodTrackTask.fromSnapshot(event.snapshot);
     });
   }
 
@@ -209,6 +215,7 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
         ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+    final foodDao = FoodDao();
 
     return Scaffold(
         appBar: AppBar(
@@ -245,11 +252,12 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                 visible: foodTrackList.isNotEmpty,
                 child: Flexible(
                   child: FirebaseAnimatedList(
-                      query: foodTrackQuery,
+                      query: foodDao.getFoodTrackQuery(),
                       itemBuilder: (_, DataSnapshot snap,
                           Animation<double> animation, int index) {
-                        return FoodTrackCard(
-                            foodTrackTask: foodTrackList[index]);
+                        final json = snap.value as Map<dynamic, dynamic>;
+                        final foodTrackTask = FoodTrackTask.fromJson(json);
+                        return FoodTrackCard(foodTrackTask: foodTrackTask);
                       }),
                 )),
           ],

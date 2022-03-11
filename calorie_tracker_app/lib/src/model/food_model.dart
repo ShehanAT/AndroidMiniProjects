@@ -24,7 +24,9 @@ class Food {
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
 
-  // factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
+  // factory Food.fromSnapshot(DataSnapshot snap) => Food(
+
+  // );
 
   Food.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
