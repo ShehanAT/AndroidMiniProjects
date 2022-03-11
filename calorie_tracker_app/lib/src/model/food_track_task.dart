@@ -29,14 +29,14 @@ class FoodTrackTask {
   FoodTrackTask.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
         mealTime = json['mealTime'],
-        createdOn = json['createdOn'],
+        createdOn = DateTime.parse(json['createdOn']),
         food = Food(json['name'], json['calories'], json['carbs'], json['fat'],
             json['protein']);
 
   Map<dynamic, dynamic> toJson() => <dynamic, dynamic>{
         'id': id,
         'mealTime': mealTime,
-        'createdOn': createdOn,
+        'createdOn': createdOn.toString(),
         'name': food.name,
         'calories': food.calories,
         'carbs': food.carbs,

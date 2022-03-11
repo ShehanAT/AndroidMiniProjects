@@ -248,6 +248,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
+            new ListTile(
+                leading: const Icon(Icons.track_changes_sharp),
+                title: new Text("Latest Food Track Entries: ",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold))),
             Visibility(
                 visible: foodTrackList.isNotEmpty,
                 child: Flexible(

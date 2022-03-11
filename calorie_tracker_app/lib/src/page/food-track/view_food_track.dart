@@ -50,6 +50,9 @@ class _ViewFoodTrackState extends State<ViewFoodTrack> {
                           "Mealtime: " +
                           widget.foodTrack.mealTime +
                           "\n" +
+                          "CreatedOn: " +
+                          widget.foodTrack.createdOn.toString() +
+                          "\n" +
                           "Calories: " +
                           widget.foodTrack.food.calories +
                           "\n" +
