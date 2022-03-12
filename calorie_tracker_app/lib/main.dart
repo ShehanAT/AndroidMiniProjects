@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'src/app.dart';
 import 'src/page/food-track/add_food_track.dart';
-import 'src/page/history_screen.dart';
+import 'src/page/history/history_screen.dart';
 import 'src/services/service_locator.dart';
 import 'src/model/test_model.dart';
 import 'package:calorie_tracker_app/src/utils/enums/view_states.dart';
