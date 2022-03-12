@@ -8,6 +8,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:calorie_tracker_app/src/utils/charts/line-chart/line_chart.dart';
 import 'package:calorie_tracker_app/src/utils/charts/line_gallery.dart';
 import 'package:calorie_tracker_app/src/utils/charts/gallery_scaffold.dart';
+import 'package:calorie_tracker_app/src/utils/charts/line-chart/datetime_series_chart.dart';
 
 class HistoryScreen extends StatefulWidget {
   HistoryScreen();
@@ -47,7 +48,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        body: new ListView(children: galleries
+        body: new Container(child: DateTimeChart()
+            // galleries
             //   new ListTile(
             //       leading: const Icon(Icons.food_bank),
             //       title: new Text(
