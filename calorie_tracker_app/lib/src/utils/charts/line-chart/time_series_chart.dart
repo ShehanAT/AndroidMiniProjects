@@ -1,7 +1,11 @@
 import 'package:calorie_tracker_app/src/utils/charts/line-chart/line_chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class TimeSeriesChart extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -35,8 +39,43 @@ class TimeSeriesChart extends StatelessWidget {
     );
   }
 
+  void fetchData() {}
+
   static List<charts.Series<TimeSeriesSale, DateTime>>
       _createTimeSeriesSampleData() {
+    DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
+    _dbRef.once().then((DatabaseEvent databaseEvent) {
+      // final Map<dynamic, dynamic> data =
+      // databaseEvent.snapshot.key;
+      final databaseValue = jsonEncode(databaseEvent.snapshot.value);
+      // ? databaseEvent.snapshot.value["foodTrack"].toString()
+      // : databaseEvent.snapshot.value.toString();
+      // jsonDecode(databaseEvent.snapshot.value["foodTrack"]);
+      // final foodTrackEntries = databaseSnapshot["foodTrack"];
+      Map<String, int> caloriesByDateMap = new Map();
+      if (databaseValue != null) {
+        Map<String, dynamic> jsonData = jsonDecode(databaseValue);
+        var dateFormat = DateFormat("MM/dd/yyyy");
+        for (var foodEntry in jsonData["foodTrack"].values) {
+          var trackedDateStr =
+              DateTime.parse(foodEntry["createdOn"].toString());
+          DateTime dateNow = DateTime.now();
+          var trackedDate = dateFormat.format(trackedDateStr);
+          if (caloriesByDateMap.containsKey(trackedDate)
+              // &&
+              // dateNow.difference(trackedDate).inDays != 0
+              ) {
+            caloriesByDateMap[trackedDate] = caloriesByDateMap[trackedDate]! +
+                int.parse(foodEntry["calories"]);
+          } else {
+            caloriesByDateMap[trackedDate] = int.parse(foodEntry["calories"]);
+          }
+        }
+        print(caloriesByDateMap);
+      } else {
+        print("databaseSnapshot key is NULL");
+      }
+    });
     // NEED TO FIND WAY TO FETCH ALL FOODTRACKTASK INSTANCES FROM FIREBASE
     // foodTrackRef.
 
@@ -56,6 +95,13 @@ class TimeSeriesChart extends StatelessWidget {
           data: data)
     ];
   }
+}
+
+class CaloriesByDate {
+  final DateTime time;
+  final int totalCalories;
+
+  CaloriesByDate(this.time, this.totalCalories);
 }
 
 class TimeSeriesSale {
