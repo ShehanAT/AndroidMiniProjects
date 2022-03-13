@@ -1,4 +1,5 @@
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
+import 'package:calorie_tracker_app/src/page/day-view/day-view.dart';
 import 'package:calorie_tracker_app/src/page/settings_screen.dart';
 import 'package:calorie_tracker_app/widgets/foodtrack_card.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
@@ -211,6 +212,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
         .push(MaterialPageRoute(builder: (context) => SettingsScreen()));
   }
 
+  void onClickDayViewScreenButton(BuildContext context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => DayViewScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
@@ -248,6 +254,11 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
+            new ElevatedButton(
+                onPressed: () {
+                  onClickDayViewScreenButton(context);
+                },
+                child: Text("Day View Screen")),
             new ListTile(
                 leading: const Icon(Icons.track_changes_sharp),
                 title: new Text("Latest Food Track Entries: ",
