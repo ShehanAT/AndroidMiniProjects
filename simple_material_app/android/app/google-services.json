@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "941637022600",
+    "firebase_url": "https://simple-material-app-1565a-default-rtdb.firebaseio.com",
+    "project_id": "simple-material-app-1565a",
+    "storage_bucket": "simple-material-app-1565a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941637022600:android:fce0745664cfc85884003d",
+        "android_client_info": {
+          "package_name": "com.coding.informer.simple_material_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941637022600-qsdb4llbimff09dphh8fkokn78930ms0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOlez2MZOHVYcW71KpN2xke8MF1tkJLX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941637022600-qsdb4llbimff09dphh8fkokn78930ms0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
