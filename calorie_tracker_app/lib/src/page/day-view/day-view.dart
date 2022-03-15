@@ -132,7 +132,7 @@ class ScanList extends StatelessWidget {
 }
 
 class ScanTile extends StatelessWidget {
-  final Scan scan;
+  final FoodTrackTask scan;
   ScanTile({required this.scan});
 
   List macros = CalorieStats.macroData;
@@ -145,7 +145,7 @@ class ScanTile extends StatelessWidget {
         backgroundColor: Color(0xff5FA55A),
         child: _itemCalories(),
       ),
-      title: Text(scan.productName,
+      title: Text(scan.food_name,
           style: TextStyle(
             fontSize: 16.0,
             fontFamily: 'Open Sans',
@@ -163,7 +163,7 @@ class ScanTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(scan.productCalories.toStringAsFixed(0),
+        Text(scan.calories.toStringAsFixed(0),
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.white,
@@ -199,7 +199,7 @@ class ScanTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.productCarbs.toStringAsFixed(1) + 'g    ',
+                  Text(' ' + scan.carbs.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.black,
@@ -214,7 +214,7 @@ class ScanTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.productProtein.toStringAsFixed(1) + 'g    ',
+                  Text(' ' + scan.protein.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.black,
@@ -229,7 +229,7 @@ class ScanTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.productFat.toStringAsFixed(1) + 'g',
+                  Text(' ' + scan.fat.toStringAsFixed(1) + 'g',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.black,
@@ -304,13 +304,13 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productCalories / macros[0]),
+              value: (scan.calories / macros[0]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff5FA55A)),
             ),
           ),
           Text('      ' +
-              ((scan.productCalories / macros[0]) * 100).toStringAsFixed(0) +
+              ((scan.calories / macros[0]) * 100).toStringAsFixed(0) +
               '%'),
         ],
       ),
@@ -326,13 +326,13 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productCarbs / macros[2]),
+              value: (scan.carbs / macros[2]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA5457)),
             ),
           ),
           Text('      ' +
-              ((scan.productCarbs / macros[2]) * 100).toStringAsFixed(0) +
+              ((scan.carbs / macros[2]) * 100).toStringAsFixed(0) +
               '%'),
         ],
       ),
@@ -348,13 +348,13 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productProtein / macros[1]),
+              value: (scan.protein / macros[1]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA8925)),
             ),
           ),
           Text('      ' +
-              ((scan.productProtein / macros[1]) * 100).toStringAsFixed(0) +
+              ((scan.protein / macros[1]) * 100).toStringAsFixed(0) +
               '%'),
         ],
       ),
@@ -370,13 +370,13 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productFat / macros[3]),
+              value: (scan.fat / macros[3]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff01B4BC)),
             ),
           ),
           Text('      ' +
-              ((scan.productFat / macros[3]) * 100).toStringAsFixed(0) +
+              ((scan.fat / macros[3]) * 100).toStringAsFixed(0) +
               '%'),
         ],
       ),
