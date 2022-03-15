@@ -31,13 +31,7 @@ class _DateTimeChart extends State<DateTimeChart> {
       new TimeSeriesSale(new DateTime(2022, 03, 14), 150),
     ];
     _dbRef.once().then((DatabaseEvent databaseEvent) {
-      // final Map<dynamic, dynamic> data =
-      // databaseEvent.snapshot.key;
       final databaseValue = jsonEncode(databaseEvent.snapshot.value);
-      // ? databaseEvent.snapshot.value["foodTrack"].toString()
-      // : databaseEvent.snapshot.value.toString();
-      // jsonDecode(databaseEvent.snapshot.value["foodTrack"]);
-      // final foodTrackEntries = databaseSnapshot["foodTrack"];
       Map<String, int> caloriesByDateMap = new Map();
       if (databaseValue != null) {
         Map<String, dynamic> jsonData = jsonDecode(databaseValue);
@@ -47,22 +41,16 @@ class _DateTimeChart extends State<DateTimeChart> {
               DateTime.parse(foodEntry["createdOn"].toString());
           DateTime dateNow = DateTime.now();
           var trackedDate = dateFormat.format(trackedDateStr);
-          if (caloriesByDateMap.containsKey(trackedDate)
-              // &&
-              // dateNow.difference(trackedDate).inDays != 0
-              ) {
+          if (caloriesByDateMap.containsKey(trackedDate)) {
             caloriesByDateMap[trackedDate] = caloriesByDateMap[trackedDate]! +
                 int.parse(foodEntry["calories"]);
           } else {
             caloriesByDateMap[trackedDate] = int.parse(foodEntry["calories"]);
           }
         }
-        // print(caloriesByDateMap);
         List<TimeSeriesSale> caloriesByDateTimeMap = [];
         for (var foodEntry in caloriesByDateMap.keys) {
-          // print(foodEntry + " 00:00:00");
           DateTime entryDateTime = DateTime.parse(foodEntry);
-          // print(foodEntry);
           caloriesByDateTimeMap.add(
               new TimeSeriesSale(entryDateTime, caloriesByDateMap[foodEntry]!));
         }
@@ -75,14 +63,12 @@ class _DateTimeChart extends State<DateTimeChart> {
         });
 
         resultData = caloriesByDateTimeMap;
-        // print(caloriesByDateTimeMap);
         return caloriesByDateTimeMap;
       } else {
         print("databaseSnapshot key is NULL");
         return null;
       }
     }).then((caloriesByDateTimeMap) {
-      // print("passing");
       print(caloriesByDateTimeMap);
       if (caloriesByDateTimeMap != null) {
         resultChartData = [
@@ -102,7 +88,6 @@ class _DateTimeChart extends State<DateTimeChart> {
               measureFn: (TimeSeriesSale sales, _) => sales.sales,
               data: resultData)
         ];
-        // return result;
       }
 
       setState(() {
@@ -122,15 +107,6 @@ class _DateTimeChart extends State<DateTimeChart> {
     ];
 
     return _chartData!;
-    // }else{
-    //   return [
-    //   new charts.Series<TimeSeriesSale, DateTime>(
-    //       id: "Sales",
-    //       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-    //       domainFn: (TimeSeriesSale sales, _) => sales.time,
-    //       measureFn: (TimeSeriesSale sales, _) => sales.sales,
-    //       data: resultData)
-    // ];
   }
 
   @override
@@ -143,11 +119,6 @@ class _DateTimeChart extends State<DateTimeChart> {
       return CircularProgressIndicator();
     }
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Container();
-  // }
-
 }
 
 class TimeSeriesSale {
