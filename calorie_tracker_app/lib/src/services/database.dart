@@ -41,6 +41,7 @@ class DatabaseService {
 
   List<FoodTrackTask> _scanListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
+      print(doc.toString());
       return FoodTrackTask(
         id: doc.id,
         food_name: doc['food_name'] ?? '',
@@ -56,11 +57,19 @@ class DatabaseService {
   }
 
   Stream<List<FoodTrackTask>> get foodTracks {
-    print(foodTrackCollection.doc(uid).collection('foodTracks').snapshots());
-    return foodTrackCollection
-        .doc(uid)
-        .collection('foodTracks')
-        .snapshots()
-        .map(_scanListFromSnapshot);
+    // print("get foodtracks: ");
+    return foodTrackCollection.snapshots().map(_scanListFromSnapshot);
+    // print(foodTrackCollection.doc(uid).collection('foodTracks').snapshots());
+    // return foodTrackCollection
+    //     .doc(uid)
+    //     .collection('foodTracks')
+    //     .snapshots()
+    //     .map(_scanListFromSnapshot);
+  }
+
+  Future<String> getFoodTrackData(String uid) async {
+    DocumentSnapshot snapshot = await foodTrackCollection.doc(uid).get();
+    print("getFoodTrackData" + snapshot.toString());
+    return snapshot.toString();
   }
 }

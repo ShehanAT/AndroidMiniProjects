@@ -26,10 +26,12 @@ class _DayViewState extends State<DayViewScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _isBack = true;
   final List<GalleryScaffold> lineGallery = buildGallery();
-
+  DatabaseService databaseService = new DatabaseService(
+      uid: "calorie-tracker-b7d17", currentDate: DateTime.now());
   @override
   void initState() {
     super.initState();
+    databaseService.getFoodTrackData("calorie-tracker-b7d17");
   }
 
   void onClickBackButton() {}
@@ -72,7 +74,8 @@ class _DayViewState extends State<DayViewScreen> {
         ),
         body: StreamProvider<List<FoodTrackTask>>.value(
           initialData: [],
-          value: new DatabaseService(uid: "0", currentDate: DateTime.now())
+          value: new DatabaseService(
+                  uid: "calorie-tracker-b7d17", currentDate: DateTime.now())
               .foodTracks,
           child: new Column(children: <Widget>[
             _calorieCounter(),
@@ -100,11 +103,12 @@ class ScanList extends StatelessWidget {
       print(scansFeed);
       List curScans = [];
       scansFeed.forEach((scan) {
-        DateTime scanDate = DateTime(scan.dateTime.toDate().year,
-            scan.dateTime.toDate().month, scan.dateTime.toDate().day);
-        if (scanDate.compareTo(curDate) == 0) {
-          curScans.add(scan);
-        }
+        // DateTime scanDate = DateTime(scan.dateTime.toDate().year,
+        //     scan.dateTime.toDate().month, scan.dateTime.toDate().day);
+        // if (scanDate.compareTo(curDate) == 0) {
+        //   curScans.add(scan);
+        // }
+        curScans.add(scan);
       });
       return curScans;
     }
