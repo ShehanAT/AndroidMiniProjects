@@ -23,6 +23,11 @@ class DayViewScreen extends StatefulWidget {
 }
 
 class _DayViewState extends State<DayViewScreen> {
+  String productName = 'Loading...';
+  // Product newResult;
+  double servingSize = 0;
+  String dropdownValue = 'grams';
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _isBack = true;
   final List<GalleryScaffold> lineGallery = buildGallery();
@@ -57,6 +62,133 @@ class _DayViewState extends State<DayViewScreen> {
     );
   }
 
+  Widget _addFoodButton() {
+    return IconButton(
+      icon: Icon(Icons.add_box),
+      iconSize: 25,
+      color: Colors.white,
+      onPressed: () async {
+        // dynamic result = await _scan.barcodeScan();
+        setState(() {
+          // newResult = result;
+          // productName = newResult.productName;
+        });
+        // _showFoodToAdd(context);
+      },
+    );
+  }
+
+  // _showFoodToAdd(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return AlertDialog(
+  //           title: Text(productName),
+  //           content: _showAmountHad(),
+  //           actions: <Widget>[
+  //             FlatButton(
+  //               onPressed: () => Navigator.pop(context), // passing false
+  //               child: Text('Cancel'),
+  //             ),
+  //             FlatButton(
+  //               onPressed: () async {
+  //                 Navigator.pop(context);
+  //                 await showDialog(
+  //                     context: context,
+  //                     builder: (context) {
+  //                       List<List> questionArray = [
+  //                         [
+  //                           newResult.nutriments.energyKcal100g *
+  //                               servingSize /
+  //                               100,
+  //                           'many calories are',
+  //                           ''
+  //                         ],
+  //                         [
+  //                           newResult.nutriments.fat * servingSize / 100,
+  //                           'much fat is',
+  //                           'g'
+  //                         ],
+  //                         [
+  //                           newResult.nutriments.proteins * servingSize / 100,
+  //                           'much protein is',
+  //                           'g'
+  //                         ],
+  //                         [
+  //                           newResult.nutriments.carbohydrates *
+  //                               servingSize /
+  //                               100,
+  //                           'much carbohydrate is',
+  //                           'g'
+  //                         ]
+  //                       ];
+  //                       questionArray.shuffle();
+  //                       return QuestionAlert(value: questionArray[0]);
+  //                     });
+  //                 _scan.storeProduct(newResult, servingSize, dropdownValue);
+  //               },
+  //               child: Text('Ok'),
+  //             ),
+  //           ],
+  //         );
+  //       });
+  // }
+
+  Widget _showDatePicker() {
+    return Container(
+      width: 250,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.arrow_left, size: 25.0),
+            color: Colors.white,
+            onPressed: () {
+              setState(() {
+                // _value = _value.subtract(Duration(days: 1));
+                // _rightArrowColour = Colors.white;
+              });
+            },
+          ),
+          TextButton(
+            // textColor: Colors.white,
+            onPressed: () => {print("Next Date Button Pressed")},
+            // _selectDate()},
+            child: Text(DateTime.now().toString(),
+                style: TextStyle(
+                  fontFamily: 'Open Sans',
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w700,
+                )),
+          ),
+          IconButton(
+              icon: Icon(Icons.arrow_right, size: 25.0),
+              // color: _rightArrowColour,
+              onPressed: () {
+                // print(today.difference(_value).compareTo(Duration(days: 1)));
+                // if (today.difference(_value).compareTo(Duration(days: 1)) ==
+                //     -1) {
+                //   setState(() {
+                //     _rightArrowColour = Color(0xffC1C1C1);
+                //   });
+                // } else {
+                //   setState(() {
+                //     _value = _value.add(Duration(days: 1));
+                //   });
+                //   if (today.difference(_value).compareTo(Duration(days: 1)) ==
+                //       -1) {
+                //     setState(() {
+                //       _rightArrowColour = Color(0xffC1C1C1);
+                //     });
+                //   }
+                // }
+              }),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var galleries = <Widget>[];
@@ -66,12 +198,17 @@ class _DayViewState extends State<DayViewScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            "Calorie Tracker App",
-            style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
+            elevation: 0,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _showDatePicker(),
+                  _addFoodButton(),
+                ],
+              ),
+            )),
         body: StreamProvider<List<FoodTrackTask>>.value(
           initialData: [],
           value: new DatabaseService(
@@ -81,16 +218,16 @@ class _DayViewState extends State<DayViewScreen> {
             _calorieCounter(),
             Expanded(
                 child: ListView(
-              children: <Widget>[ScanList(datePicked: DateTime.now())],
+              children: <Widget>[FoodTrackList(datePicked: DateTime.now())],
             ))
           ]),
         ));
   }
 }
 
-class ScanList extends StatelessWidget {
+class FoodTrackList extends StatelessWidget {
   final DateTime datePicked;
-  ScanList({required this.datePicked});
+  FoodTrackList({required this.datePicked});
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +259,7 @@ class ScanList extends StatelessWidget {
       itemCount: curScans.length + 1,
       itemBuilder: (context, index) {
         if (index < curScans.length) {
-          return ScanTile(scan: curScans[index]);
+          return FoodTrackTile(scan: curScans[index]);
         } else {
           return SizedBox(height: 5);
         }
@@ -131,9 +268,9 @@ class ScanList extends StatelessWidget {
   }
 }
 
-class ScanTile extends StatelessWidget {
+class FoodTrackTile extends StatelessWidget {
   final FoodTrackTask scan;
-  ScanTile({required this.scan});
+  FoodTrackTile({required this.scan});
 
   List macros = CalorieStats.macroData;
 
@@ -202,7 +339,7 @@ class ScanTile extends StatelessWidget {
                   Text(' ' + scan.carbs.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
                       )),
@@ -217,7 +354,7 @@ class ScanTile extends StatelessWidget {
                   Text(' ' + scan.protein.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
                       )),
@@ -232,20 +369,19 @@ class ScanTile extends StatelessWidget {
                   Text(' ' + scan.fat.toStringAsFixed(1) + 'g',
                       style: TextStyle(
                         fontSize: 12.0,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
                       )),
                 ],
               ),
-              // Text(scan.grams.toString() + 'g',
-              //     style: TextStyle(
-              //       fontSize: 12.0,
-              //       color: Colors.black,
-              //       fontFamily: 'Open Sans',
-              //       fontWeight: FontWeight.w300,
-              //     )
-              // ),
+              Text(scan.grams.toString() + 'g',
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.white,
+                    fontFamily: 'Open Sans',
+                    fontWeight: FontWeight.w300,
+                  )),
             ],
           ),
         )
@@ -271,28 +407,27 @@ class ScanTile extends StatelessWidget {
 
   Widget expandedHeader(BuildContext context) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text('% of total',
-              style: TextStyle(
-                fontSize: 14.0,
-                color: Colors.black,
-                fontFamily: 'Open Sans',
-                fontWeight: FontWeight.w400,
-              )),
-        ]
-        //   IconButton(
-        //     icon: Icon(Icons.edit),
-        //     iconSize: 16,
-        //     onPressed: () {
-        //       Navigator.push(
-        //           context,
-        //           MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
-        //       );
-        //     }
-        //   )
-        // ],
-        );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Text('% of total',
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.white,
+              fontFamily: 'Open Sans',
+              fontWeight: FontWeight.w400,
+            )),
+        IconButton(
+            icon: Icon(Icons.edit),
+            iconSize: 16,
+            onPressed: () {
+              // Navigator.push(
+              //   context,
+
+              //   MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
+              // );
+            })
+      ],
+    );
   }
 
   Widget _expandedCalories() {

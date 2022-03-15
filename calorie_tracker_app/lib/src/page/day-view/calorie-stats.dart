@@ -1,6 +1,6 @@
+import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:calorie_tracker_app/src/services/scan.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class CalorieStats extends StatelessWidget {
@@ -32,91 +32,29 @@ class CalorieStats extends StatelessWidget {
     final DateTime curDate =
         new DateTime(datePicked.year, datePicked.month, datePicked.day);
 
-    // final scans = Provider.of<List<Scan>>(context);
+    final foodTracks = Provider.of<List<FoodTrackTask>>(context);
 
-    List findCurScans() {
-      List curScans = [];
-      // scansFeed.forEach((scan) {
-      //   DateTime scanDate = DateTime(scan.dateTime.toDate().year,
-      //       scan.dateTime.toDate().month, scan.dateTime.toDate().day);
-      //   if (scanDate.compareTo(curDate) == 0) {
-      //     curScans.add(scan);
-      //   }
-      // });
-      curScans = [
-        new Scan(
-            productName: "Oatmeal",
-            productCalories: 100,
-            productCarbs: 10,
-            productFat: 10,
-            productProtein: 10,
-            dateTime: DateTime.now()),
-        new Scan(
-            productName: "Oatmeal",
-            productCalories: 100,
-            productCarbs: 10,
-            productFat: 10,
-            productProtein: 10,
-            dateTime: DateTime.now()),
-        new Scan(
-            productName: "Oatmeal",
-            productCalories: 100,
-            productCarbs: 10,
-            productFat: 10,
-            productProtein: 10,
-            dateTime: DateTime.now()),
-        new Scan(
-            productName: "Oatmeal",
-            productCalories: 100,
-            productCarbs: 10,
-            productFat: 10,
-            productProtein: 10,
-            dateTime: DateTime.now()),
-        // {
-        //   "productCarbs": 10,
-        //   "productFat": 10,
-        //   "productProtein": 10,
-        //   "productCalories": 100,
-        //   "datetime": new DateTime.now(),
-        // },
-        // {
-        //   "productCarbs": 10,
-        //   "productFat": 10,
-        //   "productProtein": 10,
-        //   "productCalories": 100,
-        //   "datetime": new DateTime.now(),
-        // },
-        // {
-        //   "productCarbs": 10,
-        //   "productFat": 10,
-        //   "productProtein": 10,
-        //   "productCalories": 100,
-        //   "datetime": new DateTime.now(),
-        // },
-        // {
-        //   "productCarbs": 10,
-        //   "productFat": 10,
-        //   "productProtein": 10,
-        //   "productCalories": 100,
-        //   "datetime": new DateTime.now(),
-        // },
-      ];
-      return curScans;
+    List findCurScans(List<FoodTrackTask> foodTracks) {
+      List currentFoodTracks = [];
+      foodTracks.forEach((scan) {
+        currentFoodTracks.add(scan);
+      });
+      return currentFoodTracks;
     }
 
-    List curScans = findCurScans();
+    List currentFoodTracks = findCurScans(foodTracks);
 
-    void findNutriments(List curScans) {
-      curScans.forEach((scan) {
-        totalCarbs += scan.productCarbs;
-        totalFat += scan.productFat;
-        totalProtein += scan.productProtein;
-        displayCalories += scan.productCalories;
+    void findNutriments(List foodTracks) {
+      foodTracks.forEach((scan) {
+        totalCarbs += scan.carbs;
+        totalFat += scan.fat;
+        totalProtein += scan.protein;
+        displayCalories += scan.calories;
       });
       totalCalories = 9 * totalFat + 4 * totalCarbs + 4 * totalProtein;
     }
 
-    findNutriments(curScans);
+    findNutriments(currentFoodTracks);
 
     // ignore: deprecated_member_use
     List<PieChartSectionData> _sections = <PieChartSectionData>[];
@@ -136,7 +74,7 @@ class CalorieStats extends StatelessWidget {
       title:
           '', // ((4 * totalCarbs / totalCalories) * 100).toStringAsFixed(0) + '%',
       radius: 50,
-      // titleStyle: TextStyle(color: Colors.white, fontSize: 24),
+      // titleStyle: TextStyle(color: Colors.black, fontSize: 24),
     );
 
     PieChartSectionData _protein = PieChartSectionData(
@@ -174,6 +112,7 @@ class CalorieStats extends StatelessWidget {
                     )),
                 Text(macroData[2].toStringAsFixed(1) + 'g',
                     style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
@@ -192,6 +131,7 @@ class CalorieStats extends StatelessWidget {
                     )),
                 Text(macroData[1].toStringAsFixed(1) + 'g',
                     style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
@@ -210,6 +150,7 @@ class CalorieStats extends StatelessWidget {
                     )),
                 Text(macroData[3].toStringAsFixed(1) + 'g',
                     style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
@@ -252,9 +193,7 @@ class CalorieStats extends StatelessWidget {
       );
     }
 
-    print(totalFat);
-
-    if (curScans.length == 0) {
+    if (currentFoodTracks.length == 0) {
       if (dateCheck()) {
         return Flexible(
           fit: FlexFit.loose,
@@ -300,21 +239,4 @@ class CalorieStats extends StatelessWidget {
       );
     }
   }
-}
-
-class Scan {
-  String productName;
-  double productCalories;
-  double productCarbs;
-  double productFat;
-  double productProtein;
-  DateTime dateTime;
-
-  Scan(
-      {required this.productName,
-      required this.productCalories,
-      required this.productCarbs,
-      required this.productFat,
-      required this.productProtein,
-      required this.dateTime});
 }
