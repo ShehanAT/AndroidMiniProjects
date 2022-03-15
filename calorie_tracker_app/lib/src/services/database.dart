@@ -11,15 +11,15 @@ class DatabaseService {
   final DateTime weekStart = DateTime(2020, 09, 07);
   // collection reference
   final CollectionReference foodTrackCollection =
-      Firestore.instance.collection('foodTracks');
+      FirebaseFirestore.instance.collection('foodTracks');
 
   Future newFoodTrackData(String name, double calories, double carbs,
       double fat, double protein, String mealTime, double grams) async {
     return await foodTrackCollection
-        .document(uid)
+        .doc(uid)
         .collection('foodTracks')
-        .document(DateTime.now().millisecondsSinceEpoch.toString())
-        .setData({
+        .doc(DateTime.now().millisecondsSinceEpoch.toString())
+        .set({
       'food_name': name,
       'calories': calories,
       'carbs': carbs,
@@ -33,31 +33,32 @@ class DatabaseService {
 
   Future<void> deleteScan(String productID) async {
     await foodTrackCollection
-        .document(uid)
+        .doc(uid)
         .collection('foodTracks')
-        .document(productID)
+        .doc(productID)
         .delete();
   }
 
   List<FoodTrackTask> _scanListFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
+    return snapshot.docs.map((doc) {
       return FoodTrackTask(
-        id: doc.documentID,
-        food_name: doc.data['food_name'] ?? '',
-        calories: doc.data['calories'] ?? 0,
-        carbs: doc.data['carbohydrates'] ?? 0,
-        fat: doc.data['fat'] ?? 0,
-        protein: doc.data['protein'] ?? 0,
-        mealTime: doc.data['mealTime'] ?? 0,
-        createdOn: doc.data['createdOn'] ?? null,
-        grams: doc.data['amount_had'] ?? 0,
+        id: doc.id,
+        food_name: doc['food_name'] ?? '',
+        calories: doc['calories'] ?? 0,
+        carbs: doc['carbohydrates'] ?? 0,
+        fat: doc['fat'] ?? 0,
+        protein: doc['protein'] ?? 0,
+        mealTime: doc['mealTime'] ?? 0,
+        createdOn: doc['createdOn'] ?? null,
+        grams: doc['grams'] ?? 0,
       );
     }).toList();
   }
 
-  Stream<List<FoodTrackTask>> get scans {
+  Stream<List<FoodTrackTask>> get foodTracks {
+    print(foodTrackCollection.doc(uid).collection('foodTracks').snapshots());
     return foodTrackCollection
-        .document(uid)
+        .doc(uid)
         .collection('foodTracks')
         .snapshots()
         .map(_scanListFromSnapshot);

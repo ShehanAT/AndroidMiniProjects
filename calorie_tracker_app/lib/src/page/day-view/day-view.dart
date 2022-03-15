@@ -11,6 +11,7 @@ import 'package:calorie_tracker_app/src/utils/charts/gallery_scaffold.dart';
 import 'package:calorie_tracker_app/src/utils/charts/line-chart/datetime_series_chart.dart';
 import 'calorie-stats.dart';
 import 'package:provider/provider.dart';
+import 'package:calorie_tracker_app/src/services/database.dart';
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -69,9 +70,10 @@ class _DayViewState extends State<DayViewScreen> {
                 color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        body: StreamProvider<List<Scan>>.value(
+        body: StreamProvider<List<FoodTrackTask>>.value(
           initialData: [],
-          value: null,
+          value: new DatabaseService(uid: "0", currentDate: DateTime.now())
+              .foodTracks,
           child: new Column(children: <Widget>[
             _calorieCounter(),
             Expanded(
@@ -89,13 +91,13 @@ class ScanList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("RENDERING SCANLIST!!!");
     final DateTime curDate =
         new DateTime(datePicked.year, datePicked.month, datePicked.day);
 
-    final scans = Provider.of<List<Scan>>(context);
+    final foodTracks = Provider.of<List<FoodTrackTask>>(context);
 
     List findCurScans(List scansFeed) {
+      print(scansFeed);
       List curScans = [];
       scansFeed.forEach((scan) {
         DateTime scanDate = DateTime(scan.dateTime.toDate().year,
@@ -107,7 +109,7 @@ class ScanList extends StatelessWidget {
       return curScans;
     }
 
-    List curScans = findCurScans(scans);
+    List curScans = findCurScans(foodTracks);
 
     return ListView.builder(
       scrollDirection: Axis.vertical,
