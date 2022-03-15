@@ -45,7 +45,7 @@ class _ViewFoodTrackState extends State<ViewFoodTrack> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Name: " +
-                          widget.foodTrack.food.name +
+                          widget.foodTrack.food_name.toString() +
                           "\n" +
                           "Mealtime: " +
                           widget.foodTrack.mealTime +
@@ -54,16 +54,16 @@ class _ViewFoodTrackState extends State<ViewFoodTrack> {
                           widget.foodTrack.createdOn.toString() +
                           "\n" +
                           "Calories: " +
-                          widget.foodTrack.food.calories +
+                          widget.foodTrack.calories.toString() +
                           "\n" +
                           "Carbs: " +
-                          widget.foodTrack.food.carbs +
+                          widget.foodTrack.carbs.toString() +
                           "\n" +
                           "Fat: " +
-                          widget.foodTrack.food.fat +
+                          widget.foodTrack.fat.toString() +
                           "\n" +
                           "Protein: " +
-                          widget.foodTrack.food.protein,
+                          widget.foodTrack.protein.toString(),
                       style: const TextStyle(fontSize: 16.0),
                     ),
                   )),

@@ -47,15 +47,16 @@ class _AddFoodScreenState extends State<AddFoodScreen> {
 
   void addFood() {
     DateTime now = DateTime.now();
-    final FoodTrackTask foodTrackTask = FoodTrackTask(
-      mealTime: dropdownValue,
-      createdOn:
-          new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      food: Food(foodNameController.text, calorieController.text,
-          carbController.text, fatController.text, proteinController.text),
-    );
-    FoodTrackerService().addFoodTrack(foodTrackTask);
-    Navigator.pop(context);
+    // final FoodTrackTask foodTrackTask =
+    //  FoodTrackTask(
+    //   mealTime: dropdownValue,
+    //   createdOn:
+    //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+    //   food: Food(foodNameController.text, calorieController.text,
+    //       carbController.text, fatController.text, proteinController.text),
+    // );
+    // FoodTrackerService().addFoodTrack(foodTrackTask);
+    // Navigator.pop(context);
   }
 
   @override

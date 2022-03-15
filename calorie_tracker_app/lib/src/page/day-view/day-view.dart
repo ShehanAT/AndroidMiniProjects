@@ -12,7 +12,6 @@ import 'package:calorie_tracker_app/src/utils/charts/line-chart/datetime_series_
 import 'calorie-stats.dart';
 import 'package:provider/provider.dart';
 
-
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
 
@@ -34,28 +33,26 @@ class _DayViewState extends State<DayViewScreen> {
 
   void onClickBackButton() {}
 
-    Widget _calorieCounter() {
-      return Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-        child: new Container(
-          decoration: BoxDecoration(
+  Widget _calorieCounter() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      child: new Container(
+        decoration: BoxDecoration(
             color: Colors.white,
             border: Border(
-              bottom: BorderSide(
-                color: Colors.grey.withOpacity(0.5),
-                width: 1.5,
-              )
-            )
-          ),
-          height: 220,
-          child: Row(
-            children: <Widget>[
-              CalorieStats(datePicked: DateTime.now()),
-            ],
-          ),
+                bottom: BorderSide(
+              color: Colors.grey.withOpacity(0.5),
+              width: 1.5,
+            ))),
+        height: 220,
+        child: Row(
+          children: <Widget>[
+            CalorieStats(datePicked: DateTime.now()),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,34 +75,31 @@ class _DayViewState extends State<DayViewScreen> {
           child: new Column(children: <Widget>[
             _calorieCounter(),
             Expanded(
-              child: ListView(
-                children: <Widget>[
-                  ScanList(datePicked: DateTime.now())
-                ],
-              ))
+                child: ListView(
+              children: <Widget>[ScanList(datePicked: DateTime.now())],
+            ))
           ]),
         ));
   }
 }
 
-
-
 class ScanList extends StatelessWidget {
-
   final DateTime datePicked;
   ScanList({required this.datePicked});
 
   @override
   Widget build(BuildContext context) {
     print("RENDERING SCANLIST!!!");
-    final DateTime curDate = new DateTime(datePicked.year, datePicked.month, datePicked.day);
+    final DateTime curDate =
+        new DateTime(datePicked.year, datePicked.month, datePicked.day);
 
     final scans = Provider.of<List<Scan>>(context);
 
     List findCurScans(List scansFeed) {
       List curScans = [];
       scansFeed.forEach((scan) {
-        DateTime scanDate = DateTime(scan.dateTime.toDate().year, scan.dateTime.toDate().month, scan.dateTime.toDate().day);
+        DateTime scanDate = DateTime(scan.dateTime.toDate().year,
+            scan.dateTime.toDate().month, scan.dateTime.toDate().day);
         if (scanDate.compareTo(curDate) == 0) {
           curScans.add(scan);
         }
@@ -126,14 +120,12 @@ class ScanList extends StatelessWidget {
         } else {
           return SizedBox(height: 5);
         }
-        },
+      },
     );
   }
 }
 
-
 class ScanTile extends StatelessWidget {
-
   final Scan scan;
   ScanTile({required this.scan});
 
@@ -141,22 +133,23 @@ class ScanTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return ExpansionTile(
-          leading: CircleAvatar(
-            radius: 25.0,
-            backgroundColor: Color(0xff5FA55A),
-            child: _itemCalories(),
-          ),
-          title: Text(scan.productName, style: TextStyle(
+    return ExpansionTile(
+      leading: CircleAvatar(
+        radius: 25.0,
+        backgroundColor: Color(0xff5FA55A),
+        child: _itemCalories(),
+      ),
+      title: Text(scan.productName,
+          style: TextStyle(
             fontSize: 16.0,
             fontFamily: 'Open Sans',
             fontWeight: FontWeight.w500,
           )),
-          subtitle: _macroData(),
-          children: <Widget>[
-            _expandedView(context),
-          ],
-        );
+      subtitle: _macroData(),
+      children: <Widget>[
+        _expandedView(context),
+      ],
+    );
   }
 
   Widget _itemCalories() {
@@ -170,16 +163,14 @@ class ScanTile extends StatelessWidget {
               color: Colors.white,
               fontFamily: 'Open Sans',
               fontWeight: FontWeight.w500,
-            )
-        ),
+            )),
         Text('kcal',
             style: TextStyle(
               fontSize: 10.0,
               color: Colors.white,
               fontFamily: 'Open Sans',
               fontWeight: FontWeight.w500,
-            )
-        ),
+            )),
       ],
     );
   }
@@ -208,8 +199,7 @@ class ScanTile extends StatelessWidget {
                         color: Colors.black,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
-                      )
-                  ),
+                      )),
                   Container(
                     height: 8,
                     width: 8,
@@ -224,8 +214,7 @@ class ScanTile extends StatelessWidget {
                         color: Colors.black,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
-                      )
-                  ),
+                      )),
                   Container(
                     height: 8,
                     width: 8,
@@ -240,8 +229,7 @@ class ScanTile extends StatelessWidget {
                         color: Colors.black,
                         fontFamily: 'Open Sans',
                         fontWeight: FontWeight.w400,
-                      )
-                  ),
+                      )),
                 ],
               ),
               // Text(scan.grams.toString() + 'g',
@@ -277,28 +265,28 @@ class ScanTile extends StatelessWidget {
 
   Widget expandedHeader(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text('% of total',
-            style: TextStyle(
-              fontSize: 14.0,
-              color: Colors.black,
-              fontFamily: 'Open Sans',
-              fontWeight: FontWeight.w400,
-            )
-        ),
-      //   IconButton(
-      //     icon: Icon(Icons.edit),
-      //     iconSize: 16,
-      //     onPressed: () {
-      //       Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
-      //       );
-      //     }
-      //   )
-      // ],
-    );
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text('% of total',
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.black,
+                fontFamily: 'Open Sans',
+                fontWeight: FontWeight.w400,
+              )),
+        ]
+        //   IconButton(
+        //     icon: Icon(Icons.edit),
+        //     iconSize: 16,
+        //     onPressed: () {
+        //       Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
+        //       );
+        //     }
+        //   )
+        // ],
+        );
   }
 
   Widget _expandedCalories() {
@@ -332,12 +320,14 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productCarbs/macros[2]),
+              value: (scan.productCarbs / macros[2]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA5457)),
             ),
           ),
-          Text('      ' + ((scan.productCarbs/macros[2])*100).toStringAsFixed(0) + '%'),
+          Text('      ' +
+              ((scan.productCarbs / macros[2]) * 100).toStringAsFixed(0) +
+              '%'),
         ],
       ),
     );
@@ -352,12 +342,14 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productProtein/macros[1]),
+              value: (scan.productProtein / macros[1]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA8925)),
             ),
           ),
-          Text('      ' + ((scan.productProtein/macros[1])*100).toStringAsFixed(0) + '%'),
+          Text('      ' +
+              ((scan.productProtein / macros[1]) * 100).toStringAsFixed(0) +
+              '%'),
         ],
       ),
     );
@@ -372,12 +364,14 @@ class ScanTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.productFat/macros[3]),
+              value: (scan.productFat / macros[3]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff01B4BC)),
             ),
           ),
-          Text('      ' + ((scan.productFat/macros[3])*100).toStringAsFixed(0) + '%'),
+          Text('      ' +
+              ((scan.productFat / macros[3]) * 100).toStringAsFixed(0) +
+              '%'),
         ],
       ),
     );

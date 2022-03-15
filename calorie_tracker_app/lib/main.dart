@@ -149,29 +149,29 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
     setState(() {
       // foodTrackList.add(FoodTrackTask.fromSnapshot(event.snapshot));
       // foodTrackList.add(FoodDao().getAllFoodTrackTasks());
-      foodTrackList.add(FoodTrackTask(
-          mealTime: "Lunch",
-          createdOn:
-              new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-          food: Food("apple", "200", "20", "20", "20")));
-      foodTrackList.add(FoodTrackTask(
-        mealTime: "Lunch",
-        food: Food("banana", "300", "20", "20", "20"),
-        createdOn:
-            new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      ));
-      foodTrackList.add(FoodTrackTask(
-        mealTime: "Lunch",
-        food: Food("grapefruit", "100", "20", "20", "20"),
-        createdOn:
-            new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      ));
-      foodTrackList.add(FoodTrackTask(
-        mealTime: "Lunch",
-        food: Food("grapes", "150", "20", "20", "20"),
-        createdOn:
-            new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      ));
+      // foodTrackList.add(FoodTrackTask(
+      //     mealTime: "Lunch",
+      //     createdOn:
+      //         new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      //     food: Food("apple", "200", "20", "20", "20")));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("banana", "300", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("grapefruit", "100", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
+      // foodTrackList.add(FoodTrackTask(
+      //   mealTime: "Lunch",
+      //   food: Food("grapes", "150", "20", "20", "20"),
+      //   createdOn:
+      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
+      // ));
     });
   }
 

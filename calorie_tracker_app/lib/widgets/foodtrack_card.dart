@@ -35,7 +35,7 @@ class FoodTrackCard extends StatelessWidget {
                           width: 15,
                         ),
                         Text(
-                          foodTrackTask.food.toString(),
+                          foodTrackTask.food_name.toString(),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -47,7 +47,7 @@ class FoodTrackCard extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    Text(foodTrackTask.food.toString(),
+                    Text(foodTrackTask.food_name.toString(),
                         style: const TextStyle(
                           color: Colors.white,
                         ))

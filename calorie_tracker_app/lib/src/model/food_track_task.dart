@@ -37,9 +37,18 @@ class FoodTrackTask {
       grams: snap.child('grams').value as int,
       createdOn: snap.child('createdOn').value as DateTime);
 
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{'mealTime': mealTime, 'food': food.toString()};
-  // }
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'mealTime': mealTime,
+      'food_name': food_name,
+      'calories': calories,
+      'carbs': carbs,
+      'protein': protein,
+      'fat': fat,
+      'grams': grams,
+      'createdOn': createdOn
+    };
+  }
 
   FoodTrackTask.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],
