@@ -36,8 +36,13 @@ class CalorieStats extends StatelessWidget {
 
     List findCurScans(List<FoodTrackTask> foodTracks) {
       List currentFoodTracks = [];
-      foodTracks.forEach((scan) {
-        currentFoodTracks.add(scan);
+      foodTracks.forEach((foodTrack) {
+        DateTime trackDate = DateTime(foodTrack.createdOn.year,
+            foodTrack.createdOn.month, foodTrack.createdOn.day);
+        if (trackDate.compareTo(curDate) == 0) {
+          currentFoodTracks.add(foodTrack);
+        }
+        // currentFoodTracks.add(scan);
       });
       return currentFoodTracks;
     }

@@ -26,7 +26,7 @@ class DayViewScreen extends StatefulWidget {
 
 class _DayViewState extends State<DayViewScreen> {
   String productName = 'Loading...';
-  Product newResult;
+  // Product newResult;
   double servingSize = 0;
   String dropdownValue = 'grams';
   DateTime _value = DateTime.now();
@@ -61,7 +61,7 @@ class _DayViewState extends State<DayViewScreen> {
         height: 220,
         child: Row(
           children: <Widget>[
-            CalorieStats(datePicked: DateTime.now()),
+            CalorieStats(datePicked: _value),
           ],
         ),
       ),
@@ -75,15 +75,15 @@ class _DayViewState extends State<DayViewScreen> {
       color: Colors.white,
       onPressed: () async {
         // dynamic result = await _scan.barcodeScan();
-        ProductQueryConfiguration configuration = ProductQueryConfiguration(
-            barcode,
-            language: OpenFoodFactsLanguage.ENGLISH,
-            fields: [ProductField.ALL]);
-        ProductResult result =
-            await OpenFoodAPIClient.getProduct(configuration);
+        // ProductQueryConfiguration configuration = ProductQueryConfiguration(
+        //     barcode,
+        //     language: OpenFoodFactsLanguage.ENGLISH,
+        //     fields: [ProductField.ALL]);
+        // ProductResult result =
+        //     await OpenFoodAPIClient.getProduct(configuration);
         setState(() {
           // newResult = result;
-          newResult = result.product;
+          // newResult = result.product;
           // productName = newResult.productName;
         });
         // _showFoodToAdd(context);
@@ -97,14 +97,14 @@ class _DayViewState extends State<DayViewScreen> {
       initialDate: _value,
       firstDate: new DateTime(2019),
       lastDate: new DateTime.now(),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-              primaryColor: const Color(0xff5FA55A), //Head background
-              accentColor: const Color(0xFF5FA55A) //selection color
-              //dialogBackgroundColor: Colors.white,//Background color
-              ),
-          child: child,
+            primaryColor: const Color(0xff5FA55A), //Head background
+            // accentColor: const Color(0xFF5FA55A)//selection color
+            //dialogBackgroundColor: Colors.white,//Background color
+          ),
+          child: child!,
         );
       },
     );
@@ -194,9 +194,10 @@ class _DayViewState extends State<DayViewScreen> {
           ),
           TextButton(
             // textColor: Colors.white,
-            onPressed: () => {print("Next Date Button Pressed")},
-            // _selectDate()},
-            child: Text(DateTime.now().toString(),
+            onPressed: () => _selectDate(),
+            // print("Next Date Button Pressed");
+            // },
+            child: Text(_dateFormatter(_value),
                 style: TextStyle(
                   fontFamily: 'Open Sans',
                   fontSize: 18.0,
@@ -205,29 +206,88 @@ class _DayViewState extends State<DayViewScreen> {
           ),
           IconButton(
               icon: Icon(Icons.arrow_right, size: 25.0),
-              // color: _rightArrowColor,
+              color: _rightArrowColor,
               onPressed: () {
-                // print(today.difference(_value).compareTo(Duration(days: 1)));
-                // if (today.difference(_value).compareTo(Duration(days: 1)) ==
-                //     -1) {
-                //   setState(() {
-                //     _rightArrowColor = Color(0xffC1C1C1);
-                //   });
-                // } else {
-                //   setState(() {
-                //     _value = _value.add(Duration(days: 1));
-                //   });
-                //   if (today.difference(_value).compareTo(Duration(days: 1)) ==
-                //       -1) {
-                //     setState(() {
-                //       _rightArrowColor = Color(0xffC1C1C1);
-                //     });
-                //   }
-                // }
+                print(today.difference(_value).compareTo(Duration(days: 1)));
+                if (today.difference(_value).compareTo(Duration(days: 1)) ==
+                    -1) {
+                  setState(() {
+                    _rightArrowColor = Color(0xffC1C1C1);
+                  });
+                } else {
+                  setState(() {
+                    _value = _value.add(Duration(days: 1));
+                  });
+                  if (today.difference(_value).compareTo(Duration(days: 1)) ==
+                      -1) {
+                    setState(() {
+                      _rightArrowColor = Color(0xffC1C1C1);
+                    });
+                  }
+                }
               }),
         ],
       ),
     );
+  }
+
+  String _dateFormatter(DateTime tm) {
+    DateTime today = new DateTime.now();
+    Duration oneDay = new Duration(days: 1);
+    Duration twoDay = new Duration(days: 2);
+    String month;
+
+    switch (tm.month) {
+      case 1:
+        month = "Jan";
+        break;
+      case 2:
+        month = "Feb";
+        break;
+      case 3:
+        month = "Mar";
+        break;
+      case 4:
+        month = "Apr";
+        break;
+      case 5:
+        month = "May";
+        break;
+      case 6:
+        month = "Jun";
+        break;
+      case 7:
+        month = "Jul";
+        break;
+      case 8:
+        month = "Aug";
+        break;
+      case 9:
+        month = "Sep";
+        break;
+      case 10:
+        month = "Oct";
+        break;
+      case 11:
+        month = "Nov";
+        break;
+      case 12:
+        month = "Dec";
+        break;
+      default:
+        month = "Undefined";
+        break;
+    }
+
+    Duration difference = today.difference(tm);
+
+    if (difference.compareTo(oneDay) < 1) {
+      return "Today";
+    } else if (difference.compareTo(twoDay) < 1) {
+      return "Yesterday";
+    } else {
+      return "${tm.day} $month ${tm.year}";
+    }
   }
 
   @override
