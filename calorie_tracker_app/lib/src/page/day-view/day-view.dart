@@ -319,7 +319,7 @@ class _DayViewState extends State<DayViewScreen> {
             _calorieCounter(),
             Expanded(
                 child: ListView(
-              children: <Widget>[FoodTrackList(datePicked: DateTime.now())],
+              children: <Widget>[FoodTrackList(datePicked: _value)],
             ))
           ]),
         ));
@@ -337,16 +337,15 @@ class FoodTrackList extends StatelessWidget {
 
     final foodTracks = Provider.of<List<FoodTrackTask>>(context);
 
-    List findCurScans(List scansFeed) {
-      print(scansFeed);
+    List findCurScans(List foodTrackFeed) {
       List curScans = [];
-      scansFeed.forEach((scan) {
-        // DateTime scanDate = DateTime(scan.dateTime.toDate().year,
-        //     scan.dateTime.toDate().month, scan.dateTime.toDate().day);
-        // if (scanDate.compareTo(curDate) == 0) {
-        //   curScans.add(scan);
-        // }
-        curScans.add(scan);
+      foodTrackFeed.forEach((foodTrack) {
+        DateTime scanDate = DateTime(foodTrack.createdOn.year,
+            foodTrack.createdOn.month, foodTrack.createdOn.day);
+        if (scanDate.compareTo(curDate) == 0) {
+          curScans.add(foodTrack);
+        }
+        // curScans.add(foodTrack);
       });
       return curScans;
     }
