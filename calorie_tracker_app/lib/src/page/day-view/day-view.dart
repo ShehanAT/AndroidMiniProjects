@@ -26,7 +26,7 @@ class DayViewScreen extends StatefulWidget {
 
 class _DayViewState extends State<DayViewScreen> {
   String productName = 'Loading...';
-  // Product newResult;
+  Product newResult;
   double servingSize = 0;
   String dropdownValue = 'grams';
   DateTime _value = DateTime.now();
@@ -75,6 +75,7 @@ class _DayViewState extends State<DayViewScreen> {
       color: Colors.white,
       onPressed: () async {
         // dynamic result = await _scan.barcodeScan();
+        dynamic result = new ProductResult();
         // ProductQueryConfiguration configuration = ProductQueryConfiguration(
         //     barcode,
         //     language: OpenFoodFactsLanguage.ENGLISH,
@@ -82,11 +83,11 @@ class _DayViewState extends State<DayViewScreen> {
         // ProductResult result =
         //     await OpenFoodAPIClient.getProduct(configuration);
         setState(() {
-          // newResult = result;
+          newResult = result.product!;
           // newResult = result.product;
-          // productName = newResult.productName;
+          productName = newResult.productName!;
         });
-        // _showFoodToAdd(context);
+        _showFoodToAdd(context);
       },
     );
   }
@@ -119,61 +120,81 @@ class _DayViewState extends State<DayViewScreen> {
       setState(() => _rightArrowColor = Colors.white);
   }
 
-  // _showFoodToAdd(BuildContext context) {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           title: Text(productName),
-  //           content: _showAmountHad(),
-  //           actions: <Widget>[
-  //             FlatButton(
-  //               onPressed: () => Navigator.pop(context), // passing false
-  //               child: Text('Cancel'),
-  //             ),
-  //             FlatButton(
-  //               onPressed: () async {
-  //                 Navigator.pop(context);
-  //                 await showDialog(
-  //                     context: context,
-  //                     builder: (context) {
-  //                       List<List> questionArray = [
-  //                         [
-  //                           newResult.nutriments.energyKcal100g *
-  //                               servingSize /
-  //                               100,
-  //                           'many calories are',
-  //                           ''
-  //                         ],
-  //                         [
-  //                           newResult.nutriments.fat * servingSize / 100,
-  //                           'much fat is',
-  //                           'g'
-  //                         ],
-  //                         [
-  //                           newResult.nutriments.proteins * servingSize / 100,
-  //                           'much protein is',
-  //                           'g'
-  //                         ],
-  //                         [
-  //                           newResult.nutriments.carbohydrates *
-  //                               servingSize /
-  //                               100,
-  //                           'much carbohydrate is',
-  //                           'g'
-  //                         ]
-  //                       ];
-  //                       questionArray.shuffle();
-  //                       return QuestionAlert(value: questionArray[0]);
-  //                     });
-  //                 _scan.storeProduct(newResult, servingSize, dropdownValue);
-  //               },
-  //               child: Text('Ok'),
-  //             ),
-  //           ],
-  //         );
-  //       });
-  // }
+  _showFoodToAdd(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(productName),
+            content: _showAmountHad(),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.pop(context), // passing false
+                child: Text('Cancel'),
+              ),
+              FlatButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  await showDialog(
+                      context: context,
+                      builder: (context) {
+                        List<List> questionArray = [
+                          [
+                            newResult.nutriments?.energyKcal100g *
+                                servingSize /
+                                100,
+                            'many calories are',
+                            ''
+                          ],
+                          [
+                            newResult.nutriments.fat * servingSize / 100,
+                            'much fat is',
+                            'g'
+                          ],
+                          [
+                            newResult.nutriments.proteins * servingSize / 100,
+                            'much protein is',
+                            'g'
+                          ],
+                          [
+                            newResult.nutriments.carbohydrates *
+                                servingSize /
+                                100,
+                            'much carbohydrate is',
+                            'g'
+                          ]
+                        ];
+                        questionArray.shuffle();
+                        return QuestionAlert(value: questionArray[0]);
+                      });
+                  _scan.storeProduct(newResult, servingSize, dropdownValue);
+                },
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        });
+  }
+
+  Widget _showAmountHad() {
+    return new Row(
+      children: <Wigdet>[
+        _showUserAmount(),
+        _showServingOrGrams(),
+      ]
+    );
+  }
+
+  Widget _showUserAmount(){
+    return new Expanded(child: new TextField(
+      maxLines: 1,
+      autofocus: true,
+      decoration: new InputDecoration(label: 'Serving', hintText: 'eg. 100',
+        contentPadding: EdgeInsets.all(0.0)
+      ),
+      keyboardType: Text
+    ),)
+  }
 
   Widget _showDatePicker() {
     return Container(
