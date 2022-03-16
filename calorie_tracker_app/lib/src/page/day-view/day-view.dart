@@ -12,6 +12,8 @@ import 'package:calorie_tracker_app/src/utils/charts/line-chart/datetime_series_
 import 'calorie-stats.dart';
 import 'package:provider/provider.dart';
 import 'package:calorie_tracker_app/src/services/database.dart';
+import 'package:openfoodfacts/model/Product.dart';
+import 'package:openfoodfacts/openfoodfacts.dart';
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -24,15 +26,19 @@ class DayViewScreen extends StatefulWidget {
 
 class _DayViewState extends State<DayViewScreen> {
   String productName = 'Loading...';
-  // Product newResult;
+  Product newResult;
   double servingSize = 0;
   String dropdownValue = 'grams';
+  DateTime _value = DateTime.now();
+  DateTime today = DateTime.now();
+  Color _rightArrowColor = Color(0xffC1C1C1);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _isBack = true;
   final List<GalleryScaffold> lineGallery = buildGallery();
   DatabaseService databaseService = new DatabaseService(
       uid: "calorie-tracker-b7d17", currentDate: DateTime.now());
+
   @override
   void initState() {
     super.initState();
@@ -69,13 +75,48 @@ class _DayViewState extends State<DayViewScreen> {
       color: Colors.white,
       onPressed: () async {
         // dynamic result = await _scan.barcodeScan();
+        ProductQueryConfiguration configuration = ProductQueryConfiguration(
+            barcode,
+            language: OpenFoodFactsLanguage.ENGLISH,
+            fields: [ProductField.ALL]);
+        ProductResult result =
+            await OpenFoodAPIClient.getProduct(configuration);
         setState(() {
           // newResult = result;
+          newResult = result.product;
           // productName = newResult.productName;
         });
         // _showFoodToAdd(context);
       },
     );
+  }
+
+  Future _selectDate() async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _value,
+      firstDate: new DateTime(2019),
+      lastDate: new DateTime.now(),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+              primaryColor: const Color(0xff5FA55A), //Head background
+              accentColor: const Color(0xFF5FA55A) //selection color
+              //dialogBackgroundColor: Colors.white,//Background color
+              ),
+          child: child,
+        );
+      },
+    );
+    if (picked != null) setState(() => _value = picked);
+    _stateSetter();
+  }
+
+  void _stateSetter() {
+    if (today.difference(_value).compareTo(Duration(days: 1)) == -1) {
+      setState(() => _rightArrowColor = Color(0xffEDEDED));
+    } else
+      setState(() => _rightArrowColor = Colors.white);
   }
 
   // _showFoodToAdd(BuildContext context) {
@@ -146,8 +187,8 @@ class _DayViewState extends State<DayViewScreen> {
             color: Colors.white,
             onPressed: () {
               setState(() {
-                // _value = _value.subtract(Duration(days: 1));
-                // _rightArrowColour = Colors.white;
+                _value = _value.subtract(Duration(days: 1));
+                _rightArrowColor = Colors.white;
               });
             },
           ),
@@ -164,13 +205,13 @@ class _DayViewState extends State<DayViewScreen> {
           ),
           IconButton(
               icon: Icon(Icons.arrow_right, size: 25.0),
-              // color: _rightArrowColour,
+              // color: _rightArrowColor,
               onPressed: () {
                 // print(today.difference(_value).compareTo(Duration(days: 1)));
                 // if (today.difference(_value).compareTo(Duration(days: 1)) ==
                 //     -1) {
                 //   setState(() {
-                //     _rightArrowColour = Color(0xffC1C1C1);
+                //     _rightArrowColor = Color(0xffC1C1C1);
                 //   });
                 // } else {
                 //   setState(() {
@@ -179,7 +220,7 @@ class _DayViewState extends State<DayViewScreen> {
                 //   if (today.difference(_value).compareTo(Duration(days: 1)) ==
                 //       -1) {
                 //     setState(() {
-                //       _rightArrowColour = Color(0xffC1C1C1);
+                //       _rightArrowColor = Color(0xffC1C1C1);
                 //     });
                 //   }
                 // }
