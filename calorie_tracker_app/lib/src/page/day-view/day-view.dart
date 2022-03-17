@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
@@ -15,7 +16,6 @@ import 'package:calorie_tracker_app/src/services/database.dart';
 import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'question-alert.dart';
-
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -34,6 +34,7 @@ class _DayViewState extends State<DayViewScreen> {
   DateTime _value = DateTime.now();
   DateTime today = DateTime.now();
   Color _rightArrowColor = Color(0xffC1C1C1);
+  final _addFoodKey = GlobalKey<FormState>();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _isBack = true;
@@ -85,9 +86,9 @@ class _DayViewState extends State<DayViewScreen> {
         // ProductResult result =
         //     await OpenFoodAPIClient.getProduct(configuration);
         setState(() {
-          newResult = result.product!;
+          // newResult = result.product!;
           // newResult = result.product;
-          productName = newResult.productName!;
+          // productName = newResult.productName!;
         });
         _showFoodToAdd(context);
       },
@@ -140,34 +141,28 @@ class _DayViewState extends State<DayViewScreen> {
                   await showDialog(
                       context: context,
                       builder: (context) {
-                        num calories100g = (newResult.nutriments?.energyKcal100g) ?? 0;
+                        num calories100g =
+                            (newResult.nutriments?.energyKcal100g) ?? 0;
                         num resultFat = (newResult.nutriments?.fat) ?? 0;
-                        num resultProtein = (newResult.nutriments?.proteins) ?? 0;
-                        num resultCarbs = (newResult.nutriments?.carbohydrates) ?? 0;
+                        num resultProtein =
+                            (newResult.nutriments?.proteins) ?? 0;
+                        num resultCarbs =
+                            (newResult.nutriments?.carbohydrates) ?? 0;
 
                         List<List> questionArray = [
                           [
-                            100 *
-                            calories100g *
-                                servingSize /
-                                100,
+                            100 * calories100g * servingSize / 100,
                             'many calories are',
                             ''
                           ],
-                          [
-                            resultFat * servingSize / 100,
-                            'much fat is',
-                            'g'
-                          ],
+                          [resultFat * servingSize / 100, 'much fat is', 'g'],
                           [
                             resultProtein * servingSize / 100,
                             'much protein is',
                             'g'
                           ],
                           [
-                            resultCarbs *
-                                servingSize /
-                                100,
+                            resultCarbs * servingSize / 100,
                             'much carbohydrate is',
                             'g'
                           ]
@@ -185,23 +180,84 @@ class _DayViewState extends State<DayViewScreen> {
   }
 
   Widget _showAmountHad() {
-    return new Row(
-      children: <Widget>[
+    return new Scaffold(
+      body: Column(children: <Widget>[
+        _showAddFoodForm(),
         _showUserAmount(),
-        _showServingOrGrams(),
-      ]
+        _showServingOrGrams()
+      ]),
     );
   }
 
-  Widget _showUserAmount(){
-    return new Expanded(child: new TextField(
-      maxLines: 1,
-      autofocus: true,
-      decoration: new InputDecoration(label: 'Serving', hintText: 'eg. 100',
-        contentPadding: EdgeInsets.all(0.0)
-      ),
-      keyboardType: Text
-    ),)
+  Widget _showAddFoodForm() {
+    return Form(
+      key: _addFoodKey,
+      child: Column(children: [
+        TextFormField(
+          decoration: const InputDecoration(
+              labelText: "Calories *",
+              hintText: "Please enter a calorie amount"),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter a calorie amount";
+            }
+            return null;
+          },
+        ),
+        TextFormField(
+          decoration: const InputDecoration(
+              labelText: "Carbs *", hintText: "Please enter a carbs amount"),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter a carbs amount";
+            }
+            return null;
+          },
+        ),
+        TextFormField(
+          decoration: const InputDecoration(
+              labelText: "Protein *",
+              hintText: "Please enter a protein amount"),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter a calorie amount";
+            }
+            return null;
+          },
+        ),
+        TextFormField(
+          decoration: const InputDecoration(
+              labelText: "Fat *", hintText: "Please enter a fat amount"),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Please enter a fat amount";
+            }
+            return null;
+          },
+        ),
+      ]),
+    );
+  }
+
+  Widget _showUserAmount() {
+    return new Expanded(
+      child: new TextField(
+          maxLines: 1,
+          autofocus: true,
+          decoration: new InputDecoration(
+              labelText: 'Serving',
+              hintText: 'eg. 100',
+              contentPadding: EdgeInsets.all(0.0)),
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+          onChanged: (value) {
+            setState(() {
+              servingSize = double.tryParse(value) ?? 0;
+            });
+          }),
+    );
   }
 
   Widget _showDatePicker() {
@@ -354,31 +410,28 @@ class _DayViewState extends State<DayViewScreen> {
         ));
   }
 
-    Widget _showServingOrGrams(){
+  Widget _showServingOrGrams() {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-        child: DropdownButtonFormField(
-          value: dropdownValue,
-          icon: Icon(Icons.arrow_downward),
-          iconSize: 24,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0.0)
-          ),
-          style: TextStyle(color: Colors.black),
-          onChanged: (newValue) => setState(() {
-            dropdownValue = newValue.toString();
-          }),
-          items: <String>['grams', 'servings']
-            .map<DropdownMenuItem<String>>((String value){
+          padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+          child: DropdownButtonFormField(
+            value: dropdownValue,
+            icon: Icon(Icons.arrow_downward),
+            iconSize: 24,
+            decoration: InputDecoration(contentPadding: EdgeInsets.all(0.0)),
+            style: TextStyle(color: Colors.black),
+            onChanged: (newValue) => setState(() {
+              dropdownValue = newValue.toString();
+            }),
+            items: <String>['grams', 'servings']
+                .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
-                value: value, 
+                value: value,
                 child: Text(value),
               );
             }).toList(),
-          )
-        ),
-      );
+          )),
+    );
   }
 }
 
@@ -673,6 +726,4 @@ class FoodTrackTile extends StatelessWidget {
       ),
     );
   }
-
-
 }
