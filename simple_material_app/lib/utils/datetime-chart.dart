@@ -8,9 +8,6 @@ import 'package:intl/intl.dart';
 class DateTimeChart extends StatefulWidget {
   @override
   _DateTimeChart createState() => _DateTimeChart();
-
-  static List<charts.Series<TimeSeriesSale, DateTime>>
-      createDateTimeSeriesData() => _DateTimeChart._createDateTimeSeriesData();
 }
 
 class _DateTimeChart extends State<DateTimeChart> {
@@ -36,7 +33,7 @@ class _DateTimeChart extends State<DateTimeChart> {
       if (databaseValue != null) {
         Map<String, dynamic> jsonData = jsonDecode(databaseValue);
         var dateFormat = DateFormat("yyyy-MM-dd");
-        for (var foodEntry in jsonData["foodTrack"].values) {
+        for (var foodEntry in jsonData["foodTrack"]) {
           var trackedDateStr =
               DateTime.parse(foodEntry["createdOn"].toString());
           DateTime dateNow = DateTime.now();
@@ -76,16 +73,17 @@ class _DateTimeChart extends State<DateTimeChart> {
               id: "Sales",
               colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
               domainFn: (TimeSeriesSale sales, _) => sales.date,
-              measureFn: (TimeSeriesSale sales, _) => sales.sales,
+              measureFn: (TimeSeriesSale sales, _) => sales.calories,
               data: caloriesByDateTimeMap)
         ];
       } else {
+        resultData = _createDateTimeSeriesData();
         resultChartData = [
           new charts.Series<TimeSeriesSale, DateTime>(
               id: "Sales",
               colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
               domainFn: (TimeSeriesSale sales, _) => sales.date,
-              measureFn: (TimeSeriesSale sales, _) => sales.sales,
+              measureFn: (TimeSeriesSale sales, _) => sales.calories,
               data: resultData)
         ];
       }
@@ -97,8 +95,7 @@ class _DateTimeChart extends State<DateTimeChart> {
     });
   }
 
-  static List<charts.Series<TimeSeriesSale, DateTime>>
-      _createDateTimeSeriesData() {
+  static List<TimeSeriesSale> _createDateTimeSeriesData() {
     List<TimeSeriesSale> resultData = [
       new TimeSeriesSale(new DateTime(2022, 03, 11), 50),
       new TimeSeriesSale(new DateTime(2022, 03, 12), 100),
@@ -106,7 +103,7 @@ class _DateTimeChart extends State<DateTimeChart> {
       new TimeSeriesSale(new DateTime(2022, 03, 14), 150),
     ];
 
-    return _chartData!;
+    return resultData;
   }
 
   @override
@@ -123,7 +120,7 @@ class _DateTimeChart extends State<DateTimeChart> {
 
 class TimeSeriesSale {
   final DateTime date;
-  final int sales;
+  final int calories;
 
-  TimeSeriesSale(this.date, this.sales);
+  TimeSeriesSale(this.date, this.calories);
 }

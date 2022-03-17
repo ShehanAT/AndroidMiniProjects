@@ -1,0 +1,94 @@
+[
+{
+    "\"mealTime\"" : "Breakfast",
+    "\"protein\"" : "20",
+    "calories" : "500",
+    "carbs" : "10",
+    "createdOn" : "2022-03-30 14:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bcb3-6b66f5003c21",
+    "name" : "Beef"
+},
+{
+    "\"mealTime\"" : "Breakfast",
+    "\"protein\"" : "20",
+    "calories" : "1900",
+    "carbs" : "10",
+    "createdOn" : "2022-03-30 14:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bcb3-6b66f5004c29",
+    "name" : "Mustard"
+},
+{
+    "\"mealTime\"" : "Breakfast",
+    "\"protein\"" : "20",
+    "calories" : "1700",
+    "carbs" : "10",
+    "createdOn" : "2022-03-30 14:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bcb3-6b66f5303c29",
+    "name" : "Pasta"
+},
+{
+    "\"mealTime\"" : "Breakfast",
+    "\"protein\"" : "20",
+    "calories" : "1500",
+    "carbs" : "10",
+    "createdOn" : "2022-03-19 14:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bca3-6b66f5003c21",
+    "name" : "Potato Salad"
+},
+{
+    "\"mealTime\"" : "Lunch",
+    "\"protein\"" : "20",
+    "calories" : "1200",
+    "carbs" : "10",
+    "createdOn" : "2022-03-20 19:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bct3-6b66f5004c29",
+    "name" : "Gum"
+},
+{
+    "\"mealTime\"" : "Dinner",
+    "\"protein\"" : "20",
+    "calories" : "1000",
+    "carbs" : "10",
+    "createdOn" : "2022-03-22 17:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-beb3-6b66f5303c29",
+    "name" : "Cheese"
+},
+{
+    "\"mealTime\"" : "Breakfast",
+    "\"protein\"" : "20",
+    "calories" : "100",
+    "carbs" : "10",
+    "createdOn" : "2022-03-01 14:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bcq3-6b66f5003c21",
+    "name" : "Potato Salad"
+},
+{
+    "\"mealTime\"" : "Lunch",
+    "\"protein\"" : "20",
+    "calories" : "200",
+    "carbs" : "10",
+    "createdOn" : "2022-03-03 19:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-acb3-6b66f5004c29",
+    "name" : "Gum"
+},
+{
+    "\"mealTime\"" : "Dinner",
+    "\"protein\"" : "20",
+    "calories" : "400",
+    "carbs" : "10",
+    "createdOn" : "2022-03-05 17:32:00.000",
+    "fat" : "30",
+    "id" : "d463d2e8-4904-40b5-bcm3-6b66f5303c29",
+    "name" : "Cheese"
+}
+]
+  
+  
