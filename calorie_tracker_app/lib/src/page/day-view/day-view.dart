@@ -26,7 +26,7 @@ class DayViewScreen extends StatefulWidget {
 
 class _DayViewState extends State<DayViewScreen> {
   String productName = 'Loading...';
-  Product newResult;
+  late Product newResult;
   double servingSize = 0;
   String dropdownValue = 'grams';
   DateTime _value = DateTime.now();
@@ -138,26 +138,32 @@ class _DayViewState extends State<DayViewScreen> {
                   await showDialog(
                       context: context,
                       builder: (context) {
+                        num calories100g = (newResult.nutriments?.energyKcal100g) ?? 0;
+                        num resultFat = (newResult.nutriments?.fat) ?? 0;
+                        num resultProtein = (newResult.nutriments?.proteins) ?? 0;
+                        num resultCarbs = (newResult.nutriments?.carbohydrates) ?? 0;
+
                         List<List> questionArray = [
                           [
-                            newResult.nutriments?.energyKcal100g *
+                            100 *
+                            calories100g *
                                 servingSize /
                                 100,
                             'many calories are',
                             ''
                           ],
                           [
-                            newResult.nutriments.fat * servingSize / 100,
+                            resultFat * servingSize / 100,
                             'much fat is',
                             'g'
                           ],
                           [
-                            newResult.nutriments.proteins * servingSize / 100,
+                            resultProtein * servingSize / 100,
                             'much protein is',
                             'g'
                           ],
                           [
-                            newResult.nutriments.carbohydrates *
+                            resultCarbs *
                                 servingSize /
                                 100,
                             'much carbohydrate is',
@@ -167,7 +173,7 @@ class _DayViewState extends State<DayViewScreen> {
                         questionArray.shuffle();
                         return QuestionAlert(value: questionArray[0]);
                       });
-                  _scan.storeProduct(newResult, servingSize, dropdownValue);
+                  // _scan.storeProduct(newResult, servingSize, dropdownValue);
                 },
                 child: Text('Ok'),
               ),
