@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 import 'package:calorie_tracker_app/src/services/database.dart';
 import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
+import 'question-alert.dart';
+
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -184,7 +186,7 @@ class _DayViewState extends State<DayViewScreen> {
 
   Widget _showAmountHad() {
     return new Row(
-      children: <Wigdet>[
+      children: <Widget>[
         _showUserAmount(),
         _showServingOrGrams(),
       ]
@@ -350,6 +352,33 @@ class _DayViewState extends State<DayViewScreen> {
             ))
           ]),
         ));
+  }
+
+    Widget _showServingOrGrams(){
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+        child: DropdownButtonFormField(
+          value: dropdownValue,
+          icon: Icon(Icons.arrow_downward),
+          iconSize: 24,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(0.0)
+          ),
+          style: TextStyle(color: Colors.black),
+          onChanged: (newValue) => setState(() {
+            dropdownValue = newValue.toString();
+          }),
+          items: <String>['grams', 'servings']
+            .map<DropdownMenuItem<String>>((String value){
+              return DropdownMenuItem<String>(
+                value: value, 
+                child: Text(value),
+              );
+            }).toList(),
+          )
+        ),
+      );
   }
 }
 
@@ -644,4 +673,6 @@ class FoodTrackTile extends StatelessWidget {
       ),
     );
   }
+
+
 }
