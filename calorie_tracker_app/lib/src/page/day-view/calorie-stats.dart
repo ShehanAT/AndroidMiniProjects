@@ -8,11 +8,11 @@ class CalorieStats extends StatelessWidget {
   DateTime today = DateTime.now();
   CalorieStats({required this.datePicked});
 
-  double totalCalories = 0;
-  double totalCarbs = 0;
-  double totalFat = 0;
-  double totalProtein = 0;
-  double displayCalories = 0;
+  num totalCalories = 0;
+  num totalCarbs = 0;
+  num totalFat = 0;
+  num totalProtein = 0;
+  num displayCalories = 0;
 
   bool dateCheck() {
     DateTime formatPicked =
@@ -25,7 +25,7 @@ class CalorieStats extends StatelessWidget {
     }
   }
 
-  static List<double> macroData = [];
+  static List<num> macroData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +51,10 @@ class CalorieStats extends StatelessWidget {
 
     void findNutriments(List foodTracks) {
       foodTracks.forEach((scan) {
-        totalCarbs += double.parse(scan.carbs);
-        totalFat += double.parse(scan.fat);
-        totalProtein += double.parse(scan.protein);
-        displayCalories += double.parse(scan.calories);
+        totalCarbs += scan.carbs;
+        totalFat += scan.fat;
+        totalProtein += scan.protein;
+        displayCalories += scan.calories;
       });
       totalCalories = 9 * totalFat + 4 * totalCarbs + 4 * totalProtein;
     }

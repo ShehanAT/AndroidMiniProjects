@@ -7,13 +7,13 @@ import 'package:firebase_database/firebase_database.dart';
 class FoodTrackTask {
   String id;
   String food_name;
-  double calories;
-  double carbs;
-  double fat;
-  double protein;
+  num calories;
+  num carbs;
+  num fat;
+  num protein;
   String mealTime;
   DateTime createdOn;
-  double grams;
+  num grams;
 
   FoodTrackTask({
     required this.food_name,
@@ -29,12 +29,12 @@ class FoodTrackTask {
 
   factory FoodTrackTask.fromSnapshot(DataSnapshot snap) => FoodTrackTask(
       food_name: snap.child('food_name').value as String,
-      calories: snap.child('calories') as double,
-      carbs: snap.child('carbs').value as double,
-      fat: snap.child('fat').value as double,
-      protein: snap.child('protein').value as double,
+      calories: snap.child('calories') as int,
+      carbs: snap.child('carbs').value as int,
+      fat: snap.child('fat').value as int,
+      protein: snap.child('protein').value as int,
       mealTime: snap.child('mealTime').value as String,
-      grams: snap.child('grams').value as double,
+      grams: snap.child('grams').value as int,
       createdOn: snap.child('createdOn').value as DateTime);
 
   Map<String, dynamic> toMap() {

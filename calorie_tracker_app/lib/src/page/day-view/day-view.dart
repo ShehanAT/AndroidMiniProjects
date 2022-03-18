@@ -202,7 +202,7 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.calories = double.parse(value);
+            addFoodTrack.calories = int.parse(value);
             print(addFoodTrack.calories);
             // addFood.calories = value;
           },
@@ -217,7 +217,7 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.carbs = double.parse(value);
+            addFoodTrack.carbs = int.parse(value);
             print(addFoodTrack.carbs);
             // addFood.calories = value;
           },
@@ -233,7 +233,7 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.protein = double.parse(value);
+            addFoodTrack.protein = int.parse(value);
             print(addFoodTrack.protein);
             // addFood.calories = value;
           },
@@ -248,7 +248,7 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.fat = double.parse(value);
+            addFoodTrack.fat = int.parse(value);
             print(addFoodTrack.fat);
             // addFood.calories = value;
           },
@@ -658,6 +658,10 @@ class FoodTrackTile extends StatelessWidget {
   }
 
   Widget _expandedCalories() {
+    double caloriesValue = 0;
+    if (!(scan.calories / macros[0]).isNaN) {
+      caloriesValue = scan.calories / macros[0];
+    }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child: Row(
@@ -666,20 +670,22 @@ class FoodTrackTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.calories / macros[0]),
+              value: caloriesValue,
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff5FA55A)),
             ),
           ),
-          Text('      ' +
-              ((scan.calories / macros[0]) * 100).toStringAsFixed(0) +
-              '%'),
+          Text('      ' + ((caloriesValue) * 100).toStringAsFixed(0) + '%'),
         ],
       ),
     );
   }
 
   Widget _expandedCarbs() {
+    double carbsValue = 0;
+    if (!(scan.carbs / macros[2]).isNaN) {
+      carbsValue = scan.carbs / macros[2];
+    }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Row(
@@ -688,20 +694,22 @@ class FoodTrackTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.carbs / macros[2]),
+              value: carbsValue,
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA5457)),
             ),
           ),
-          Text('      ' +
-              ((scan.carbs / macros[2]) * 100).toStringAsFixed(0) +
-              '%'),
+          Text('      ' + ((carbsValue) * 100).toStringAsFixed(0) + '%'),
         ],
       ),
     );
   }
 
   Widget _expandedProtein() {
+    double proteinValue = 0;
+    if (!(scan.protein / macros[1]).isNaN) {
+      proteinValue = scan.protein / macros[1];
+    }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
       child: Row(
@@ -710,20 +718,22 @@ class FoodTrackTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: scan.protein / macros[1]),
+              value: proteinValue,
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA8925)),
             ),
           ),
-          Text('      ' +
-              ((scan.protein / macros[1]) * 100).toStringAsFixed(0) +
-              '%'),
+          Text('      ' + ((proteinValue) * 100).toStringAsFixed(0) + '%'),
         ],
       ),
     );
   }
 
   Widget _expandedFat() {
+    double fatValue = 0;
+    if (!(scan.fat / macros[3]).isNaN) {
+      fatValue = scan.fat / macros[3];
+    }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
       child: Row(
@@ -737,9 +747,7 @@ class FoodTrackTile extends StatelessWidget {
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff01B4BC)),
             ),
           ),
-          Text('      ' +
-              ((scan.fat / macros[3]) * 100).toStringAsFixed(0) +
-              '%'),
+          Text('      ' + ((fatValue) * 100).toStringAsFixed(0) + '%'),
         ],
       ),
     );
