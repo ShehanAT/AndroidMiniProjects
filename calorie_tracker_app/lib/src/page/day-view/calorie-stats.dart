@@ -51,10 +51,10 @@ class CalorieStats extends StatelessWidget {
 
     void findNutriments(List foodTracks) {
       foodTracks.forEach((scan) {
-        totalCarbs += scan.carbs;
-        totalFat += scan.fat;
-        totalProtein += scan.protein;
-        displayCalories += scan.calories;
+        totalCarbs += double.parse(scan.carbs);
+        totalFat += double.parse(scan.fat);
+        totalProtein += double.parse(scan.protein);
+        displayCalories += double.parse(scan.calories);
       });
       totalCalories = 9 * totalFat + 4 * totalCarbs + 4 * totalProtein;
     }

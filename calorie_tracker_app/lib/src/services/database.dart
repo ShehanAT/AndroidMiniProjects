@@ -1,5 +1,6 @@
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:calorie_tracker_app/src/model/food_model.dart';
 
 class DatabaseService {
   final String uid;
@@ -28,6 +29,21 @@ class DatabaseService {
       'mealTime': mealTime,
       'created_on': DateTime.now(),
       'grams': grams,
+    });
+  }
+
+  Future addFoodTrackData(FoodTrackTask food) async {
+    return await foodTrackCollection
+        .doc(DateTime.now().millisecondsSinceEpoch.toString())
+        .set({
+      'food_name': food.food_name,
+      'calories': food.calories,
+      'carbs': food.carbs,
+      'fat': food.fat,
+      'protein': food.protein,
+      'mealTime': food.mealTime,
+      'createdOn': food.createdOn,
+      'grams': food.grams
     });
   }
 

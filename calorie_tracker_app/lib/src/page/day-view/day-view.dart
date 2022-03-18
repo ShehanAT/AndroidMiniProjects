@@ -42,13 +42,21 @@ class _DayViewState extends State<DayViewScreen> {
   DatabaseService databaseService = new DatabaseService(
       uid: "calorie-tracker-b7d17", currentDate: DateTime.now());
 
-  late Food addFood;
+  late FoodTrackTask addFoodTrack;
   late String calorieAmount;
 
   @override
   void initState() {
     super.initState();
-    addFood = Food("", "", "", "", "");
+    addFoodTrack = FoodTrackTask(
+        food_name: "",
+        calories: 0,
+        carbs: 0,
+        protein: 0,
+        fat: 0,
+        mealTime: "",
+        createdOn: DateTime.now(),
+        grams: 0);
     databaseService.getFoodTrackData("calorie-tracker-b7d17");
   }
 
@@ -142,41 +150,9 @@ class _DayViewState extends State<DayViewScreen> {
               FlatButton(
                 onPressed: () async {
                   Navigator.pop(context);
+                  databaseService.addFoodTrackData(addFoodTrack);
                   print("New Food item: ");
-                  print(addFood.toString());
-                  // await showDialog(
-                  //     context: context,
-                  //     builder: (context) {
-                  //       num calories100g =
-                  //           (newResult.nutriments?.energyKcal100g) ?? 0;
-                  //       num resultFat = (newResult.nutriments?.fat) ?? 0;
-                  //       num resultProtein =
-                  //           (newResult.nutriments?.proteins) ?? 0;
-                  //       num resultCarbs =
-                  //           (newResult.nutriments?.carbohydrates) ?? 0;
-
-                  //       List<List> questionArray = [
-                  //         [
-                  //           100 * calories100g * servingSize / 100,
-                  //           'many calories are',
-                  //           ''
-                  //         ],
-                  //         [resultFat * servingSize / 100, 'much fat is', 'g'],
-                  //         [
-                  //           resultProtein * servingSize / 100,
-                  //           'much protein is',
-                  //           'g'
-                  //         ],
-                  //         [
-                  //           resultCarbs * servingSize / 100,
-                  //           'much carbohydrate is',
-                  //           'g'
-                  //         ]
-                  //       ];
-                  //       questionArray.shuffle();
-                  //       return QuestionAlert(value: questionArray[0]);
-                  //     });
-                  // _scan.storeProduct(newResult, servingSize, dropdownValue);
+                  print(addFoodTrack.toString());
                 },
                 child: Text('Ok'),
               ),
@@ -209,8 +185,9 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFood.name = value;
-            print(addFood.name);
+            addFoodTrack.food_name = value;
+            print(addFoodTrack.food_name);
+
             // addFood.calories = value;
           },
         ),
@@ -225,8 +202,8 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFood.calories = value;
-            print(addFood.calories);
+            addFoodTrack.calories = double.parse(value);
+            print(addFoodTrack.calories);
             // addFood.calories = value;
           },
         ),
@@ -240,8 +217,8 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFood.carbs = value;
-            print(addFood.carbs);
+            addFoodTrack.carbs = double.parse(value);
+            print(addFoodTrack.carbs);
             // addFood.calories = value;
           },
         ),
@@ -256,8 +233,8 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFood.protein = value;
-            print(addFood.protein);
+            addFoodTrack.protein = double.parse(value);
+            print(addFoodTrack.protein);
             // addFood.calories = value;
           },
         ),
@@ -271,8 +248,8 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFood.fat = value;
-            print(addFood.fat);
+            addFoodTrack.fat = double.parse(value);
+            print(addFoodTrack.fat);
             // addFood.calories = value;
           },
         ),
@@ -733,7 +710,7 @@ class FoodTrackTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.protein / macros[1]),
+              value: scan.protein / macros[1]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xffFA8925)),
             ),
