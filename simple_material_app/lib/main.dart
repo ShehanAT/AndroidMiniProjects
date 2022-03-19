@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_material_app/utils/datetime-chart.dart';
+import 'package:simple_material_app/pages/datetime-chart.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_material_app/services/shared_preference_service.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';

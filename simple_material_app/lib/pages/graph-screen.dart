@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_material_app/utils/datetime-chart.dart';
+import 'package:simple_material_app/pages/datetime-chart.dart';
 import 'package:simple_material_app/utils/gallery-scaffold.dart';
 
 class GraphScreen extends StatefulWidget {
