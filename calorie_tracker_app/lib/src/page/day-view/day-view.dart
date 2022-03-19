@@ -55,7 +55,7 @@ class _DayViewState extends State<DayViewScreen> {
         protein: 0,
         fat: 0,
         mealTime: "",
-        createdOn: DateTime.now(),
+        createdOn: _value,
         grams: 0);
     databaseService.getFoodTrackData("calorie-tracker-b7d17");
   }
@@ -150,6 +150,7 @@ class _DayViewState extends State<DayViewScreen> {
               FlatButton(
                 onPressed: () async {
                   Navigator.pop(context);
+                  addFoodTrack.createdOn = _value;
                   databaseService.addFoodTrackData(addFoodTrack);
                   print("New Food item: ");
                   print(addFoodTrack.toString());
