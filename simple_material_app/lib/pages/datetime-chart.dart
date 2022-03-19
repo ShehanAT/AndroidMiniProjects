@@ -50,9 +50,8 @@ class _DateTimeChart extends State<DateTimeChart> {
                 onPressed: () async {
                   Navigator.pop(context);
                   addFoodTrack.date = _dateTimeValue;
-                  databaseService.addFoodTrackData(addFoodTrack);
-                  print("New Food item: ");
-                  print(addFoodTrack.toString());
+                  await databaseService.addFoodTrackData(addFoodTrack);
+                  fetchChartData();
                 },
                 child: Text('Ok'),
               ),
@@ -109,11 +108,7 @@ class _DateTimeChart extends State<DateTimeChart> {
     );
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
+  void fetchChartData() {
     DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
     addFoodTrack = new FoodTrackEntry(_dateTimeValue, 0);
     List<charts.Series<FoodTrackEntry, DateTime>> resultChartData;
@@ -126,39 +121,28 @@ class _DateTimeChart extends State<DateTimeChart> {
 
     _dbRef.once().then((DatabaseEvent databaseEvent) {
       final databaseValue = jsonEncode(databaseEvent.snapshot.value);
-      Map<String, int> caloriesByDateMap = new Map();
+      Map<String, num> caloriesByDateMap = new Map();
       if (databaseValue != null) {
         Map<String, dynamic> jsonData = jsonDecode(databaseValue);
         var dateFormat = DateFormat("yyyy-MM-dd");
-        jsonData["foodTrack"].forEach((k, foodEntry) => {
-            DateTime trackedDateStr =
+
+        for (var foodEntry in jsonData["foodTrack"].values) {
+          var trackedDateStr =
               DateTime.parse(foodEntry["createdOn"].toString());
-            DateTime dateNow = DateTime.now();
-            var trackedDate = dateFormat.format(trackedDateStr);
-            if (caloriesByDateMap.containsKey(trackedDate)) {
-              caloriesByDateMap[trackedDate] = caloriesByDateMap[trackedDate]! +
-                  int.parse(foodEntry["calories"]);
-            } else {
-              caloriesByDateMap[trackedDate] = int.parse(foodEntry["calories"]);
-            }
-        });
-        // for (var foodEntry in jsonData["foodTrack"]) {
-          // var trackedDateStr =
-          //     DateTime.parse(foodEntry["createdOn"].toString());
-          // DateTime dateNow = DateTime.now();
-          // var trackedDate = dateFormat.format(trackedDateStr);
-          // if (caloriesByDateMap.containsKey(trackedDate)) {
-          //   caloriesByDateMap[trackedDate] = caloriesByDateMap[trackedDate]! +
-          //       int.parse(foodEntry["calories"]);
-          // } else {
-          //   caloriesByDateMap[trackedDate] = int.parse(foodEntry["calories"]);
-          // }
-        // }
+          DateTime dateNow = DateTime.now();
+          var trackedDate = dateFormat.format(trackedDateStr);
+          if (caloriesByDateMap.containsKey(trackedDate)) {
+            caloriesByDateMap[trackedDate] =
+                caloriesByDateMap[trackedDate]! + foodEntry["calories"];
+          } else {
+            caloriesByDateMap[trackedDate] = foodEntry["calories"];
+          }
+        }
         List<FoodTrackEntry> caloriesByDateTimeMap = [];
         for (var foodEntry in caloriesByDateMap.keys) {
           DateTime entryDateTime = DateTime.parse(foodEntry);
-          caloriesByDateTimeMap.add(
-              new FoodTrackEntry(entryDateTime, caloriesByDateMap[foodEntry]!));
+          caloriesByDateTimeMap.add(new FoodTrackEntry(entryDateTime,
+              int.parse(caloriesByDateMap[foodEntry].toString())));
         }
 
         caloriesByDateTimeMap.sort((a, b) {
@@ -202,6 +186,14 @@ class _DateTimeChart extends State<DateTimeChart> {
         _chartData = resultChartData;
       });
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    fetchChartData();
   }
 
   static List<FoodTrackEntry> _createDateTimeSeriesData() {
