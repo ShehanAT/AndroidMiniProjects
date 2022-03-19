@@ -10,7 +10,7 @@ class DatabaseService {
       FirebaseDatabase.instance.ref().child("foodTrack");
   final DateTime today =
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-  final DateTime weekStart = DateTime(2020, 09, 07);
+  // final DateTime weekStart = DateTime(2020, 09, 07);
   // collection reference
 
   Future addFoodTrackData(FoodTrackEntry foodTrackEntry) async {
