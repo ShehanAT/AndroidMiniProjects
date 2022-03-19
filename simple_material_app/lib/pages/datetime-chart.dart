@@ -90,9 +90,10 @@ class _DateTimeChart extends State<DateTimeChart> {
             // addFood.calories = value;
           },
         ),
-        Text("Created On: "),
+        // Text("Created On: "),
         DateTimeField(
           format: dateTimeFormat,
+          decoration: InputDecoration(labelText: "Date: "),
           onShowPicker: (context, currentValue) async {
             _dateTimeValue = await showDatePicker(
                     context: context,
