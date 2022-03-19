@@ -87,10 +87,8 @@ class _DateTimeChart extends State<DateTimeChart> {
           onChanged: (value) {
             addFoodTrack.calories = int.parse(value);
             print(addFoodTrack.calories);
-            // addFood.calories = value;
           },
         ),
-        // Text("Created On: "),
         DateTimeField(
           format: dateTimeFormat,
           decoration: InputDecoration(labelText: "Date: "),
@@ -104,7 +102,6 @@ class _DateTimeChart extends State<DateTimeChart> {
             addFoodTrack.date = _dateTimeValue;
           },
         )
-        // DatePicker().showDatePicker(context, )
       ]),
     );
   }
@@ -160,7 +157,6 @@ class _DateTimeChart extends State<DateTimeChart> {
         return null;
       }
     }).then((caloriesByDateTimeMap) {
-      print(caloriesByDateTimeMap);
       if (caloriesByDateTimeMap != null) {
         resultChartData = [
           new charts.Series<FoodTrackEntry, DateTime>(
@@ -191,7 +187,6 @@ class _DateTimeChart extends State<DateTimeChart> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     fetchChartData();
@@ -210,7 +205,6 @@ class _DateTimeChart extends State<DateTimeChart> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     if (_chartData != null) {
       return Scaffold(
           appBar: AppBar(
@@ -220,7 +214,6 @@ class _DateTimeChart extends State<DateTimeChart> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    // _showDatePicker(),
                     new Text("Add Food Entry"),
                     _addFoodButton(),
                   ],
@@ -229,21 +222,6 @@ class _DateTimeChart extends State<DateTimeChart> {
           body: new Container(
             child: charts.TimeSeriesChart(_chartData!, animate: true),
           ));
-      // StreamProvider<List<FoodTrackTask>>.value(
-      //   initialData: [],
-      //   value: new DatabaseService(
-      //           uid: "calorie-tracker-b7d17", currentDate: DateTime.now())
-      //       .foodTracks,
-      //   child: new Column(children: <Widget>[
-      //     _calorieCounter(),
-      //     Expanded(
-      //         child: ListView(
-      //       children: <Widget>[FoodTrackList(datePicked: _value)],
-      //     ))
-      //   ]),
-      // ));
-      // return Container(
-      //     child: charts.TimeSeriesChart(_chartData!, animate: true));
     } else {
       return CircularProgressIndicator();
     }
