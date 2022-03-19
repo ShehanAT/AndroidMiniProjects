@@ -22,168 +22,15 @@ class _DateTimeChart extends State<DateTimeChart> {
   final _addFoodKey = GlobalKey<FormState>();
   DatabaseService databaseService = new DatabaseService();
 
-  Widget _addFoodButton() {
-    return IconButton(
-      icon: Icon(Icons.add_box),
-      iconSize: 25,
-      color: Colors.white,
-      onPressed: () async {
-        setState(() {});
-        _showFoodToAdd(context);
-      },
-    );
-  }
+  Widget _addFoodButton() {}
 
-  _showFoodToAdd(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(productName),
-            content: _showAmountHad(),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () => Navigator.pop(context), // passing false
-                child: Text('Cancel'),
-              ),
-              FlatButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-                  addFoodTrack.date = _dateTimeValue;
-                  await databaseService.addFoodTrackData(addFoodTrack);
-                  fetchChartData();
-                },
-                child: Text('Ok'),
-              ),
-            ],
-          );
-        });
-  }
+  _showFoodToAdd(BuildContext context) {}
 
-  Widget _showAmountHad() {
-    return new Scaffold(
-      body: Column(children: <Widget>[
-        _showAddFoodForm(),
-      ]),
-    );
-  }
+  Widget _showAmountHad() {}
 
-  Widget _showAddFoodForm() {
-    final dateTimeFormat = DateFormat("yyyy-MM-dd");
+  Widget _showAddFoodForm() {}
 
-    return Form(
-      key: _addFoodKey,
-      child: Column(children: [
-        TextFormField(
-          decoration: const InputDecoration(
-              labelText: "Calories *",
-              hintText: "Please enter a calorie amount"),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please enter a calorie amount";
-            }
-            return null;
-          },
-          onChanged: (value) {
-            addFoodTrack.calories = int.parse(value);
-            print(addFoodTrack.calories);
-          },
-        ),
-        DateTimeField(
-          format: dateTimeFormat,
-          decoration: InputDecoration(labelText: "Date: "),
-          onShowPicker: (context, currentValue) async {
-            _dateTimeValue = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime(2100)) ??
-                _dateTimeValue;
-            addFoodTrack.date = _dateTimeValue;
-          },
-        )
-      ]),
-    );
-  }
-
-  void fetchChartData() {
-    DatabaseReference _dbRef = FirebaseDatabase.instance.ref();
-    addFoodTrack = new FoodTrackEntry(_dateTimeValue, 0);
-    List<charts.Series<FoodTrackEntry, DateTime>> resultChartData;
-    List<FoodTrackEntry> resultData = [
-      new FoodTrackEntry(new DateTime(2022, 03, 11), 50),
-      new FoodTrackEntry(new DateTime(2022, 03, 12), 100),
-      new FoodTrackEntry(new DateTime(2022, 03, 13), 120),
-      new FoodTrackEntry(new DateTime(2022, 03, 14), 150),
-    ];
-
-    _dbRef.once().then((DatabaseEvent databaseEvent) {
-      final databaseValue = jsonEncode(databaseEvent.snapshot.value);
-      Map<String, num> caloriesByDateMap = new Map();
-      if (databaseValue != null) {
-        Map<String, dynamic> jsonData = jsonDecode(databaseValue);
-        var dateFormat = DateFormat("yyyy-MM-dd");
-
-        for (var foodEntry in jsonData["foodTrack"].values) {
-          var trackedDateStr =
-              DateTime.parse(foodEntry["createdOn"].toString());
-          DateTime dateNow = DateTime.now();
-          var trackedDate = dateFormat.format(trackedDateStr);
-          if (caloriesByDateMap.containsKey(trackedDate)) {
-            caloriesByDateMap[trackedDate] =
-                caloriesByDateMap[trackedDate]! + foodEntry["calories"];
-          } else {
-            caloriesByDateMap[trackedDate] = foodEntry["calories"];
-          }
-        }
-        List<FoodTrackEntry> caloriesByDateTimeMap = [];
-        for (var foodEntry in caloriesByDateMap.keys) {
-          DateTime entryDateTime = DateTime.parse(foodEntry);
-          caloriesByDateTimeMap.add(new FoodTrackEntry(entryDateTime,
-              int.parse(caloriesByDateMap[foodEntry].toString())));
-        }
-
-        caloriesByDateTimeMap.sort((a, b) {
-          int aDate = a.date.microsecondsSinceEpoch;
-          int bDate = b.date.microsecondsSinceEpoch;
-
-          return aDate.compareTo(bDate);
-        });
-
-        resultData = caloriesByDateTimeMap;
-        return caloriesByDateTimeMap;
-      } else {
-        print("databaseSnapshot key is NULL");
-        return null;
-      }
-    }).then((caloriesByDateTimeMap) {
-      if (caloriesByDateTimeMap != null) {
-        resultChartData = [
-          new charts.Series<FoodTrackEntry, DateTime>(
-              id: "Sales",
-              colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-              domainFn: (FoodTrackEntry sales, _) => sales.date,
-              measureFn: (FoodTrackEntry sales, _) => sales.calories,
-              data: caloriesByDateTimeMap)
-        ];
-      } else {
-        resultData = _createDateTimeSeriesData();
-        resultChartData = [
-          new charts.Series<FoodTrackEntry, DateTime>(
-              id: "Sales",
-              colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-              domainFn: (FoodTrackEntry sales, _) => sales.date,
-              measureFn: (FoodTrackEntry sales, _) => sales.calories,
-              data: resultData)
-        ];
-      }
-
-      setState(() {
-        _data = resultData;
-        _chartData = resultChartData;
-      });
-    });
-  }
+  void fetchChartData() {}
 
   @override
   void initState() {
@@ -204,26 +51,5 @@ class _DateTimeChart extends State<DateTimeChart> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (_chartData != null) {
-      return Scaffold(
-          appBar: AppBar(
-              elevation: 0,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text("Add Food Entry"),
-                    _addFoodButton(),
-                  ],
-                ),
-              )),
-          body: new Container(
-            child: charts.TimeSeriesChart(_chartData!, animate: true),
-          ));
-    } else {
-      return CircularProgressIndicator();
-    }
-  }
+  Widget build(BuildContext context) {}
 }
