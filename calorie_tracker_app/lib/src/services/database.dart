@@ -32,9 +32,9 @@ class DatabaseService {
     });
   }
 
-  Future addFoodTrackData(FoodTrackTask food) async {
+  Future addFoodTrackEntry(FoodTrackTask food) async {
     return await foodTrackCollection
-        .doc(DateTime.now().millisecondsSinceEpoch.toString())
+        .doc(food.createdOn.millisecondsSinceEpoch.toString())
         .set({
       'food_name': food.food_name,
       'calories': food.calories,
@@ -45,6 +45,13 @@ class DatabaseService {
       'createdOn': food.createdOn,
       'grams': food.grams
     });
+  }
+
+  Future deleteFoodTrackEntry(FoodTrackTask deleteEntry) async {
+    print(deleteEntry.toString());
+    return await foodTrackCollection
+        .doc(deleteEntry.createdOn.millisecondsSinceEpoch.toString())
+        .delete();
   }
 
   Future<void> deleteScan(String productID) async {

@@ -27,7 +27,7 @@ class DayViewScreen extends StatefulWidget {
 }
 
 class _DayViewState extends State<DayViewScreen> {
-  String productName = 'Loading...';
+  String productName = 'Add Food';
   late Product newResult;
   double servingSize = 0;
   String dropdownValue = 'grams';
@@ -151,7 +151,7 @@ class _DayViewState extends State<DayViewScreen> {
                 onPressed: () async {
                   Navigator.pop(context);
                   addFoodTrack.createdOn = _value;
-                  databaseService.addFoodTrackData(addFoodTrack);
+                  databaseService.addFoodTrackEntry(addFoodTrack);
                   print("New Food item: ");
                   print(addFoodTrack.toString());
                 },
@@ -487,7 +487,7 @@ class FoodTrackList extends StatelessWidget {
       itemCount: curScans.length + 1,
       itemBuilder: (context, index) {
         if (index < curScans.length) {
-          return FoodTrackTile(scan: curScans[index]);
+          return FoodTrackTile(foodTrackEntry: curScans[index]);
         } else {
           return SizedBox(height: 5);
         }
@@ -497,8 +497,11 @@ class FoodTrackList extends StatelessWidget {
 }
 
 class FoodTrackTile extends StatelessWidget {
-  final FoodTrackTask scan;
-  FoodTrackTile({required this.scan});
+  final FoodTrackTask foodTrackEntry;
+  DatabaseService databaseService = new DatabaseService(
+      uid: "calorie-tracker-b7d17", currentDate: DateTime.now());
+
+  FoodTrackTile({required this.foodTrackEntry});
 
   List macros = CalorieStats.macroData;
 
@@ -510,7 +513,7 @@ class FoodTrackTile extends StatelessWidget {
         backgroundColor: Color(0xff5FA55A),
         child: _itemCalories(),
       ),
-      title: Text(scan.food_name,
+      title: Text(foodTrackEntry.food_name,
           style: TextStyle(
             fontSize: 16.0,
             fontFamily: 'Open Sans',
@@ -528,7 +531,7 @@ class FoodTrackTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(scan.calories.toStringAsFixed(0),
+        Text(foodTrackEntry.calories.toStringAsFixed(0),
             style: TextStyle(
               fontSize: 16.0,
               color: Colors.white,
@@ -564,7 +567,7 @@ class FoodTrackTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.carbs.toStringAsFixed(1) + 'g    ',
+                  Text(' ' + foodTrackEntry.carbs.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -579,7 +582,8 @@ class FoodTrackTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.protein.toStringAsFixed(1) + 'g    ',
+                  Text(
+                      ' ' + foodTrackEntry.protein.toStringAsFixed(1) + 'g    ',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -594,7 +598,7 @@ class FoodTrackTile extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Text(' ' + scan.fat.toStringAsFixed(1) + 'g',
+                  Text(' ' + foodTrackEntry.fat.toStringAsFixed(1) + 'g',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.white,
@@ -603,7 +607,7 @@ class FoodTrackTile extends StatelessWidget {
                       )),
                 ],
               ),
-              Text(scan.grams.toString() + 'g',
+              Text(foodTrackEntry.grams.toString() + 'g',
                   style: TextStyle(
                     fontSize: 12.0,
                     color: Colors.white,
@@ -653,15 +657,27 @@ class FoodTrackTile extends StatelessWidget {
 
               //   MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
               // );
-            })
+            }),
+        IconButton(
+            icon: Icon(Icons.delete),
+            iconSize: 16,
+            onPressed: () async {
+              print("Delete button pressed");
+              databaseService.deleteFoodTrackEntry(foodTrackEntry);
+              // Navigator.push(
+              //   context,
+
+              //   MaterialPageRoute(builder: (context) => EditItem(scan: scan)),
+              // );
+            }),
       ],
     );
   }
 
   Widget _expandedCalories() {
     double caloriesValue = 0;
-    if (!(scan.calories / macros[0]).isNaN) {
-      caloriesValue = scan.calories / macros[0];
+    if (!(foodTrackEntry.calories / macros[0]).isNaN) {
+      caloriesValue = foodTrackEntry.calories / macros[0];
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
@@ -684,8 +700,8 @@ class FoodTrackTile extends StatelessWidget {
 
   Widget _expandedCarbs() {
     double carbsValue = 0;
-    if (!(scan.carbs / macros[2]).isNaN) {
-      carbsValue = scan.carbs / macros[2];
+    if (!(foodTrackEntry.carbs / macros[2]).isNaN) {
+      carbsValue = foodTrackEntry.carbs / macros[2];
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
@@ -708,8 +724,8 @@ class FoodTrackTile extends StatelessWidget {
 
   Widget _expandedProtein() {
     double proteinValue = 0;
-    if (!(scan.protein / macros[1]).isNaN) {
-      proteinValue = scan.protein / macros[1];
+    if (!(foodTrackEntry.protein / macros[1]).isNaN) {
+      proteinValue = foodTrackEntry.protein / macros[1];
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
@@ -732,8 +748,8 @@ class FoodTrackTile extends StatelessWidget {
 
   Widget _expandedFat() {
     double fatValue = 0;
-    if (!(scan.fat / macros[3]).isNaN) {
-      fatValue = scan.fat / macros[3];
+    if (!(foodTrackEntry.fat / macros[3]).isNaN) {
+      fatValue = foodTrackEntry.fat / macros[3];
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
@@ -743,7 +759,7 @@ class FoodTrackTile extends StatelessWidget {
             height: 10.0,
             width: 200.0,
             child: LinearProgressIndicator(
-              value: (scan.fat / macros[3]),
+              value: (foodTrackEntry.fat / macros[3]),
               backgroundColor: Color(0xffEDEDED),
               valueColor: AlwaysStoppedAnimation<Color>(Color(0xff01B4BC)),
             ),
