@@ -187,7 +187,6 @@ class _DayViewState extends State<DayViewScreen> {
           },
           onChanged: (value) {
             addFoodTrack.food_name = value;
-            print(addFoodTrack.food_name);
 
             // addFood.calories = value;
           },
@@ -204,7 +203,6 @@ class _DayViewState extends State<DayViewScreen> {
           },
           onChanged: (value) {
             addFoodTrack.calories = int.parse(value);
-            print(addFoodTrack.calories);
             // addFood.calories = value;
           },
         ),
@@ -219,7 +217,6 @@ class _DayViewState extends State<DayViewScreen> {
           },
           onChanged: (value) {
             addFoodTrack.carbs = int.parse(value);
-            print(addFoodTrack.carbs);
             // addFood.calories = value;
           },
         ),
@@ -235,7 +232,6 @@ class _DayViewState extends State<DayViewScreen> {
           },
           onChanged: (value) {
             addFoodTrack.protein = int.parse(value);
-            print(addFoodTrack.protein);
             // addFood.calories = value;
           },
         ),
@@ -250,7 +246,6 @@ class _DayViewState extends State<DayViewScreen> {
           },
           onChanged: (value) {
             addFoodTrack.fat = int.parse(value);
-            print(addFoodTrack.fat);
             // addFood.calories = value;
           },
         ),
@@ -299,7 +294,6 @@ class _DayViewState extends State<DayViewScreen> {
           TextButton(
             // textColor: Colors.white,
             onPressed: () => _selectDate(),
-            // print("Next Date Button Pressed");
             // },
             child: Text(_dateFormatter(_value),
                 style: TextStyle(
@@ -312,7 +306,6 @@ class _DayViewState extends State<DayViewScreen> {
               icon: Icon(Icons.arrow_right, size: 25.0),
               color: _rightArrowColor,
               onPressed: () {
-                print(today.difference(_value).compareTo(Duration(days: 1)));
                 if (today.difference(_value).compareTo(Duration(days: 1)) ==
                     -1) {
                   setState(() {
