@@ -16,6 +16,7 @@ import 'package:calorie_tracker_app/src/services/database.dart';
 import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'question-alert.dart';
+import 'dart:math';
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -58,6 +59,18 @@ class _DayViewState extends State<DayViewScreen> {
         createdOn: _value,
         grams: 0);
     databaseService.getFoodTrackData("calorie-tracker-b7d17");
+  }
+
+  void resetFoodTrack() {
+    addFoodTrack = FoodTrackTask(
+        food_name: "",
+        calories: 0,
+        carbs: 0,
+        protein: 0,
+        fat: 0,
+        mealTime: "",
+        createdOn: _value,
+        grams: 0);
   }
 
   void onClickBackButton() {}
@@ -135,6 +148,17 @@ class _DayViewState extends State<DayViewScreen> {
       setState(() => _rightArrowColor = Colors.white);
   }
 
+  checkFormValid() {
+    if (addFoodTrack.calories != 0 &&
+        addFoodTrack.carbs != 0 &&
+        addFoodTrack.protein != 0 &&
+        addFoodTrack.fat != 0 &&
+        addFoodTrack.grams != 0) {
+      return true;
+    }
+    return false;
+  }
+
   _showFoodToAdd(BuildContext context) {
     return showDialog(
         context: context,
@@ -149,11 +173,22 @@ class _DayViewState extends State<DayViewScreen> {
               ),
               FlatButton(
                 onPressed: () async {
-                  Navigator.pop(context);
-                  addFoodTrack.createdOn = _value;
-                  databaseService.addFoodTrackEntry(addFoodTrack);
-                  print("New Food item: ");
-                  print(addFoodTrack.toString());
+                  if (checkFormValid()) {
+                    Navigator.pop(context);
+                    var random = new Random();
+                    int randomMilliSecond = random.nextInt(1000);
+                    addFoodTrack.createdOn = _value;
+                    addFoodTrack.createdOn = addFoodTrack.createdOn
+                        .add(Duration(milliseconds: randomMilliSecond));
+                    databaseService.addFoodTrackEntry(addFoodTrack);
+                    resetFoodTrack();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                          "Invalid form data! All numeric fields must contain numeric values greater than 0"),
+                      backgroundColor: Colors.white,
+                    ));
+                  }
                 },
                 child: Text('Ok'),
               ),
@@ -201,8 +236,15 @@ class _DayViewState extends State<DayViewScreen> {
             }
             return null;
           },
+          keyboardType: TextInputType.number,
           onChanged: (value) {
-            addFoodTrack.calories = int.parse(value);
+            try {
+              addFoodTrack.calories = int.parse(value);
+            } catch (e) {
+              // return "Please enter numeric values"
+              addFoodTrack.calories = 0;
+            }
+
             // addFood.calories = value;
           },
         ),
@@ -215,9 +257,13 @@ class _DayViewState extends State<DayViewScreen> {
             }
             return null;
           },
+          keyboardType: TextInputType.number,
           onChanged: (value) {
-            addFoodTrack.carbs = int.parse(value);
-            // addFood.calories = value;
+            try {
+              addFoodTrack.carbs = int.parse(value);
+            } catch (e) {
+              addFoodTrack.carbs = 0;
+            }
           },
         ),
         TextFormField(
@@ -231,8 +277,11 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.protein = int.parse(value);
-            // addFood.calories = value;
+            try {
+              addFoodTrack.protein = int.parse(value);
+            } catch (e) {
+              addFoodTrack.protein = 0;
+            }
           },
         ),
         TextFormField(
@@ -245,8 +294,11 @@ class _DayViewState extends State<DayViewScreen> {
             return null;
           },
           onChanged: (value) {
-            addFoodTrack.fat = int.parse(value);
-            // addFood.calories = value;
+            try {
+              addFoodTrack.fat = int.parse(value);
+            } catch (e) {
+              addFoodTrack.fat = 0;
+            }
           },
         ),
       ]),
@@ -259,7 +311,7 @@ class _DayViewState extends State<DayViewScreen> {
           maxLines: 1,
           autofocus: true,
           decoration: new InputDecoration(
-              labelText: 'Serving',
+              labelText: 'Serving *',
               hintText: 'eg. 100',
               contentPadding: EdgeInsets.all(0.0)),
           keyboardType: TextInputType.number,
@@ -267,6 +319,11 @@ class _DayViewState extends State<DayViewScreen> {
             FilteringTextInputFormatter.digitsOnly
           ],
           onChanged: (value) {
+            try {
+              addFoodTrack.grams = int.parse(value);
+            } catch (e) {
+              addFoodTrack.grams = 0;
+            }
             setState(() {
               servingSize = double.tryParse(value) ?? 0;
             });
