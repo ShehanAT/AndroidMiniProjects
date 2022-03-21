@@ -9,7 +9,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:calorie_tracker_app/src/utils/charts/line-chart/line_chart.dart';
 import 'package:calorie_tracker_app/src/utils/charts/line_gallery.dart';
 import 'package:calorie_tracker_app/src/utils/charts/gallery_scaffold.dart';
-import 'package:calorie_tracker_app/src/utils/charts/line-chart/datetime_series_chart.dart';
+import 'package:calorie_tracker_app/src/utils/charts/datetime_series_chart.dart';
 import 'calorie-stats.dart';
 import 'package:provider/provider.dart';
 import 'package:calorie_tracker_app/src/services/database.dart';
@@ -39,7 +39,6 @@ class _DayViewState extends State<DayViewScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool _isBack = true;
-  final List<GalleryScaffold> lineGallery = buildGallery();
   DatabaseService databaseService = new DatabaseService(
       uid: "calorie-tracker-b7d17", currentDate: DateTime.now());
 
@@ -446,11 +445,6 @@ class _DayViewState extends State<DayViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var galleries = <Widget>[];
-
-    galleries.addAll(
-        lineGallery.map((gallery) => gallery.buildGalleryListTile(context)));
-
     return Scaffold(
         appBar: AppBar(
             elevation: 0,
