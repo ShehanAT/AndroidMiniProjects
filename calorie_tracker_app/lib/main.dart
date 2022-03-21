@@ -21,6 +21,7 @@ import 'package:calorie_tracker_app/routes/router.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:calorie_tracker_app/src/model/dao/food_dao.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 Future<void> main() async {
   setupLocator();
@@ -239,11 +240,10 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontWeight: FontWeight.bold))),
             new ElevatedButton(
-              onPressed: () {
-                onClickAddFoodButton(context);
-              },
-              child: Text("Add Food"),
-            ),
+                onPressed: () {
+                  onClickDayViewScreenButton(context);
+                },
+                child: Text("Day View Screen")),
             new ElevatedButton(
                 onPressed: () {
                   onClickHistoryScreenButton(context);
@@ -254,11 +254,7 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
-            new ElevatedButton(
-                onPressed: () {
-                  onClickDayViewScreenButton(context);
-                },
-                child: Text("Day View Screen")),
+         
             new ListTile(
                 leading: const Icon(Icons.track_changes_sharp),
                 title: new Text("Latest Food Track Entries: ",
