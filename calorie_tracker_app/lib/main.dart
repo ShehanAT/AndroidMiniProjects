@@ -1,16 +1,14 @@
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/page/day-view/day-view.dart';
-import 'package:calorie_tracker_app/src/page/settings_screen.dart';
+import 'package:calorie_tracker_app/src/page/settings/settings_screen.dart';
 import 'package:calorie_tracker_app/widgets/foodtrack_card.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'src/app.dart';
-import 'src/page/food-track/add_food_track.dart';
 import 'src/page/history/history_screen.dart';
 import 'src/services/service_locator.dart';
 import 'src/model/test_model.dart';
-import 'package:calorie_tracker_app/src/utils/enums/view_states.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:calorie_tracker_app/src/providers/theme_notifier.dart';
@@ -139,41 +137,14 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _database.ref().child(nodeName).onChildAdded.listen(_childAdded);
-    // _database.ref().child(nodeName).onChildRemoved.listen(_childRemoves);
-    // _database.ref().child(nodeName).onChildChanged.listen(_childChanged);
+
     foodTrackQuery = _database.ref().child('foodTrack');
   }
 
   void _childAdded(dynamic event) {
     DateTime now = DateTime.now();
-    // FoodDao().getAllFoodTrackTasks();
-    setState(() {
-      // foodTrackList.add(FoodTrackTask.fromSnapshot(event.snapshot));
-      // foodTrackList.add(FoodDao().getAllFoodTrackTasks());
-      // foodTrackList.add(FoodTrackTask(
-      //     mealTime: "Lunch",
-      //     createdOn:
-      //         new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      //     food: Food("apple", "200", "20", "20", "20")));
-      // foodTrackList.add(FoodTrackTask(
-      //   mealTime: "Lunch",
-      //   food: Food("banana", "300", "20", "20", "20"),
-      //   createdOn:
-      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      // ));
-      // foodTrackList.add(FoodTrackTask(
-      //   mealTime: "Lunch",
-      //   food: Food("grapefruit", "100", "20", "20", "20"),
-      //   createdOn:
-      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      // ));
-      // foodTrackList.add(FoodTrackTask(
-      //   mealTime: "Lunch",
-      //   food: Food("grapes", "150", "20", "20", "20"),
-      //   createdOn:
-      //       new DateTime(now.year, now.month, now.day, now.hour, now.minute),
-      // ));
-    });
+
+    setState(() {});
   }
 
   void _childRemoves(dynamic event) {
@@ -196,11 +167,6 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
       foodTrackList[foodTrackList.indexOf(changedFoodTrackTask)] =
           FoodTrackTask.fromSnapshot(event.snapshot);
     });
-  }
-
-  void onClickAddFoodButton(BuildContext context) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => AddFoodScreen()));
   }
 
   void onClickHistoryScreenButton(BuildContext context) {
@@ -254,7 +220,6 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
-         
             new ListTile(
                 leading: const Icon(Icons.track_changes_sharp),
                 title: new Text("Latest Food Track Entries: ",

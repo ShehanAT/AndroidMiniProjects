@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-// import 'package:food_app/locator.dart';
-// import 'package:food_app/screens/home/Pages/profile/profile.dart';
 import 'package:calorie_tracker_app/src/services/question_controller.dart';
-// import 'package:food_app/services/user_controller.dart';
 
 class QuestionAlert extends StatefulWidget {
   final List value;

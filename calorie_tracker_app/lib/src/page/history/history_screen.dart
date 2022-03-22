@@ -5,8 +5,6 @@ import 'package:calorie_tracker_app/src/model/food_model.dart';
 import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
 import 'package:calorie_tracker_app/component/iconpicker/icon_picker_builder.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:calorie_tracker_app/src/utils/charts/line_gallery.dart';
-import 'package:calorie_tracker_app/src/utils/charts/gallery_scaffold.dart';
 import 'package:calorie_tracker_app/src/utils/charts/datetime_series_chart.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -43,33 +41,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ),
         body: Container(
           child: DateTimeChart(),
-          // DateTimeChart(),
-          // DateTimeChart()
-          // galleries
-          //   new ListTile(
-          //       leading: const Icon(Icons.food_bank),
-          //       title: new Text(
-          //           "Oatmeal, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
-          //   new ListTile(
-          //       leading: const Icon(Icons.food_bank),
-          //       title: new Text(
-          //           "Burrito, calories: 400cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
-          //   new ListTile(
-          //       leading: const Icon(Icons.food_bank),
-          //       title: new Text(
-          //           "Pasta, calories: 350cal, Carbs: 40g, Fat: 10g, Protein: 5g")),
-          //   new ListTile(
-          //       leading: const Icon(Icons.food_bank),
-          //       title: new Text(
-          //           "Hummus, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
-          //   new ListTile(
-          //       leading: const Icon(Icons.food_bank),
-          //       title: new Text(
-          //           "Mashed Potates, calories: 300cal, Carbs: 30g, Fat: 10g, Protein: 5g")),
-          //   // SimpleLineChart(SimpleLineChart._createSampleData(),
-          //   //     animate: false),
-          //   SimpleLineChart.withSampleData()
-          // ],
         ));
   }
 }

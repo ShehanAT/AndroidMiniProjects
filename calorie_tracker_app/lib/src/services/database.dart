@@ -91,6 +91,12 @@ class DatabaseService {
     //     .map(_scanListFromSnapshot);
   }
 
+  Future<List<dynamic>> getAllFoodTrackData() async {
+    QuerySnapshot snapshot = await foodTrackCollection.get();
+    List<dynamic> result = snapshot.docs.map((doc) => doc.data()).toList();
+    return result;
+  }
+
   Future<String> getFoodTrackData(String uid) async {
     DocumentSnapshot snapshot = await foodTrackCollection.doc(uid).get();
     print("getFoodTrackData" + snapshot.toString());
