@@ -2,8 +2,6 @@ import 'package:calorie_tracker_app/locator.dart';
 
 class QuestionController {
   double correctValue;
-  // UserController _userController = locator.get<UserController>();
-
   QuestionController({required this.correctValue});
 
   List<int> generatePossibleOptions(double correctValue) {
@@ -23,8 +21,6 @@ class QuestionController {
     List<int> storeChoices = [];
 
     List<int> optionsFromValue = generatePossibleOptions(correctValue);
-    // Using the cascade operator("..") in this instance is equivalent to:
-    // List<int> shuffledList = optionsFromValue; shuffledList.shuffle();
     List<int> shuffledList = optionsFromValue..shuffle();
     for (int i = 0; i < 3; i++) {
       storeChoices.add(shuffledList[i]);

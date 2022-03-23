@@ -81,14 +81,7 @@ class DatabaseService {
   }
 
   Stream<List<FoodTrackTask>> get foodTracks {
-    // print("get foodtracks: ");
     return foodTrackCollection.snapshots().map(_scanListFromSnapshot);
-    // print(foodTrackCollection.doc(uid).collection('foodTracks').snapshots());
-    // return foodTrackCollection
-    //     .doc(uid)
-    //     .collection('foodTracks')
-    //     .snapshots()
-    //     .map(_scanListFromSnapshot);
   }
 
   Future<List<dynamic>> getAllFoodTrackData() async {

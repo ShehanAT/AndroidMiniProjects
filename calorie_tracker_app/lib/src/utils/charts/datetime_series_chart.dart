@@ -104,12 +104,8 @@ class _DateTimeChart extends State<DateTimeChart> {
                   child:
                       charts.TimeSeriesChart(resultChartData!, animate: true),
                 ))
-            // Text("Caloric Intake By Date Chart"),
-            // charts.TimeSeriesChart(resultChartData!, animate: true)
           ],
         )),
-        // child: charts.TimeSeriesChart(resultChartData!,
-        //     animate: true)
       );
     } else {
       return CircularProgressIndicator();

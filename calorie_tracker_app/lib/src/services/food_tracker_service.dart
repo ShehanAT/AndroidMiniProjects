@@ -17,10 +17,6 @@ class FoodTrackerService {
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   void addFoodTrack(FoodTrackTask foodtrackTask) {
-    // _databaseReference = database.reference().child(nodeName);
-    // _databaseReference.push().set(foodtrackTask.toMap());
-
-    // final food = Food(foodtrackTask.food.name,
     foodDao.saveFood(foodtrackTask);
   }
 

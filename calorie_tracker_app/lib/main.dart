@@ -5,7 +5,6 @@ import 'package:calorie_tracker_app/widgets/foodtrack_card.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'src/app.dart';
 import 'src/page/history/history_screen.dart';
 import 'src/services/service_locator.dart';
 import 'src/model/test_model.dart';
@@ -26,14 +25,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await SharedPreferencesService().init();
-  // runApp(const MyApp());
-  runApp(CalorieTrackerApp()
-      // MultiProvider(
-      //   providers: <ChangeNotifierProvider<ChangeNotifier>>[
-      //     ChangeNotifierProvider<>(create: create)
-      //   ],
-      //   child: CalorieTrackerApp(),)
-      );
+  runApp(CalorieTrackerApp());
 }
 
 class CalorieTrackerApp extends StatefulWidget {
@@ -42,7 +34,6 @@ class CalorieTrackerApp extends StatefulWidget {
 }
 
 class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
-  // const MyApp({Key? key}) : super(key: key);
   DarkThemeProvider themeChangeProvider = DarkThemeProvider();
   late Widget homeWidget;
   late bool signedIn;
@@ -55,7 +46,6 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
 
   void checkFirstSeen() {
     final bool _firstLaunch = true;
-// final bool _firstLaunch = SharedPreferencesService.getFirstLaunch();
 
     if (_firstLaunch) {
       homeWidget = Homepage();
@@ -65,7 +55,6 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
     setState(() {});
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<DarkThemeProvider>(
@@ -87,7 +76,6 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
         },
       ),
     );
-    // const MyHomePage(title: 'Flutter Demo Home Page'),
   }
 
   void hideKeyboard(BuildContext context) {
@@ -98,17 +86,12 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
   }
 }
 
-// class
-
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Second Route'),
-      // ),
       body: Center(
         child: FlatButton(
           onPressed: () {
@@ -122,7 +105,6 @@ class Homepage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _Homepage();
   }
 }
@@ -220,23 +202,6 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
                   onClickSettingsScreenButton(context);
                 },
                 child: Text("Settings Screen")),
-            new ListTile(
-                leading: const Icon(Icons.track_changes_sharp),
-                title: new Text("Latest Food Track Entries: ",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold))),
-            Visibility(
-                visible: foodTrackList.isNotEmpty,
-                child: Flexible(
-                  child: FirebaseAnimatedList(
-                      query: foodDao.getFoodTrackQuery(),
-                      itemBuilder: (_, DataSnapshot snap,
-                          Animation<double> animation, int index) {
-                        final json = snap.value as Map<dynamic, dynamic>;
-                        final foodTrackTask = FoodTrackTask.fromJson(json);
-                        return FoodTrackCard(foodTrackTask: foodTrackTask);
-                      }),
-                )),
           ],
         ));
   }
