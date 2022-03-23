@@ -63,9 +63,9 @@ class DatabaseService {
   }
 
   List<FoodTrackTask> _scanListFromSnapshot(QuerySnapshot snapshot) {
-    print(snapshot.docs[0].toString());
+    // print(snapshot.docs[0].toString());
     return snapshot.docs.map((doc) {
-      print(doc.toString());
+      // print(doc.toString());
       return FoodTrackTask(
         id: doc.id,
         food_name: doc['food_name'] ?? '',
@@ -73,7 +73,7 @@ class DatabaseService {
         carbs: doc['carbs'] ?? 0,
         fat: doc['fat'] ?? 0,
         protein: doc['protein'] ?? 0,
-        mealTime: doc['mealTime'] ?? 0,
+        mealTime: doc['mealTime'] ?? "",
         createdOn: doc['createdOn'].toDate() ?? DateTime.now(),
         grams: doc['grams'] ?? 0,
       );

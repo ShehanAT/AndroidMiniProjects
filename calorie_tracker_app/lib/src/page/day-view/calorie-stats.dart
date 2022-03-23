@@ -42,7 +42,6 @@ class CalorieStats extends StatelessWidget {
         if (trackDate.compareTo(curDate) == 0) {
           currentFoodTracks.add(foodTrack);
         }
-        // currentFoodTracks.add(scan);
       });
       return currentFoodTracks;
     }

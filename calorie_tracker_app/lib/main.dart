@@ -6,8 +6,6 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'src/page/history/history_screen.dart';
-import 'src/services/service_locator.dart';
-import 'src/model/test_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:calorie_tracker_app/src/providers/theme_notifier.dart';
@@ -21,7 +19,6 @@ import 'package:calorie_tracker_app/src/model/dao/food_dao.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 Future<void> main() async {
-  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await SharedPreferencesService().init();
@@ -48,8 +45,6 @@ class _CalorieTrackerAppState extends State<CalorieTrackerApp> {
     final bool _firstLaunch = true;
 
     if (_firstLaunch) {
-      homeWidget = Homepage();
-    } else {
       homeWidget = Homepage();
     }
     setState(() {});
@@ -175,16 +170,16 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Homepage",
+            "Flutter Calorie Tracker App",
             style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
         body: new Column(
           children: <Widget>[
             new ListTile(
                 leading: const Icon(Icons.food_bank),
-                title: new Text("Welcome to Calorie Tracker App!",
+                title: new Text("Welcome To Calorie Tracker App!",
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontWeight: FontWeight.bold))),
             new ElevatedButton(
