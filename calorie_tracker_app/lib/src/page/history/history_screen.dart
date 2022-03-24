@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
-import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
 import 'package:calorie_tracker_app/component/iconpicker/icon_picker_builder.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:calorie_tracker_app/src/utils/charts/datetime_series_chart.dart';
@@ -34,9 +32,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Calorie Tracker App",
+            "History Screen",
             style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
         body: Container(

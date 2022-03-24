@@ -63,9 +63,7 @@ class DatabaseService {
   }
 
   List<FoodTrackTask> _scanListFromSnapshot(QuerySnapshot snapshot) {
-    // print(snapshot.docs[0].toString());
     return snapshot.docs.map((doc) {
-      // print(doc.toString());
       return FoodTrackTask(
         id: doc.id,
         food_name: doc['food_name'] ?? '',

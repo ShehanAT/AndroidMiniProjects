@@ -2,6 +2,7 @@ import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:calorie_tracker_app/src/utils/theme_colors.dart';
 
 class CalorieStats extends StatelessWidget {
   DateTime datePicked;
@@ -64,7 +65,7 @@ class CalorieStats extends StatelessWidget {
     List<PieChartSectionData> _sections = <PieChartSectionData>[];
 
     PieChartSectionData _fat = PieChartSectionData(
-      color: Color(0xff01B4BC),
+      color: Color(FAT_COLOR),
       value: (9 * (totalFat) / totalCalories) * 100,
       title:
           '', // ((9 * totalFat / totalCalories) * 100).toStringAsFixed(0) + '%',
@@ -73,7 +74,7 @@ class CalorieStats extends StatelessWidget {
     );
 
     PieChartSectionData _carbohydrates = PieChartSectionData(
-      color: Color(0xffFA5457),
+      color: Color(CARBS_COLOR),
       value: (4 * (totalCarbs) / totalCalories) * 100,
       title:
           '', // ((4 * totalCarbs / totalCalories) * 100).toStringAsFixed(0) + '%',
@@ -82,7 +83,7 @@ class CalorieStats extends StatelessWidget {
     );
 
     PieChartSectionData _protein = PieChartSectionData(
-      color: Color(0xffFA8925),
+      color: Color(PROTEIN_COLOR),
       value: (4 * (totalProtein) / totalCalories) * 100,
       title:
           '', // ((4 * totalProtein / totalCalories) * 100).toStringAsFixed(0) + '%',
@@ -109,7 +110,7 @@ class CalorieStats extends StatelessWidget {
               children: <Widget>[
                 Text('Carbs ',
                     style: TextStyle(
-                      color: Color(0xffFA5457),
+                      color: Color(CARBS_COLOR),
                       fontFamily: 'Open Sans',
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,

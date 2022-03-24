@@ -15,7 +15,6 @@ import 'package:calorie_tracker_app/helpers/colors.dart';
 import 'package:calorie_tracker_app/routes/router.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:calorie_tracker_app/src/model/dao/food_dao.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 Future<void> main() async {
@@ -165,7 +164,6 @@ class _Homepage extends State<Homepage> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle =
         ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-    final foodDao = FoodDao();
 
     return Scaffold(
         appBar: AppBar(

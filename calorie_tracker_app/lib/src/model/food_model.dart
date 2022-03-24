@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:calorie_tracker_app/src/utils/uuid.dart';
-// part 'food_model.g.dart';
 
 @JsonSerializable()
 class Food {
@@ -23,10 +22,6 @@ class Food {
     String? color,
     String? id,
   }) : this.id = id ?? Uuid().generateV4();
-
-  // factory Food.fromSnapshot(DataSnapshot snap) => Food(
-
-  // );
 
   Food.fromJson(Map<dynamic, dynamic> json)
       : id = json['id'],

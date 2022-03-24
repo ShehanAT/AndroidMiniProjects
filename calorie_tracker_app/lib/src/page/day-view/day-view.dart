@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:calorie_tracker_app/src/model/scoped/food_list_model.dart';
 import 'package:calorie_tracker_app/src/model/food_track_task.dart';
 import 'package:calorie_tracker_app/src/model/food_model.dart';
-import 'package:calorie_tracker_app/component/colorpicker/color_picker_builder.dart';
 import 'package:calorie_tracker_app/component/iconpicker/icon_picker_builder.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:calorie_tracker_app/src/utils/charts/datetime_series_chart.dart';
@@ -14,6 +12,7 @@ import 'package:openfoodfacts/model/Product.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'question-alert.dart';
 import 'dart:math';
+import 'package:calorie_tracker_app/src/utils/theme_colors.dart';
 
 class DayViewScreen extends StatefulWidget {
   DayViewScreen();
@@ -604,7 +603,7 @@ class FoodTrackTile extends StatelessWidget {
                     height: 8,
                     width: 8,
                     decoration: BoxDecoration(
-                      color: Color(0xffFA5457),
+                      color: Color(CARBS_COLOR),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -619,7 +618,7 @@ class FoodTrackTile extends StatelessWidget {
                     height: 8,
                     width: 8,
                     decoration: BoxDecoration(
-                      color: Color(0xffFA8925),
+                      color: Color(PROTEIN_COLOR),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -635,7 +634,7 @@ class FoodTrackTile extends StatelessWidget {
                     height: 8,
                     width: 8,
                     decoration: BoxDecoration(
-                      color: Color(0xff01B4BC),
+                      color: Color(FAT_COLOR),
                       shape: BoxShape.circle,
                     ),
                   ),
