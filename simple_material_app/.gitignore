@@ -1,3 +1,5 @@
+android/app/google-services.json
+
 # Miscellaneous
 *.class
 *.log
@@ -30,6 +32,7 @@
 .pub-cache/
 .pub/
 /build/
+
 
 # Web related
 lib/generated_plugin_registrant.dart

@@ -1,16 +1,11 @@
-# simple_material_app
+# Flutter Time Series Chart Demo
 
-A new Flutter project.
+A simple Flutter application demonstrating how to use Time Series Charts from the charts_flutter library 
+Here are the accompanying YouTube video tutorial and blog post tutorials on [codinginformer.com](https://codinginformer.com/index.php/2022/03/17/how-to-use-flutter-time-series-charts-with-firebase/) and [Medium](https://medium.com/@shehanatuk/how-to-use-flutter-time-series-charts-with-firebase-6f3f364b5902)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+![Screenshot #1](/screenshots/image1.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot #2](/screenshots/image2.png)
