@@ -1,8 +1,10 @@
 package com.coding.informer.dictionary_app
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.androidnetworking.AndroidNetworking
@@ -18,9 +20,18 @@ import com.androidnetworking.interfaces.JSONArrayRequestListener
 import android.widget.Toast
 
 import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TextView
+import androidx.core.graphics.red
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,9 +39,14 @@ class MainActivity : AppCompatActivity() {
     var customErrorInputLayout: TextInputLayout? = null
     var errorEditText: TextInputEditText? = null
     var customErrorEditText: TextInputEditText? = null
+    var apiResponseView: TextView? = null;
+    var mRequestQueue : RequestQueue? = null;
+    var mStringRequest : StringRequest? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
 
         setContentView(R.layout.activity_main)
         errorEditText = findViewById<View>(R.id.errorEditText) as TextInputEditText
@@ -59,30 +75,40 @@ class MainActivity : AppCompatActivity() {
         getRandomDogs();
     }
 
-    private fun getRandomDogs(){
-        val call: Call<List<Results>> = RetrofitClient.getInstance().myApi.getDogs();
-        call.enqueue(object : Callback<List<Results?>?> {
-            override fun onResponse(call: Call<List<Results?>?>?, response: Response<List<Results?>?>) {
-                System.out.println(response.toString());
-//                val myheroList: List<Results> = response.body()
-//                val oneHeroes = arrayOfNulls<String>(myheroList.size)
-//                for (i in myheroList.indices) {
-//                    oneHeroes[i] = myheroList[i].name
-//                }
-//                superListView.setAdapter(
-//                    ArrayAdapter(
-//                        applicationContext,
-//                        android.R.layout.simple_list_item_1,
-//                        oneHeroes
-//                    )
-//                )
-            }
+    private fun getRandomDogs() {
+        // RequestQueue initialized
+        mRequestQueue = Volley.newRequestQueue(this)
 
-            override fun onFailure(call: Call<List<Results?>?>?, t: Throwable?) {
-                Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
+        // String Request initialized
+        mStringRequest = StringRequest(
+            Request.Method.GET, Api.BASE_URL,
+            { response ->
+                apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
+                apiResponseView?.text = response;
+//                apiResponseView?.setTextColor(R.color.colorPrimary.red)
+                Log.d("API Response", response)
+                Toast.makeText(applicationContext, "API Response :$response", Toast.LENGTH_LONG)
+                    .show() //display the response on screen
+
             }
-        })
+        ) { error -> Log.i(TAG, "Error :$error") }
+        mRequestQueue!!.add(mStringRequest)
     }
+
+//    private fun getRandomDogs(){
+//        val call: Call<List<Results>> = RetrofitClient.getInstance().myApi.getDogs();
+//        call.enqueue(object : Callback<List<Results?>?> {
+//            override fun onResponse(call: Call<List<Results?>?>?, response: Response<List<Results?>?>) {
+//                Log.d("API RESPONSE", response.toString());
+//                apiResponseListView?.setText("API Response: \n" + response.toString());
+//
+//            }
+//
+//            override fun onFailure(call: Call<List<Results?>?>?, t: Throwable?) {
+//                Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
+//            }
+//        })
+//    }
 }
 
 private fun <T> Call<T>.enqueue(callback: Callback<List<Results?>?>) {
