@@ -11,208 +11,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchWordTextInput"
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:hint="Enter word to search" />
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Word" />
+
+
         <TextView
             android:id="@+id/apiResponseText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TEXT"
             android:textColor="#000000" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:hint="TextInputEditText" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_horizontal_margin">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Floating Hint Enabled" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Floating Hint Disabled" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:hintAnimationEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Hint Animation Disabled" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Custom Hint TextAppearance" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Character Counter Limit 10" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterTextAppearance="@style/CounterText"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Character Counter Custom TextAppearance" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
-            app:counterTextAppearance="@style/CounterText"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="CounterOverflow CustomTextAppearance" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/errorInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
-            app:counterTextAppearance="@style/CounterText"
-            app:errorEnabled="true"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/errorEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Default Error Label" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/customErrorInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
-            app:counterTextAppearance="@style/CounterText"
-            app:errorEnabled="true"
-            app:errorTextAppearance="@style/ErrorText"
-            app:hintTextAppearance="@style/HintText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/customErrorEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Custom Error Label" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
-            app:counterTextAppearance="@style/CounterText"
-            app:hintTextAppearance="@style/HintText"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password Visibility Toggle"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            app:counterEnabled="true"
-            app:counterMaxLength="5"
-            app:counterOverflowTextAppearance="@style/CounterOverFlow"
-            app:counterTextAppearance="@style/CounterText"
-            app:hintTextAppearance="@style/HintText"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/my_orange">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password Visibility Toggle Tint"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
