@@ -36,44 +36,18 @@ class MainActivity : AppCompatActivity() {
 
         searchButton = findViewById<Button>(R.id.searchButton)
 
-
-
-//        searchWordTextInput!!.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-//            override fun afterTextChanged(s: Editable) {
-//                searchWord = s.toString();
-//            }
-//        })
+        searchWordTextInput!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                searchWord = s.toString();
+            }
+        })
 
         searchButton!!.setOnClickListener {
             callDictionaryAPI();
         }
 
-//        searchButton!!.setOnClickListener {
-//            callDictionaryAPI();
-//        }
-
-
-//        errorEditText!!.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-//            override fun afterTextChanged(s: Editable) {
-//                if (s.length > errorInputLayout!!.counterMaxLength) errorInputLayout!!.error =
-//                    "Max character length is " + errorInputLayout!!.counterMaxLength else errorInputLayout!!.error =
-//                    null
-//            }
-//        })
-//        customErrorEditText!!.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-//            override fun afterTextChanged(s: Editable) {
-//                if (s.length > customErrorInputLayout!!.counterMaxLength) customErrorInputLayout!!.error =
-//                    "Max character length is " + customErrorInputLayout!!.counterMaxLength else customErrorInputLayout!!.error =
-//                    null
-//            }
-//        })
-//        getRandomDogs();
     }
 
     private fun callDictionaryAPI() {
@@ -82,12 +56,11 @@ class MainActivity : AppCompatActivity() {
         mStringRequest = StringRequest(
             Request.Method.GET, Api.DICTIONARY_BASE_URL + "/" + searchWord,
             { response ->
-//                apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
-//                apiResponseView?.text = response;
-//                apiResponseView?.setTextColor(R.color.colorPrimary.red)
+                Toast.makeText(applicationContext, "Search word: " + searchWord, Toast.LENGTH_LONG)
+                    .show()
+                apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
+                apiResponseView?.text = response;
                 Log.d("API Response", response)
-                Toast.makeText(applicationContext, "API Response :$response", Toast.LENGTH_LONG)
-                    .show() //display the response on screen
 
             }
         ) { error ->
