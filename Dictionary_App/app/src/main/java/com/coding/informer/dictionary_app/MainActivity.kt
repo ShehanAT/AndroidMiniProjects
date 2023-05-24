@@ -15,6 +15,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley
+import org.json.JSONArray
+import org.json.JSONObject
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,51 +63,20 @@ class MainActivity : AppCompatActivity() {
             { response ->
                 Toast.makeText(applicationContext, "Search word: " + searchWord, Toast.LENGTH_LONG)
                     .show()
+                val jsonResponse = JSONArray(response);
+//Syntax for traversing jsonResponse in order to extract definitions:
+// (((jsonResponse.get(0) as JSONObject).getJSONArray("meanings").get(0) as JSONObject).getJSONArray("definitions").get(0) as JSONObject).getString("definition")
                 apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
                 apiResponseView?.text = response;
+
                 Log.d("API Response", response)
 
             }
         ) { error ->
-//            Log.d(TAG, "Error :$error")
             Toast.makeText(applicationContext, "Ran into error during API Request", Toast.LENGTH_LONG)
                 .show()
         }
         mRequestQueue!!.add(mStringRequest)
     }
 
-//    private fun getRandomDogs() {
-//        // RequestQueue initialized
-//        mRequestQueue = Volley.newRequestQueue(this)
-//
-//        // String Request initialized
-//        mStringRequest = StringRequest(
-//            Request.Method.GET, Api.BASE_URL,
-//            { response ->
-//                apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
-//                apiResponseView?.text = response;
-////                apiResponseView?.setTextColor(R.color.colorPrimary.red)
-//                Log.d("API Response", response)
-//                Toast.makeText(applicationContext, "API Response :$response", Toast.LENGTH_LONG)
-//                    .show() //display the response on screen
-//
-//            }
-//        ) { error -> Log.i(TAG, "Error :$error") }
-//        mRequestQueue!!.add(mStringRequest)
-//    }
-
-//    private fun getRandomDogs(){
-//        val call: Call<List<Results>> = RetrofitClient.getInstance().myApi.getDogs();
-//        call.enqueue(object : Callback<List<Results?>?> {
-//            override fun onResponse(call: Call<List<Results?>?>?, response: Response<List<Results?>?>) {
-//                Log.d("API RESPONSE", response.toString());
-//                apiResponseListView?.setText("API Response: \n" + response.toString());
-//
-//            }
-//
-//            override fun onFailure(call: Call<List<Results?>?>?, t: Throwable?) {
-//                Toast.makeText(applicationContext, "An error has occured", Toast.LENGTH_LONG).show()
-//            }
-//        })
-//    }
 }
