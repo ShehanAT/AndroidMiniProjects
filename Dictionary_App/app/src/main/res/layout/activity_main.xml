@@ -1,44 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.coding.informer.dictionary_app.MainActivity"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.coding.informer.dictionary_app.MainActivity">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/searchWordTextInput"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="79dp"
+        android:hint="Enter word to search" />
+
+    <Button
+        android:id="@+id/searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="137dp"
+        android:text="Search Word" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/searchWordTextInput"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/searchButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="31dp"
+        tools:context="com.coding.informer.dictionary_app.MainActivity">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="154dp"
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:hint="Enter word to search" />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/searchButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search Word" />
+            <TextView
+                android:id="@+id/apiResponseText"
+                android:layout_width="match_parent"
+                android:layout_height="269dp"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="219dp"
+                android:layout_marginEnd="40dp"
+                android:text=""
+                android:textColor="#000000" />
 
+        </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/apiResponseText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEXT"
-            android:textColor="#000000" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="92dp"
+        android:text="Dictionary App"
+        android:textSize="32dp"
+        android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/definitionList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
-
-
-</ScrollView>
+</RelativeLayout>
