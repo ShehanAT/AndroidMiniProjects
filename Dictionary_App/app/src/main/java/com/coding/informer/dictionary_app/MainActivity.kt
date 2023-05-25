@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     var searchWordTextInput : TextInputEditText? = null;
     var searchWord : String? = "grain";
     var searchButton : Button? = null;
+    var definitionList : ArrayList<String> = ArrayList();
+    var definitionListStr : String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,8 +69,29 @@ class MainActivity : AppCompatActivity() {
                 val jsonResponse = JSONArray(response);
 //Syntax for traversing jsonResponse in order to extract definitions:
 // (((jsonResponse.get(0) as JSONObject).getJSONArray("meanings").get(0) as JSONObject).getJSONArray("definitions").get(0) as JSONObject).getString("definition")
-                apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
-                apiResponseView?.text = response;
+                val meaningsObj = (jsonResponse.get(0) as JSONObject).getJSONArray("meanings");
+                try{
+                    definitionListStr = "";
+                    for (i  in 0 until meaningsObj.length()) {
+                        val meaningsObj2 = (meaningsObj.get(i) as JSONObject).getJSONArray("definitions");
+                        for ( j in 0 until meaningsObj2.length()) {
+                            var defObj = (meaningsObj2.get(j) as JSONObject)
+                            definitionListStr += "* " + (defObj.getString("definition")) + "\n";
+                        }
+                    }
+                    Log.d("Definition List:", definitionList.toList().toString())
+//                    val definitionListView = findViewById<RecyclerView>(R.id.definitionList)
+                    apiResponseView = findViewById<View>(R.id.apiResponseText) as TextView?
+                    apiResponseView?.text = definitionListStr;
+
+                } catch (e : Exception) {
+                    Log.d("API Response:", "Ran into error while parsing API Response")
+                }
+
+//                for (JSONObject defObj : (((jsonResponse.get(0) as JSONObject).getJSONArray("meanings").get(0) as JSONObject).getJSONArray("definitions").get(0) as JSONObject)) {
+//
+//                }
+
 
                 Log.d("API Response", response)
 
