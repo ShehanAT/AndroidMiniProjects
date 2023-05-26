@@ -58,6 +58,38 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun enableTextToSpeechAPI() {
+        textToSpeech.setOnClickListener({ view ->
+
+            val stringToSpeak :String = ttsInput.text.toString()
+
+            if (null!=stringToSpeak &&  stringToSpeak.isNotEmpty()) {
+
+                TranslatorFactory
+                    .instance
+                    .with(TranslatorFactory.TRANSLATORS.TEXT_TO_SPEECH,
+                        object : ConversionCallback {
+                            override fun onSuccess(result: String) {
+                            }
+
+                            override fun onCompletion() {
+                            }
+
+                            override fun onErrorOccurred(errorMessage: String) {
+                                erroConsole.text = "Text2Speech Error: $errorMessage"
+                            }
+
+                        })
+                    .initialize(stringToSpeak, this)
+
+            } else {
+                ttsInput.setText("Invalid input")
+                Snackbar.make(view, "Please enter some text to speak", Snackbar.LENGTH_LONG).show()
+            }
+
+        })
+    }
+
     private fun callDictionaryAPI() {
         mRequestQueue = Volley.newRequestQueue(this)
 
