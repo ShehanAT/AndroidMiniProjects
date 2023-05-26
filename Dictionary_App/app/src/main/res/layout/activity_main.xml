@@ -11,13 +11,13 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/searchWordTextInput"
-        android:layout_width="293dp"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="78dp"
         android:hint="Enter word to search" />
 
     <Button
@@ -73,5 +73,15 @@
         android:text="Dictionary App"
         android:textSize="32dp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/pronunciationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="13dp"
+        android:text="Pronunciation" />
 
 </RelativeLayout>

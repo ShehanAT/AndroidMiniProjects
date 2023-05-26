@@ -1,7 +1,12 @@
 package com.coding.informer.dictionary_app
 
+import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -18,10 +23,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
-
-
-
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     var apiResponseView: TextView? = null;
@@ -32,15 +35,40 @@ class MainActivity : AppCompatActivity() {
     var searchButton : Button? = null;
     var definitionList : ArrayList<String> = ArrayList();
     var definitionListStr : String = "";
+    var pronunciationBtn : Button? = null;
+
+    companion object {
+        private const val REQUEST_CODE_STT = 1
+    }
+
+    private val textToSpeechEngine: TextToSpeech by lazy {
+        // Pass in context and the listener.
+        TextToSpeech(this,
+            TextToSpeech.OnInitListener { status ->
+                // set our locale only if init was success.
+                Log.d("TextToSpeech", "TextToSpeech Status: $status")
+                if (status == TextToSpeech.SUCCESS) {
+                    Log.d("TextToSpeech", "TextToSpeech API Init Success")
+                    textToSpeechEngine.language = Locale.UK
+                } else{
+                    Log.d("TextToSpeech", "TextToSpeech API Init Failure")
+                }
+            })
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
+
+
         apiResponseView = findViewById<TextView>(R.id.apiResponseText)
 
         searchWordTextInput = findViewById<TextInputEditText>(R.id.searchWordTextInput)
+
+        pronunciationBtn = findViewById<Button>(R.id.pronunciationBtn)
 
         searchButton = findViewById<Button>(R.id.searchButton)
 
@@ -56,38 +84,35 @@ class MainActivity : AppCompatActivity() {
             callDictionaryAPI();
         }
 
+        pronunciationBtn!!.setOnClickListener {
+            val sampleText = "Search".toString().trim();
+
+            if(sampleText.isNotEmpty()) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    textToSpeechEngine.speak(sampleText, TextToSpeech.QUEUE_FLUSH, null, "tts1")
+                } else {
+                    textToSpeechEngine.speak(sampleText, TextToSpeech.QUEUE_FLUSH, null)
+                }
+            } else {
+                Toast.makeText(this, "Text cannot be empty", Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
 
-    private fun enableTextToSpeechAPI() {
-        textToSpeech.setOnClickListener({ view ->
-
-            val stringToSpeak :String = ttsInput.text.toString()
-
-            if (null!=stringToSpeak &&  stringToSpeak.isNotEmpty()) {
-
-                TranslatorFactory
-                    .instance
-                    .with(TranslatorFactory.TRANSLATORS.TEXT_TO_SPEECH,
-                        object : ConversionCallback {
-                            override fun onSuccess(result: String) {
-                            }
-
-                            override fun onCompletion() {
-                            }
-
-                            override fun onErrorOccurred(errorMessage: String) {
-                                erroConsole.text = "Text2Speech Error: $errorMessage"
-                            }
-
-                        })
-                    .initialize(stringToSpeak, this)
-
-            } else {
-                ttsInput.setText("Invalid input")
-                Snackbar.make(view, "Please enter some text to speak", Snackbar.LENGTH_LONG).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            REQUEST_CODE_STT -> {
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    result?.let {
+                        val recognizedText = it[0]
+//                        et_text_input.setText(recognizedText)
+                    }
+                }
             }
-
-        })
+        }
     }
 
     private fun callDictionaryAPI() {
@@ -135,4 +160,13 @@ class MainActivity : AppCompatActivity() {
         mRequestQueue!!.add(mStringRequest)
     }
 
+    override fun onPause() {
+        textToSpeechEngine.stop()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        textToSpeechEngine.shutdown()
+        super.onDestroy()
+    }
 }
