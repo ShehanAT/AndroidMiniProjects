@@ -33,8 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main);
 
-        ttsBtn = findViewById<Button>(R.id.ttsBtn);
+        ttsBtn = findViewById(R.id.ttsBtn) as Button;
 
         ttsBtn!!.setOnClickListener {
             val text: String = "Yellow".toString().trim()
