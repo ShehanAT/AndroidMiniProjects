@@ -6,6 +6,8 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+//import nl.marc_apps.tts.TextToSpeech
+//import nl.marc_apps.tts.TextToSpeechInstance
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -18,12 +20,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley
+import nl.marc_apps.tts.errors.TextToSpeechInitialisationError
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+class MainActivity : AppCompatActivity() {
     var apiResponseView: TextView? = null;
     var mRequestQueue : RequestQueue? = null;
     var mStringRequest : StringRequest? = null;
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     var definitionList : ArrayList<String> = ArrayList();
     var definitionListStr : String = "";
     var pronunciationBtn : Button? = null;
-//    var textToSpeechEngine : TextToSpeech? = null;
+
     companion object {
         private const val REQUEST_CODE_STT = 1
     }
@@ -82,7 +85,10 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         pronunciationBtn!!.setOnClickListener {
-            val text = searchWordTextInput!!.text.toString().trim()
+            val text = searchWordTextInput!!.text.toString().trim();
+//            tts = tts ?: TextToSpeech.createOrThrow(applicationContext)
+
+
             if (text.isNotEmpty()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                    textToSpeechEngine!!.speak(text, TextToSpeech.QUEUE_FLUSH, null)
@@ -166,15 +172,15 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         textToSpeechEngine?.shutdown()
         super.onDestroy()
     }
-
-    override fun onInit(status: Int) {
-        Log.d("TextToSpeech", "TextToSpeech Status: " + status)
-        if(status == TextToSpeech.SUCCESS) {
-            val result = textToSpeechEngine!!.setLanguage(Locale.US)
-
-            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Log.e("TextToSpeech", "Language not supported!")
-            }
-        }
-    }
+//
+//    override fun onInit(status: Int) {
+//        Log.d("TextToSpeech", "TextToSpeech Status: " + status)
+//        if(status == TextToSpeech.SUCCESS) {
+//            val result = textToSpeechEngine!!.setLanguage(Locale.US)
+//
+//            if(result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+//                Log.e("TextToSpeech", "Language not supported!")
+//            }
+//        }
+//    }
 }
