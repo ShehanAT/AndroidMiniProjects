@@ -8,6 +8,7 @@ import android.view.MenuItem
 
 import android.os.Build
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 //import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(this,
             TextToSpeech.OnInitListener { status ->
+                Log.d("API Response", "Status: " + status)
                 if (status == TextToSpeech.SUCCESS) {
                     textToSpeechEngine.language = Locale.UK
                 }
