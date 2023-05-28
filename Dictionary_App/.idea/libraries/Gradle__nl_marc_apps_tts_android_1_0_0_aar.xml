@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: nl.marc-apps:tts-android:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/c5224126f3e895f1ffd96ae1f12feb52/transformed/jetified-tts-debug/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5224126f3e895f1ffd96ae1f12feb52/transformed/jetified-tts-debug/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/c5224126f3e895f1ffd96ae1f12feb52/transformed/jetified-tts-debug/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.marc-apps/tts-android/1.0.0/e866ed435b6d155e8fc957d35f30e2669bf837a8/tts-android-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nl.marc-apps/tts-android/1.0.0/76fe44fb7c715f462c0afe9b5d559c1162e6e081/tts-android-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

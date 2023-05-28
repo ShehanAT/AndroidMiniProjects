@@ -1,0 +1,16 @@
+com/coding/informer/dictionary_app/BuildConfig.java
+ com.coding.informer.dictionary_app.BuildConfig
+com/coding/informer/dictionary_app/Api.java
+ com.coding.informer.dictionary_app.Api
+com/coding/informer/dictionary_app/RetrofitClient.java
+ com.coding.informer.dictionary_app.RetrofitClient
+com/coding/informer/dictionary_app/Results.java
+ com.coding.informer.dictionary_app.Results
+com/coding/informer/dictionary_app/databinding/ContentMainBinding.java
+ com.coding.informer.dictionary_app.databinding.ContentMainBinding
+com/coding/informer/dictionary_app/databinding/FragmentSecondBinding.java
+ com.coding.informer.dictionary_app.databinding.FragmentSecondBinding
+com/coding/informer/dictionary_app/databinding/ActivityMainBinding.java
+ com.coding.informer.dictionary_app.databinding.ActivityMainBinding
+com/coding/informer/dictionary_app/databinding/FragmentFirstBinding.java
+ com.coding.informer.dictionary_app.databinding.FragmentFirstBinding

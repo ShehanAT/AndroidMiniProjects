@@ -1,0 +1,4 @@
+#Sun May 28 14:10:22 EDT 2023
+base.0=C\:\\Users\\sheha\\OneDrive\\Documents\\GitHub\\androidMiniProjects\\Dictionary-App-V2\\app\\build\\intermediates\\dex\\debug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
