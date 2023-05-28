@@ -5,6 +5,12 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/calorie_tracker_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/calorie_tracker_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/calorie_tracker_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/simple_material_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/simple_material_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/simple_material_app/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

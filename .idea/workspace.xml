@@ -22,11 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0621042e-105c-4a6c-a90b-a4fb1950c105" name="Default Changelist" comment="Added AndroidViewModelExample application for upcoming video">
-      <change beforePath="$PROJECT_DIR$/.idea/androidMiniProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/androidMiniProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0621042e-105c-4a6c-a90b-a4fb1950c105" name="Default Changelist" comment="Added AndroidViewModelExample application for upcoming video" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,11 +58,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -84,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637115358287</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed Volley API request issue in Dictionary-App-V2's MainActivity.kt file">
+      <created>1685298201811</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685298201811</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,12 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added MPAndroidCharts mini project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added MPAndroidCharts mini project" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1637115370775">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/-2400.0.1920.1040/0.0.1536.824@0.0.1536.824" timestamp="1637115370775" />
+    <MESSAGE value="Fixed Volley API request issue in Dictionary-App-V2's MainActivity.kt file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Volley API request issue in Dictionary-App-V2's MainActivity.kt file" />
   </component>
 </project>
